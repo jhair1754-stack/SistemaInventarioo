@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Sistema de Gestión de Inventarios para Distribuidora de Electrodomésticos — DistribuMax">
+    <title>DistribuMax — Gestión de Inventarios</title>
+
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link href="css/styles.css" rel="stylesheet">
+</head>
+<body>
+
+<!-- ═══════════════════════════════════════════════════════════ -->
+<!--  NAVBAR                                                    -->
+<!-- ═══════════════════════════════════════════════════════════ -->
+<nav class="navbar navbar-expand-lg navbar-custom">
+    <div class="container-fluid px-4">
+        <a class="navbar-brand d-flex align-items-center" href="#">
+            <span class="navbar-brand-icon">📦</span>
+            DistribuMax
+        </a>
+        <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav">
+            <i class="bi bi-list text-white fs-4"></i>
+        </button>
+        <div class="collapse navbar-collapse" id="mainNav">
+            <ul class="navbar-nav ms-auto gap-1">
+                <li class="nav-item">
+                    <a class="nav-link active" href="#" id="nav-dashboard" onclick="showView('dashboard')">
+                        <i class="bi bi-speedometer2 me-1"></i> Dashboard
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#" id="nav-productos" onclick="showView('productos')">
+                        <i class="bi bi-box-seam me-1"></i> Productos
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#" id="nav-movimientos" onclick="showView('movimientos')">
+                        <i class="bi bi-arrow-left-right me-1"></i> Movimientos
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#" id="nav-alertas" onclick="showView('alertas')">
+                        <i class="bi bi-exclamation-triangle me-1"></i> Alertas
+                        <span class="badge bg-danger rounded-pill ms-1" id="alerta-count" style="display:none;">0</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<!-- Toast Container -->
+<div class="toast-container" id="toastContainer"></div>
+
+<!-- ═══════════════════════════════════════════════════════════ -->
+<!--  VISTA: DASHBOARD                                          -->
+<!-- ═══════════════════════════════════════════════════════════ -->
+<div class="view-section active" id="view-dashboard">
+    <div class="container-fluid px-4 py-4">
+        <!-- KPI Cards -->
+        <div class="row g-3 mb-4" id="kpi-container">
+            <div class="col-xl col-md-4 col-6">
+                <div class="kpi-card blue">
+                    <div class="kpi-icon blue"><i class="bi bi-box-seam"></i></div>
+                    <div class="kpi-value" id="kpi-total-productos">—</div>
+                    <div class="kpi-label">Total Productos</div>
+                </div>
+            </div>
+            <div class="col-xl col-md-4 col-6">
+                <div class="kpi-card green">
+                    <div class="kpi-icon green"><i class="bi bi-upc-scan"></i></div>
+                    <div class="kpi-value" id="kpi-total-unidades">—</div>
+                    <div class="kpi-label">Unidades Registradas</div>
+                </div>
+            </div>
+            <div class="col-xl col-md-4 col-6">
+                <div class="kpi-card purple">
+                    <div class="kpi-icon purple"><i class="bi bi-currency-dollar"></i></div>
+                    <div class="kpi-value" id="kpi-valor-total">—</div>
+                    <div class="kpi-label">Valor del Inventario</div>
+                </div>
+            </div>
+            <div class="col-xl col-md-6 col-6">
+                <div class="kpi-card orange">
+                    <div class="kpi-icon orange"><i class="bi bi-arrow-left-right"></i></div>
+                    <div class="kpi-value" id="kpi-movimientos-hoy">—</div>
+                    <div class="kpi-label">Movimientos Hoy</div>
+                </div>
+            </div>
+            <div class="col-xl col-md-6 col-12">
+                <div class="kpi-card red">
+                    <div class="kpi-icon red"><i class="bi bi-exclamation-triangle"></i></div>
+                    <div class="kpi-value" id="kpi-stock-bajo">—</div>
+                    <div class="kpi-label">Stock Bajo</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row g-4">
+            <!-- Últimos Movimientos -->
+            <div class="col-lg-7">
+                <div class="content-card">
+                    <div class="section-header">
+                        <h2 class="section-title"><i class="bi bi-clock-history"></i> Últimos Movimientos</h2>
+                    </div>
+                    <div class="table-responsive">
+                        <table class="table-custom" id="table-ultimos-movimientos">
+                            <thead>
+                                <tr>
+                                    <th>Producto</th>
+                                    <th>Tipo</th>
+                                    <th>Cantidad</th>
+                                    <th>Almacén</th>
+                                    <th>Fecha</th>
+                                </tr>
+                            </thead>
+                            <tbody id="tbody-ultimos-movimientos">
+                                <tr><td colspan="5" class="text-center text-muted py-4">Cargando...</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Alertas de Stock -->
+            <div class="col-lg-5">
+                <div class="content-card">
+                    <div class="section-header">
+                        <h2 class="section-title"><i class="bi bi-exclamation-triangle"></i> Alertas de Stock Bajo</h2>
+                    </div>
+                    <div id="dashboard-alertas-list">
+                        <div class="loading-spinner"><div class="spinner"></div></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════════ -->
+<!--  VISTA: PRODUCTOS                                          -->
+<!-- ═══════════════════════════════════════════════════════════ -->
+<div class="view-section" id="view-productos">
+    <div class="container-fluid px-4 py-4">
+        <div class="section-header">
+            <h1 class="section-title"><i class="bi bi-box-seam"></i> Gestión de Productos</h1>
+            <button class="btn btn-primary-custom" onclick="abrirModalCrearProducto()" id="btn-nuevo-producto">
+                <i class="bi bi-plus-lg"></i> Nuevo Producto
+            </button>
+        </div>
+
+        <!-- Filtros -->
+        <div class="filter-bar">
+            <div class="d-flex align-items-center gap-2 text-muted" style="font-size:0.8rem;">
+                <i class="bi bi-funnel"></i> Filtros:
+            </div>
+            <input type="text" class="form-control form-control-custom" id="filtro-busqueda"
+                   placeholder="Buscar por nombre o SKU..." oninput="filtrarProductos()">
+            <select class="form-select form-select-custom" id="filtro-categoria" onchange="filtrarProductos()">
+                <option value="">Todas las categorías</option>
+            </select>
+            <select class="form-select form-select-custom" id="filtro-marca" onchange="filtrarProductos()">
+                <option value="">Todas las marcas</option>
+            </select>
+            <button class="btn btn-outline-custom" onclick="limpiarFiltros()">
+                <i class="bi bi-x-lg"></i> Limpiar
+            </button>
+        </div>
+
+        <!-- Tabla de Productos -->
+        <div class="content-card">
+            <div class="table-responsive">
+                <table class="table-custom" id="table-productos">
+                    <thead>
+                        <tr>
+                            <th>SKU</th>
+                            <th>Producto</th>
+                            <th>Marca</th>
+                            <th>Categoría</th>
+                            <th>Precio</th>
+                            <th>Stock</th>
+                            <th>Estado</th>
+                            <th style="width:120px;">Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tbody-productos">
+                        <tr><td colspan="8" class="text-center text-muted py-4">Cargando productos...</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════════ -->
+<!--  VISTA: MOVIMIENTOS                                        -->
+<!-- ═══════════════════════════════════════════════════════════ -->
+<div class="view-section" id="view-movimientos">
+    <div class="container-fluid px-4 py-4">
+        <div class="section-header">
+            <h1 class="section-title"><i class="bi bi-arrow-left-right"></i> Historial de Movimientos</h1>
+            <div class="d-flex gap-2">
+                <button class="btn btn-success-custom" onclick="abrirModalEntrada()" id="btn-nueva-entrada">
+                    <i class="bi bi-box-arrow-in-down"></i> Registrar Entrada
+                </button>
+                <button class="btn btn-primary-custom" onclick="abrirModalSalida()" id="btn-nueva-salida">
+                    <i class="bi bi-box-arrow-up"></i> Registrar Salida
+                </button>
+            </div>
+        </div>
+
+        <!-- Filtros Movimientos -->
+        <div class="filter-bar">
+            <div class="d-flex align-items-center gap-2 text-muted" style="font-size:0.8rem;">
+                <i class="bi bi-funnel"></i> Filtros:
+            </div>
+            <select class="form-select form-select-custom" id="filtro-mov-tipo" onchange="filtrarMovimientos()">
+                <option value="">Todos los tipos</option>
+                <option value="ENTRADA">Entradas</option>
+                <option value="SALIDA">Salidas</option>
+                <option value="AJUSTE">Ajustes</option>
+            </select>
+            <input type="date" class="form-control form-control-custom" id="filtro-mov-desde" onchange="filtrarMovimientos()">
+            <input type="date" class="form-control form-control-custom" id="filtro-mov-hasta" onchange="filtrarMovimientos()">
+        </div>
+
+        <div class="content-card">
+            <div class="table-responsive">
+                <table class="table-custom" id="table-movimientos">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Producto</th>
+                            <th>SKU</th>
+                            <th>Tipo</th>
+                            <th>Cantidad</th>
+                            <th>Almacén</th>
+                            <th>Proveedor</th>
+                            <th>Lote</th>
+                            <th>Fecha</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tbody-movimientos">
+                        <tr><td colspan="9" class="text-center text-muted py-4">Cargando movimientos...</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════════ -->
+<!--  VISTA: ALERTAS                                            -->
+<!-- ═══════════════════════════════════════════════════════════ -->
+<div class="view-section" id="view-alertas">
+    <div class="container-fluid px-4 py-4">
+        <div class="section-header">
+            <h1 class="section-title"><i class="bi bi-exclamation-triangle"></i> Alertas de Stock Bajo</h1>
+        </div>
+        <div id="alertas-full-list">
+            <div class="loading-spinner"><div class="spinner"></div></div>
+        </div>
+    </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════════ -->
+<!--  MODAL: Crear/Editar Producto                              -->
+<!-- ═══════════════════════════════════════════════════════════ -->
+<div class="modal fade" id="modalProducto" tabindex="-1">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modalProductoTitle">
+                    <i class="bi bi-plus-circle"></i> Nuevo Producto
+                </h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <form id="formProducto" novalidate>
+                    <input type="hidden" id="prod-id">
+                    <div class="row g-3">
+                        <div class="col-md-4">
+                            <label class="form-label-custom">Código SKU *</label>
+                            <input type="text" class="form-control form-control-custom" id="prod-sku" required placeholder="LB-REF-SAM-001">
+                        </div>
+                        <div class="col-md-8">
+                            <label class="form-label-custom">Nombre del Producto *</label>
+                            <input type="text" class="form-control form-control-custom" id="prod-nombre" required placeholder="Refrigeradora Samsung 617L">
+                        </div>
+                        <div class="col-md-4">
+                            <label class="form-label-custom">Modelo</label>
+                            <input type="text" class="form-control form-control-custom" id="prod-modelo" placeholder="RS64R5311B4">
+                        </div>
+                        <div class="col-md-4">
+                            <label class="form-label-custom">Marca *</label>
+                            <select class="form-select form-select-custom" id="prod-marca" required>
+                                <option value="">Seleccionar...</option>
+                            </select>
+                        </div>
+                        <div class="col-md-4">
+                            <label class="form-label-custom">Subcategoría *</label>
+                            <select class="form-select form-select-custom" id="prod-subcategoria" required>
+                                <option value="">Seleccionar...</option>
+                            </select>
+                        </div>
+
+                        <div class="col-12"><hr style="border-color: var(--border-subtle); margin: 0.5rem 0;"></div>
+
+                        <div class="col-md-4">
+                            <label class="form-label-custom">Precio Unitario (S/) *</label>
+                            <input type="number" step="0.01" class="form-control form-control-custom" id="prod-precio" required placeholder="0.00">
+                        </div>
+                        <div class="col-md-4">
+                            <label class="form-label-custom">Stock Mínimo *</label>
+                            <input type="number" class="form-control form-control-custom" id="prod-stock-minimo" required value="5">
+                        </div>
+                        <div class="col-md-4">
+                            <label class="form-label-custom">Peso (kg)</label>
+                            <input type="number" step="0.01" class="form-control form-control-custom" id="prod-peso" placeholder="0.00">
+                        </div>
+                        <div class="col-md-4">
+                            <label class="form-label-custom">Ancho (cm)</label>
+                            <input type="number" step="0.01" class="form-control form-control-custom" id="prod-ancho" placeholder="0.00">
+                        </div>
+                        <div class="col-md-4">
+                            <label class="form-label-custom">Alto (cm)</label>
+                            <input type="number" step="0.01" class="form-control form-control-custom" id="prod-alto" placeholder="0.00">
+                        </div>
+                        <div class="col-md-4">
+                            <label class="form-label-custom">Profundidad (cm)</label>
+                            <input type="number" step="0.01" class="form-control form-control-custom" id="prod-profundidad" placeholder="0.00">
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-outline-custom" data-bs-dismiss="modal">Cancelar</button>
+                <button type="button" class="btn btn-primary-custom" onclick="guardarProducto()" id="btn-guardar-producto">
+                    <i class="bi bi-check-lg"></i> Guardar Producto
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════════ -->
+<!--  MODAL: Registrar Entrada de Lote                          -->
+<!-- ═══════════════════════════════════════════════════════════ -->
+<div class="modal fade" id="modalEntrada" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">
+                    <i class="bi bi-box-arrow-in-down" style="color: var(--accent-green-light);"></i> Registrar Entrada de Lote
+                </h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <form id="formEntrada" novalidate>
+                    <div class="row g-3">
+                        <div class="col-12">
+                            <label class="form-label-custom">Producto *</label>
+                            <select class="form-select form-select-custom" id="entrada-producto" required>
+                                <option value="">Seleccionar producto...</option>
+                            </select>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label-custom">Almacén *</label>
+                            <select class="form-select form-select-custom" id="entrada-almacen" required>
+                                <option value="">Seleccionar...</option>
+                            </select>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label-custom">Proveedor</label>
+                            <select class="form-select form-select-custom" id="entrada-proveedor">
+                                <option value="">Seleccionar...</option>
+                            </select>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label-custom">Cantidad *</label>
+                            <input type="number" min="1" class="form-control form-control-custom" id="entrada-cantidad" required value="1">
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label-custom">Nº Lote</label>
+                            <input type="text" class="form-control form-control-custom" id="entrada-lote" placeholder="LOT-2026-XXX">
+                        </div>
+                        <div class="col-12">
+                            <label class="form-label-custom">Números de Serie (uno por línea)</label>
+                            <textarea class="form-control form-control-custom" id="entrada-series" rows="3"
+                                      placeholder="RFSAM-001001&#10;RFSAM-001002&#10;RFSAM-001003"></textarea>
+                        </div>
+                        <div class="col-12">
+                            <label class="form-label-custom">Observaciones</label>
+                            <textarea class="form-control form-control-custom" id="entrada-observaciones" rows="2"
+                                      placeholder="Notas adicionales..."></textarea>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-outline-custom" data-bs-dismiss="modal">Cancelar</button>
+                <button type="button" class="btn btn-success-custom" onclick="registrarEntrada()" id="btn-registrar-entrada">
+                    <i class="bi bi-check-lg"></i> Registrar Entrada
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════════ -->
+<!--  MODAL: Registrar Salida                                   -->
+<!-- ═══════════════════════════════════════════════════════════ -->
+<div class="modal fade" id="modalSalida" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">
+                    <i class="bi bi-box-arrow-up" style="color: var(--accent-blue-light);"></i> Registrar Salida
+                </h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <form id="formSalida" novalidate>
+                    <div class="row g-3">
+                        <div class="col-12">
+                            <label class="form-label-custom">Producto *</label>
+                            <select class="form-select form-select-custom" id="salida-producto" required>
+                                <option value="">Seleccionar producto...</option>
+                            </select>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label-custom">Almacén *</label>
+                            <select class="form-select form-select-custom" id="salida-almacen" required>
+                                <option value="">Seleccionar...</option>
+                            </select>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label-custom">Cantidad *</label>
+                            <input type="number" min="1" class="form-control form-control-custom" id="salida-cantidad" required value="1">
+                        </div>
+                        <div class="col-12">
+                            <label class="form-label-custom">Nº de Serie a despachar (uno por línea)</label>
+                            <textarea class="form-control form-control-custom" id="salida-series" rows="3"
+                                      placeholder="RFSAM-001001&#10;RFSAM-001002"></textarea>
+                        </div>
+                        <div class="col-12">
+                            <label class="form-label-custom">Observaciones</label>
+                            <textarea class="form-control form-control-custom" id="salida-observaciones" rows="2"
+                                      placeholder="Detalle de la venta o despacho..."></textarea>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-outline-custom" data-bs-dismiss="modal">Cancelar</button>
+                <button type="button" class="btn btn-primary-custom" onclick="registrarSalida()" id="btn-registrar-salida">
+                    <i class="bi bi-check-lg"></i> Registrar Salida
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<!-- Application JS -->
+<script src="js/app.js"></script>
+</body>
+</html>
