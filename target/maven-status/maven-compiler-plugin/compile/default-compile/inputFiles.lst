@@ -3,7 +3,6 @@ C:\Users\bryan\Desktop\UNMSM\CICLO 2026 - 1\Estructura de Datos\Pruebas de Proye
 C:\Users\bryan\Desktop\UNMSM\CICLO 2026 - 1\Estructura de Datos\Pruebas de Proyecto\Proyecto\src\main\java\com\distribuidora\inventario\ui\MenuConsola.java
 C:\Users\bryan\Desktop\UNMSM\CICLO 2026 - 1\Estructura de Datos\Pruebas de Proyecto\Proyecto\src\main\java\com\distribuidora\inventario\exceptions\StockInsuficienteException.java
 C:\Users\bryan\Desktop\UNMSM\CICLO 2026 - 1\Estructura de Datos\Pruebas de Proyecto\Proyecto\src\main\java\com\distribuidora\inventario\Main.java
-C:\Users\bryan\Desktop\UNMSM\CICLO 2026 - 1\Estructura de Datos\Pruebas de Proyecto\Proyecto\src\main\java\com\distribuidora\inventario\models\ProductoGeneral.java
 C:\Users\bryan\Desktop\UNMSM\CICLO 2026 - 1\Estructura de Datos\Pruebas de Proyecto\Proyecto\src\main\java\com\distribuidora\inventario\structures\ArbolBST.java
 C:\Users\bryan\Desktop\UNMSM\CICLO 2026 - 1\Estructura de Datos\Pruebas de Proyecto\Proyecto\src\main\java\com\distribuidora\inventario\services\InventarioService.java
 C:\Users\bryan\Desktop\UNMSM\CICLO 2026 - 1\Estructura de Datos\Pruebas de Proyecto\Proyecto\src\main\java\com\distribuidora\inventario\services\LogisticaService.java
@@ -13,7 +12,8 @@ C:\Users\bryan\Desktop\UNMSM\CICLO 2026 - 1\Estructura de Datos\Pruebas de Proye
 C:\Users\bryan\Desktop\UNMSM\CICLO 2026 - 1\Estructura de Datos\Pruebas de Proyecto\Proyecto\src\main\java\com\distribuidora\inventario\exceptions\ProductoNoEncontradoException.java
 C:\Users\bryan\Desktop\UNMSM\CICLO 2026 - 1\Estructura de Datos\Pruebas de Proyecto\Proyecto\src\main\java\com\distribuidora\inventario\exceptions\CodigoProductoDuplicadoException.java
 C:\Users\bryan\Desktop\UNMSM\CICLO 2026 - 1\Estructura de Datos\Pruebas de Proyecto\Proyecto\src\main\java\com\distribuidora\inventario\models\Almacen.java
-C:\Users\bryan\Desktop\UNMSM\CICLO 2026 - 1\Estructura de Datos\Pruebas de Proyecto\Proyecto\src\main\java\com\distribuidora\inventario\models\ProductoPerecible.java
 C:\Users\bryan\Desktop\UNMSM\CICLO 2026 - 1\Estructura de Datos\Pruebas de Proyecto\Proyecto\src\main\java\com\distribuidora\inventario\structures\NodoBST.java
 C:\Users\bryan\Desktop\UNMSM\CICLO 2026 - 1\Estructura de Datos\Pruebas de Proyecto\Proyecto\src\main\java\com\distribuidora\inventario\models\Producto.java
+C:\Users\bryan\Desktop\UNMSM\CICLO 2026 - 1\Estructura de Datos\Pruebas de Proyecto\Proyecto\src\main\java\com\distribuidora\inventario\structures\NodoArbol.java
 C:\Users\bryan\Desktop\UNMSM\CICLO 2026 - 1\Estructura de Datos\Pruebas de Proyecto\Proyecto\src\main\java\com\distribuidora\inventario\exceptions\AlmacenNoEncontradoException.java
+C:\Users\bryan\Desktop\UNMSM\CICLO 2026 - 1\Estructura de Datos\Pruebas de Proyecto\Proyecto\src\main\java\com\distribuidora\inventario\structures\ArbolBinarioBusqueda.java

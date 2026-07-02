@@ -1,14 +1,14 @@
 com\distribuidora\inventario\services\LogisticaService.class
 com\distribuidora\inventario\models\Producto.class
-com\distribuidora\inventario\models\ProductoGeneral.class
 com\distribuidora\inventario\structures\Arista.class
 com\distribuidora\inventario\structures\NodoPila.class
-com\distribuidora\inventario\models\ProductoPerecible.class
+com\distribuidora\inventario\structures\ArbolBinarioBusqueda.class
 com\distribuidora\inventario\structures\GrafoLogistico$ResultadoDijkstra.class
 com\distribuidora\inventario\models\Transaccion$TipoMovimiento.class
 com\distribuidora\inventario\models\Transaccion.class
 com\distribuidora\inventario\exceptions\CodigoProductoDuplicadoException.class
 com\distribuidora\inventario\services\InventarioService.class
+com\distribuidora\inventario\structures\NodoArbol.class
 com\distribuidora\inventario\structures\PilaAuditoria.class
 com\distribuidora\inventario\structures\NodoBST.class
 com\distribuidora\inventario\exceptions\ProductoNoEncontradoException.class
