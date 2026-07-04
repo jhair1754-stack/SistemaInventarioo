@@ -2,9 +2,6 @@ package com.distribuidora.inventario.structures;
 
 import com.distribuidora.inventario.models.Transaccion;
 
-import java.util.ArrayList;
-import java.util.List;
-
 // ====================================================================
 // [REQUISITO RUBRICA: PILAS] - Clase PilaAuditoria
 // ====================================================================
@@ -208,9 +205,9 @@ public class PilaAuditoria {
      *
      * @return Lista de transacciones; el elemento 0 es el más reciente.
      */
-    public List<Transaccion> toList() {
+    public ListaEnlazada<Transaccion> toList() {
         // [REQUISITO RUBRICA: PILAS] - Recorrido de la pila sin modificarla
-        List<Transaccion> lista      = new ArrayList<>();
+        ListaEnlazada<Transaccion> lista = new ListaEnlazada<>();
         NodoPila          nodoActual = this.tope;   // Comenzar desde el tope
 
         // Recorrer la cadena: tope → siguiente → siguiente → ... → null

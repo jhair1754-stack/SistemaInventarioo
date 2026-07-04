@@ -4,9 +4,6 @@ import com.distribuidora.inventario.exceptions.CodigoProductoDuplicadoException;
 import com.distribuidora.inventario.exceptions.ProductoNoEncontradoException;
 import com.distribuidora.inventario.models.Producto;
 
-import java.util.ArrayList;
-import java.util.List;
-
 // ====================================================================
 // [REQUISITO RUBRICA: ÁRBOL BINARIO DE BÚSQUEDA] - Clase ArbolBST
 // Implementación COMPLETA del Árbol Binario de Búsqueda (BST) desde
@@ -321,14 +318,14 @@ public class ArbolBST {
      *
      * @return Lista de productos en orden alfabético de código.
      */
-    public List<Producto> recorrerInorden() {
-        List<Producto> lista = new ArrayList<>();
+    public ListaEnlazada<Producto> recorrerInorden() {
+        ListaEnlazada<Producto> lista = new ListaEnlazada<>();
         inordenRecursivo(this.raiz, lista);
         return lista;
     }
 
     /** Auxiliar recursivo para recorrido inorden. */
-    private void inordenRecursivo(NodoBST nodo, List<Producto> lista) {
+    private void inordenRecursivo(NodoBST nodo, ListaEnlazada<Producto> lista) {
         if (nodo == null) return;
         inordenRecursivo(nodo.izquierdo, lista);  // 1. Subárbol izquierdo
         lista.add(nodo.dato);                       // 2. Nodo actual
@@ -341,14 +338,14 @@ public class ArbolBST {
      *
      * @return Lista de productos en preorden.
      */
-    public List<Producto> recorrerPreorden() {
-        List<Producto> lista = new ArrayList<>();
+    public ListaEnlazada<Producto> recorrerPreorden() {
+        ListaEnlazada<Producto> lista = new ListaEnlazada<>();
         preordenRecursivo(this.raiz, lista);
         return lista;
     }
 
     /** Auxiliar recursivo para recorrido preorden. */
-    private void preordenRecursivo(NodoBST nodo, List<Producto> lista) {
+    private void preordenRecursivo(NodoBST nodo, ListaEnlazada<Producto> lista) {
         if (nodo == null) return;
         lista.add(nodo.dato);                         // 1. Nodo actual
         preordenRecursivo(nodo.izquierdo, lista);    // 2. Subárbol izquierdo
@@ -360,9 +357,9 @@ public class ArbolBST {
      *
      * @return Lista de productos en estado crítico de stock.
      */
-    public List<Producto> obtenerProductosCriticos() {
-        List<Producto> todos    = recorrerInorden();
-        List<Producto> criticos = new ArrayList<>();
+    public ListaEnlazada<Producto> obtenerProductosCriticos() {
+        ListaEnlazada<Producto> todos    = recorrerInorden();
+        ListaEnlazada<Producto> criticos = new ListaEnlazada<>();
         for (Producto p : todos) {
             if (p.estaEnStockCritico()) {
                 criticos.add(p);

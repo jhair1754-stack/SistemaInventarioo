@@ -1,5 +1,8 @@
 package com.distribuidora.inventario.models;
 
+import com.distribuidora.inventario.structures.ArbolBinarioBusqueda;
+import com.distribuidora.inventario.structures.PilaAuditoria;
+
 /**
  * ============================================================
  * ENTIDAD: Almacen
@@ -53,6 +56,12 @@ public class Almacen {
     /** Capacidad máxima de almacenamiento en unidades. */
     private int         capacidadMaxima;
 
+    /** Árbol de productos específico de este almacén. */
+    private ArbolBinarioBusqueda arbolProductos;
+
+    /** Pila de auditoría específica de este almacén. */
+    private PilaAuditoria pilaAuditoria;
+
     // ─────────────────────────────────────────────────────────
     //  CONSTRUCTOR
     // ─────────────────────────────────────────────────────────
@@ -73,6 +82,8 @@ public class Almacen {
         this.ubicacion       = ubicacion;
         this.tipo            = tipo;
         this.capacidadMaxima = capacidadMaxima;
+        this.arbolProductos  = new ArbolBinarioBusqueda();
+        this.pilaAuditoria   = new PilaAuditoria();
     }
 
     // ─────────────────────────────────────────────────────────
@@ -103,6 +114,12 @@ public class Almacen {
     public int  getCapacidadMaxima()         { return capacidadMaxima; }
     /** @param c Nueva capacidad máxima. */
     public void setCapacidadMaxima(int c)    { this.capacidadMaxima = c; }
+
+    /** @return El árbol de productos de este almacén. */
+    public ArbolBinarioBusqueda getArbolProductos() { return arbolProductos; }
+
+    /** @return La pila de auditoría de este almacén. */
+    public PilaAuditoria getPilaAuditoria() { return pilaAuditoria; }
 
     // ─────────────────────────────────────────────────────────
     //  REPRESENTACIÓN EN CADENA

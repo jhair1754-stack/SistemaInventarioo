@@ -6,8 +6,11 @@ import com.distribuidora.inventario.models.Almacen.TipoAlmacen;
 import com.distribuidora.inventario.models.Producto;
 import com.distribuidora.inventario.services.InventarioService;
 import com.distribuidora.inventario.services.LogisticaService;
-import com.distribuidora.inventario.ui.MenuConsola;
+import com.distribuidora.inventario.ui.FrmPrincipal;
+import javax.swing.SwingUtilities;
+import javax.swing.UIManager;
 
+import java.awt.Font;
 import java.time.LocalDate;
 
 /**
@@ -37,8 +40,8 @@ public class Main {
     public static void main(String[] args) {
 
         // ── INICIALIZAR SERVICIOS ──────────────────────────────────────
-        InventarioService inventarioService = new InventarioService("ALM-01");
         LogisticaService  logisticaService  = new LogisticaService();
+        InventarioService inventarioService = new InventarioService(logisticaService, "ALM-01");
 
         // ── CARGAR RED LOGÍSTICA EN EL GRAFO ──────────────────────────
         // [REQUISITO RUBRICA: GRAFOS] - Carga de vértices y aristas de demo
@@ -57,9 +60,28 @@ public class Main {
 
         System.out.println("  [INIT] Sistema listo.\n");
 
-        // ── LANZAR MENÚ INTERACTIVO ────────────────────────────────────
-        MenuConsola menu = new MenuConsola(inventarioService, logisticaService);
-        menu.iniciar();
+        // ── LANZAR INTERFAZ GRÁFICA (GUI) ────────────────────────────────
+        SwingUtilities.invokeLater(() -> {
+            try {
+                // Usamos el L&F Cross-Platform (Metal) para que setBackground()
+                // funcione correctamente en los botones de todos los sistemas operativos.
+                UIManager.setLookAndFeel(UIManager.getCrossPlatformLookAndFeelClassName());
+
+                // Ajustes globales de tipografía para que Metal se vea profesional
+                java.util.Enumeration<Object> keys = UIManager.getDefaults().keys();
+                while (keys.hasMoreElements()) {
+                    Object key = keys.nextElement();
+                    Object value = UIManager.get(key);
+                    if (value instanceof javax.swing.plaf.FontUIResource) {
+                        UIManager.put(key, new javax.swing.plaf.FontUIResource(
+                                new Font("Segoe UI", Font.PLAIN, 13)));
+                    }
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            new FrmPrincipal(inventarioService, logisticaService).setVisible(true);
+        });
     }
 
     // ─────────────────────────────────────────────────────────

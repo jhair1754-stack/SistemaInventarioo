@@ -4,9 +4,6 @@ import com.distribuidora.inventario.exceptions.CodigoProductoDuplicadoException;
 import com.distribuidora.inventario.exceptions.ProductoNoEncontradoException;
 import com.distribuidora.inventario.models.Producto;
 
-import java.util.ArrayList;
-import java.util.List;
-
 // ====================================================================
 // [REQUISITO RUBRICA: ÁRBOL BINARIO DE BÚSQUEDA] - ArbolBinarioBusqueda
 // ====================================================================
@@ -327,15 +324,15 @@ public class ArbolBinarioBusqueda {
      *
      * @return Lista de productos ordenados alfabéticamente por código.
      */
-    public List<Producto> recorrerInorden() {
+    public ListaEnlazada<Producto> recorrerInorden() {
         // [REQUISITO RUBRICA: ÁRBOL BINARIO DE BÚSQUEDA] - recorrido inorden
-        List<Producto> lista = new ArrayList<>();
+        ListaEnlazada<Producto> lista = new ListaEnlazada<>();
         inordenRec(this.raiz, lista);
         return lista;
     }
 
     /** Auxiliar recursivo para recorrido inorden. */
-    private void inordenRec(NodoArbol nodo, List<Producto> lista) {
+    private void inordenRec(NodoArbol nodo, ListaEnlazada<Producto> lista) {
         if (nodo == null) return;
         inordenRec(nodo.izquierdo, lista);  // 1. Sub-árbol izquierdo
         lista.add(nodo.dato);               // 2. Nodo actual (raíz del sub-árbol)
@@ -348,14 +345,14 @@ public class ArbolBinarioBusqueda {
      *
      * @return Lista de productos en preorden.
      */
-    public List<Producto> recorrerPreorden() {
-        List<Producto> lista = new ArrayList<>();
+    public ListaEnlazada<Producto> recorrerPreorden() {
+        ListaEnlazada<Producto> lista = new ListaEnlazada<>();
         preordenRec(this.raiz, lista);
         return lista;
     }
 
     /** Auxiliar recursivo para recorrido preorden. */
-    private void preordenRec(NodoArbol nodo, List<Producto> lista) {
+    private void preordenRec(NodoArbol nodo, ListaEnlazada<Producto> lista) {
         if (nodo == null) return;
         lista.add(nodo.dato);               // 1. Nodo actual
         preordenRec(nodo.izquierdo, lista); // 2. Sub-árbol izquierdo
@@ -372,9 +369,9 @@ public class ArbolBinarioBusqueda {
      *
      * @return Lista de productos en estado crítico de stock.
      */
-    public List<Producto> obtenerProductosCriticos() {
-        List<Producto> todos     = recorrerInorden();
-        List<Producto> criticos  = new ArrayList<>();
+    public ListaEnlazada<Producto> obtenerProductosCriticos() {
+        ListaEnlazada<Producto> todos     = recorrerInorden();
+        ListaEnlazada<Producto> criticos  = new ListaEnlazada<>();
         for (Producto p : todos) {
             if (p.estaEnStockCritico()) criticos.add(p);
         }

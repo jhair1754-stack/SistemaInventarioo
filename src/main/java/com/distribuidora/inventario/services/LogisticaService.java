@@ -5,8 +5,7 @@ import com.distribuidora.inventario.models.Almacen;
 import com.distribuidora.inventario.structures.GrafoLogistico;
 import com.distribuidora.inventario.structures.GrafoLogistico.ResultadoDijkstra;
 
-import java.util.List;
-import java.util.Map;
+import com.distribuidora.inventario.structures.ListaEnlazada;
 
 /**
  * ============================================================
@@ -90,7 +89,7 @@ public class LogisticaService {
 
             // Mostrar el camino como: [ALM-01] → [ALM-02] → [ALM-06]
             StringBuilder ruta = new StringBuilder("  ║    ");
-            List<String> camino = res.camino;
+            ListaEnlazada<String> camino = res.camino;
             for (int i = 0; i < camino.size(); i++) {
                 ruta.append("[").append(camino.get(i)).append("]");
                 if (i < camino.size() - 1) ruta.append(" -> ");
@@ -114,6 +113,25 @@ public class LogisticaService {
     /** Lista todos los almacenes registrados. */
     public void listarAlmacenes() {
         System.out.println(grafo.listarAlmacenes());
+    }
+
+    /**
+     * Genera el siguiente ID de almacén con el formato ALM-XXX
+     */
+    public String generarCodigoAlmacen() {
+        int max = 0;
+        ListaEnlazada<GrafoLogistico.VerticeLogistico> vertices = grafo.getVertices();
+        for (GrafoLogistico.VerticeLogistico v : vertices) {
+            String id = v.almacen.getId();
+            if (id.startsWith("ALM-")) {
+                try {
+                    int num = Integer.parseInt(id.substring(4));
+                    if (num > max) max = num;
+                } catch (NumberFormatException ignored) {}
+            }
+        }
+        max = Math.max(max, 6); // Asegurar que empiece en ALM-007 (ALM-07)
+        return String.format("ALM-%03d", max + 1);
     }
 
     // ─────────────────────────────────────────────────────────
