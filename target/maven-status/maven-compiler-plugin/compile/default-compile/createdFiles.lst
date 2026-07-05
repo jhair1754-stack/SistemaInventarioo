@@ -13,12 +13,12 @@ com\distribuidora\inventario\exceptions\AlmacenNoEncontradoException.class
 com\distribuidora\inventario\exceptions\StockInsuficienteException.class
 com\distribuidora\inventario\models\Almacen.class
 com\distribuidora\inventario\ui\FrmGestionProductos$1.class
+com\distribuidora\inventario\ui\FrmReportes$3.class
 com\distribuidora\inventario\exceptions\FechaVencimientoInvalidaException.class
 com\distribuidora\inventario\structures\ListaEnlazada.class
 com\distribuidora\inventario\structures\GrafoLogistico.class
 com\distribuidora\inventario\structures\ListaEnlazada$NodoLista.class
 com\distribuidora\inventario\structures\GrafoLogistico$VerticeLogistico.class
-com\distribuidora\inventario\ui\FrmLogistica$1.class
 com\distribuidora\inventario\ui\FrmPrincipal.class
 com\distribuidora\inventario\ui\FrmReportes$1.class
 com\distribuidora\inventario\ui\FrmControlStock.class

@@ -3,12 +3,13 @@ package com.distribuidora.inventario.ui;
 import com.distribuidora.inventario.exceptions.AlmacenNoEncontradoException;
 import com.distribuidora.inventario.models.Almacen;
 import com.distribuidora.inventario.services.LogisticaService;
+import com.distribuidora.inventario.structures.GrafoLogistico;
 import com.distribuidora.inventario.structures.GrafoLogistico.ResultadoDijkstra;
+import com.distribuidora.inventario.structures.GrafoLogistico.VerticeLogistico;
+import com.distribuidora.inventario.structures.ListaEnlazada;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.FocusAdapter;
-import java.awt.event.FocusEvent;
 
 public class FrmLogistica extends JDialog {
 
@@ -24,21 +25,26 @@ public class FrmLogistica extends JDialog {
     private LogisticaService logisticaService;
 
     private JTextField txtIdAlmacen, txtNombre, txtDireccion, txtCapacidad;
-    private JComboBox<String> cbTipo;
+    private JComboBox<String> cbTipoAlmacen;
     private JButton btnAgregarAlmacen;
 
-    private JTextField txtOrigen, txtDestino, txtDistancia, txtDescripcion;
+    // Conectar rutas: JComboBox en lugar de JTextField
+    private JComboBox<String> cbOrigenRuta, cbDestinoRuta;
+    private JTextField txtDistancia, txtDescripcion;
     private JButton btnConectar;
 
-    private JTextField txtRutaOrigen, txtRutaDestino;
+    // Dijkstra: JComboBox en lugar de JTextField
+    private JComboBox<String> cbRutaOrigen, cbRutaDestino;
     private JButton btnCalcularRuta;
+
     private JTextArea txtResultados;
+    private JTextArea txtResultadoRuta; // Panel inferior para resultado Dijkstra
 
     public FrmLogistica(Frame parent, LogisticaService logServ) {
-        super(parent, "Gestión Logística (Grafos)", true);
+        super(parent, "Gestión de Red Logística", true);
         this.logisticaService = logServ;
 
-        setSize(960, 620);
+        setSize(1060, 680);
         setLocationRelativeTo(parent);
         setLayout(new BorderLayout());
         getContentPane().setBackground(BG_FORM);
@@ -49,7 +55,7 @@ public class FrmLogistica extends JDialog {
 
     private void initComponents() {
         JPanel pnlIzquierdo = new JPanel(new GridLayout(3, 1, 0, 8));
-        pnlIzquierdo.setPreferredSize(new Dimension(370, 0));
+        pnlIzquierdo.setPreferredSize(new Dimension(400, 0));
         pnlIzquierdo.setBackground(BG_FORM);
         pnlIzquierdo.setBorder(BorderFactory.createCompoundBorder(
                 BorderFactory.createMatteBorder(0, 0, 0, 1, BORDER),
@@ -62,42 +68,47 @@ public class FrmLogistica extends JDialog {
         gbc.fill = GridBagConstraints.HORIZONTAL;
 
         int fila = 1;
-        gbc.gridx = 0; gbc.gridy = fila; pnlAgregar.add(crearLabel("ID:"), gbc);
+        gbc.gridx = 0; gbc.gridy = fila; gbc.weightx = 0;
+        pnlAgregar.add(crearLabel("ID:"), gbc);
         txtIdAlmacen = crearTextField(14);
         txtIdAlmacen.setEditable(false);
         txtIdAlmacen.setText(logisticaService.generarCodigoAlmacen());
-        gbc.gridx = 1; pnlAgregar.add(txtIdAlmacen, gbc);
+        gbc.gridx = 1; gbc.weightx = 1.0; pnlAgregar.add(txtIdAlmacen, gbc);
 
         fila++;
-        gbc.gridx = 0; gbc.gridy = fila; pnlAgregar.add(crearLabel("Nombre:"), gbc);
+        gbc.gridx = 0; gbc.gridy = fila; gbc.weightx = 0;
+        pnlAgregar.add(crearLabel("Nombre:"), gbc);
         txtNombre = crearTextField(14);
-        gbc.gridx = 1; pnlAgregar.add(txtNombre, gbc);
+        gbc.gridx = 1; gbc.weightx = 1.0; pnlAgregar.add(txtNombre, gbc);
 
         fila++;
-        gbc.gridx = 0; gbc.gridy = fila; pnlAgregar.add(crearLabel("Dirección:"), gbc);
+        gbc.gridx = 0; gbc.gridy = fila; gbc.weightx = 0;
+        pnlAgregar.add(crearLabel("Dirección:"), gbc);
         txtDireccion = crearTextField(14);
         txtDireccion.setToolTipText("Formato: Distrito, Av./Calle y Número. Ej: Lima, Av. Venezuela Cdra 34");
-        gbc.gridx = 1; pnlAgregar.add(txtDireccion, gbc);
+        gbc.gridx = 1; gbc.weightx = 1.0; pnlAgregar.add(txtDireccion, gbc);
 
         fila++;
-        gbc.gridx = 0; gbc.gridy = fila; pnlAgregar.add(crearLabel("Capacidad:"), gbc);
+        gbc.gridx = 0; gbc.gridy = fila; gbc.weightx = 0;
+        pnlAgregar.add(crearLabel("Capacidad:"), gbc);
         txtCapacidad = crearTextField(14);
-        gbc.gridx = 1; pnlAgregar.add(txtCapacidad, gbc);
+        gbc.gridx = 1; gbc.weightx = 1.0; pnlAgregar.add(txtCapacidad, gbc);
 
         fila++;
-        gbc.gridx = 0; gbc.gridy = fila; pnlAgregar.add(crearLabel("Tipo:"), gbc);
-        cbTipo = new JComboBox<>(new String[]{"CENTRAL", "REGIONAL", "TIENDA", "HUB"});
-        cbTipo.setFont(new Font("Segoe UI", Font.PLAIN, 12));
-        gbc.gridx = 1; pnlAgregar.add(cbTipo, gbc);
+        gbc.gridx = 0; gbc.gridy = fila; gbc.weightx = 0;
+        pnlAgregar.add(crearLabel("Tipo:"), gbc);
+        cbTipoAlmacen = new JComboBox<>(new String[]{"CENTRAL", "REGIONAL", "TIENDA", "HUB"});
+        cbTipoAlmacen.setFont(new Font("Segoe UI", Font.PLAIN, 12));
+        gbc.gridx = 1; gbc.weightx = 1.0; pnlAgregar.add(cbTipoAlmacen, gbc);
 
         fila++;
         btnAgregarAlmacen = crearBotonAccion("Agregar Almacén", ACCENT);
-        gbc.gridx = 0; gbc.gridy = fila; gbc.gridwidth = 2;
+        gbc.gridx = 0; gbc.gridy = fila; gbc.gridwidth = 2; gbc.weightx = 1.0;
         pnlAgregar.add(btnAgregarAlmacen, gbc);
 
         pnlIzquierdo.add(pnlAgregar);
 
-        // ─── 2. CONECTAR RUTAS ───
+        // ─── 2. CONECTAR RUTAS (sin botones "?") ───
         JPanel pnlConectar = crearSeccion("Conectar Rutas");
         gbc = new GridBagConstraints();
         gbc.insets = new Insets(4, 4, 4, 4);
@@ -105,70 +116,110 @@ public class FrmLogistica extends JDialog {
         gbc.gridwidth = 1;
         fila = 1;
 
-        gbc.gridx = 0; gbc.gridy = fila; gbc.weightx = 0.0; pnlConectar.add(crearLabel("Origen ID:"), gbc);
-        txtOrigen = crearTextField(14);
-        gbc.gridx = 1; gbc.weightx = 1.0; pnlConectar.add(txtOrigen, gbc);
-        JButton btnValOri = crearBotonPequeno("?");
-        gbc.gridx = 2; gbc.weightx = 0.0; pnlConectar.add(btnValOri, gbc);
+        gbc.gridx = 0; gbc.gridy = fila; gbc.weightx = 0;
+        pnlConectar.add(crearLabel("Origen:"), gbc);
+        cbOrigenRuta = new JComboBox<>();
+        cbOrigenRuta.setFont(new Font("Segoe UI", Font.PLAIN, 12));
+        gbc.gridx = 1; gbc.weightx = 1.0; pnlConectar.add(cbOrigenRuta, gbc);
 
         fila++;
-        gbc.gridx = 0; gbc.gridy = fila; gbc.weightx = 0.0; pnlConectar.add(crearLabel("Destino ID:"), gbc);
-        txtDestino = crearTextField(14);
-        gbc.gridx = 1; gbc.weightx = 1.0; pnlConectar.add(txtDestino, gbc);
-        JButton btnValDes = crearBotonPequeno("?");
-        gbc.gridx = 2; gbc.weightx = 0.0; pnlConectar.add(btnValDes, gbc);
+        gbc.gridx = 0; gbc.gridy = fila; gbc.weightx = 0;
+        pnlConectar.add(crearLabel("Destino:"), gbc);
+        cbDestinoRuta = new JComboBox<>();
+        cbDestinoRuta.setFont(new Font("Segoe UI", Font.PLAIN, 12));
+        gbc.gridx = 1; gbc.weightx = 1.0; pnlConectar.add(cbDestinoRuta, gbc);
 
         fila++;
-        gbc.gridx = 0; gbc.gridy = fila; pnlConectar.add(crearLabel("Distancia (km):"), gbc);
-        txtDistancia = crearTextField(10);
-        gbc.gridx = 1; gbc.gridwidth = 2; pnlConectar.add(txtDistancia, gbc);
+        gbc.gridx = 0; gbc.gridy = fila; gbc.weightx = 0;
+        pnlConectar.add(crearLabel("Distancia (km):"), gbc);
+        txtDistancia = crearTextField(14);
+        gbc.gridx = 1; gbc.weightx = 1.0; pnlConectar.add(txtDistancia, gbc);
 
         fila++;
-        gbc.gridx = 0; gbc.gridy = fila; gbc.gridwidth = 1;
+        gbc.gridx = 0; gbc.gridy = fila; gbc.weightx = 0;
         pnlConectar.add(crearLabel("Descripción:"), gbc);
-        txtDescripcion = crearTextField(10);
-        gbc.gridx = 1; gbc.gridwidth = 2; pnlConectar.add(txtDescripcion, gbc);
+        txtDescripcion = crearTextField(14);
+        gbc.gridx = 1; gbc.weightx = 1.0; pnlConectar.add(txtDescripcion, gbc);
 
         fila++;
         btnConectar = crearBotonAccion("Crear Ruta", GREEN_BTN);
-        gbc.gridx = 0; gbc.gridy = fila; gbc.gridwidth = 3;
+        gbc.gridx = 0; gbc.gridy = fila; gbc.gridwidth = 2;
         pnlConectar.add(btnConectar, gbc);
 
         pnlIzquierdo.add(pnlConectar);
 
-        // ─── 3. DIJKSTRA ───
-        JPanel pnlRuta = crearSeccion("Ruta Óptima (Dijkstra)");
+        // ─── 3. OPTIMIZACIÓN DE RUTAS LOGÍSTICAS ───
+        JPanel pnlRuta = crearSeccion("Optimización de Rutas Logísticas");
         gbc = new GridBagConstraints();
         gbc.insets = new Insets(4, 4, 4, 4);
         gbc.fill = GridBagConstraints.HORIZONTAL;
         gbc.gridwidth = 1;
         fila = 1;
 
-        gbc.gridx = 0; gbc.gridy = fila; pnlRuta.add(crearLabel("Origen:"), gbc);
-        txtRutaOrigen = crearTextField(14);
-        gbc.gridx = 1; pnlRuta.add(txtRutaOrigen, gbc);
+        gbc.gridx = 0; gbc.gridy = fila; gbc.weightx = 0;
+        pnlRuta.add(crearLabel("Origen:"), gbc);
+        cbRutaOrigen = new JComboBox<>();
+        cbRutaOrigen.setFont(new Font("Segoe UI", Font.PLAIN, 12));
+        gbc.gridx = 1; gbc.weightx = 1.0; pnlRuta.add(cbRutaOrigen, gbc);
 
         fila++;
-        gbc.gridx = 0; gbc.gridy = fila; pnlRuta.add(crearLabel("Destino:"), gbc);
-        txtRutaDestino = crearTextField(14);
-        gbc.gridx = 1; pnlRuta.add(txtRutaDestino, gbc);
+        gbc.gridx = 0; gbc.gridy = fila; gbc.weightx = 0;
+        pnlRuta.add(crearLabel("Destino:"), gbc);
+        cbRutaDestino = new JComboBox<>();
+        cbRutaDestino.setFont(new Font("Segoe UI", Font.PLAIN, 12));
+        gbc.gridx = 1; gbc.weightx = 1.0; pnlRuta.add(cbRutaDestino, gbc);
 
         fila++;
-        btnCalcularRuta = crearBotonAccion("Calcular Ruta", ACCENT);
+        btnCalcularRuta = crearBotonAccion("Calcular Ruta Óptima", ACCENT);
         gbc.gridx = 0; gbc.gridy = fila; gbc.gridwidth = 2;
         pnlRuta.add(btnCalcularRuta, gbc);
 
         pnlIzquierdo.add(pnlRuta);
         add(pnlIzquierdo, BorderLayout.WEST);
 
-        // ─── PANEL DERECHO: RESULTADOS ───
+        // ─── PANEL DERECHO: RED + RESULTADO DIJKSTRA ───
+        JPanel pnlDerecho = new JPanel(new BorderLayout(0, 8));
+        pnlDerecho.setBackground(BG_FORM);
+        pnlDerecho.setBorder(BorderFactory.createEmptyBorder(8, 8, 8, 8));
+
+        // Red logística (texto monoespaciado)
         txtResultados = new JTextArea();
         txtResultados.setEditable(false);
         txtResultados.setFont(new Font("Consolas", Font.PLAIN, 12));
         txtResultados.setBackground(BG_WHITE);
         txtResultados.setForeground(TEXT_PRI);
         txtResultados.setMargin(new Insets(12, 12, 12, 12));
-        add(new JScrollPane(txtResultados), BorderLayout.CENTER);
+        JScrollPane scrollRed = new JScrollPane(txtResultados);
+        scrollRed.setBorder(BorderFactory.createTitledBorder(
+                BorderFactory.createLineBorder(BORDER),
+                "Red Logística Actual",
+                javax.swing.border.TitledBorder.LEFT,
+                javax.swing.border.TitledBorder.TOP,
+                new Font("Segoe UI", Font.BOLD, 12), TEXT_PRI));
+        pnlDerecho.add(scrollRed, BorderLayout.CENTER);
+
+        // Resultado de Dijkstra (panel inferior con tarjeta)
+        txtResultadoRuta = new JTextArea(4, 30);
+        txtResultadoRuta.setEditable(false);
+        txtResultadoRuta.setFont(new Font("Segoe UI", Font.BOLD, 13));
+        txtResultadoRuta.setBackground(new Color(240, 253, 244)); // Verde muy suave
+        txtResultadoRuta.setForeground(new Color(21, 128, 61));
+        txtResultadoRuta.setMargin(new Insets(10, 14, 10, 14));
+        txtResultadoRuta.setText("Seleccione origen y destino para calcular la ruta óptima.");
+        JScrollPane scrollRuta = new JScrollPane(txtResultadoRuta);
+        scrollRuta.setBorder(BorderFactory.createTitledBorder(
+                BorderFactory.createLineBorder(new Color(187, 247, 208)),
+                "Resultado de Ruta Óptima",
+                javax.swing.border.TitledBorder.LEFT,
+                javax.swing.border.TitledBorder.TOP,
+                new Font("Segoe UI", Font.BOLD, 12), new Color(21, 128, 61)));
+        scrollRuta.setPreferredSize(new Dimension(0, 120));
+        pnlDerecho.add(scrollRuta, BorderLayout.SOUTH);
+
+        add(pnlDerecho, BorderLayout.CENTER);
+
+        // ─── CARGAR COMBOS ───
+        cargarCombosAlmacenes();
 
         // ─── EVENTOS ───
         btnAgregarAlmacen.addActionListener(e -> {
@@ -177,53 +228,37 @@ public class FrmLogistica extends JDialog {
                 String nombre = txtNombre.getText();
                 String dir = txtDireccion.getText();
                 int cap = Integer.parseInt(txtCapacidad.getText());
-                String tipo = (String) cbTipo.getSelectedItem();
+                String tipo = (String) cbTipoAlmacen.getSelectedItem();
                 Almacen.TipoAlmacen tipoEnum = Almacen.TipoAlmacen.valueOf(tipo);
 
                 Almacen a = new Almacen(id, nombre, dir, tipoEnum, cap);
                 logisticaService.agregarAlmacen(a);
-                JOptionPane.showMessageDialog(this, "Almacén agregado.");
+                JOptionPane.showMessageDialog(this, "Almacén '" + id + "' agregado correctamente.");
 
                 txtIdAlmacen.setText(logisticaService.generarCodigoAlmacen());
                 txtNombre.setText(""); txtDireccion.setText(""); txtCapacidad.setText("");
+                cargarCombosAlmacenes();
                 actualizarTextoRed();
             } catch (Exception ex) {
-                JOptionPane.showMessageDialog(this, "Verifique los datos.",
+                JOptionPane.showMessageDialog(this, "Verifique los datos ingresados.",
                         "Error", JOptionPane.ERROR_MESSAGE);
             }
         });
 
-        FocusAdapter validadorFocus = new FocusAdapter() {
-            @Override
-            public void focusLost(FocusEvent e) {
-                JTextField txt = (JTextField) e.getSource();
-                String id = txt.getText().trim();
-                if (!id.isEmpty() && !logisticaService.existeAlmacen(id)) {
-                    txt.setForeground(new Color(220, 38, 38));
-                    JOptionPane.showMessageDialog(FrmLogistica.this,
-                            "El almacén " + id + " no existe en el grafo.",
-                            "ID Inválido", JOptionPane.WARNING_MESSAGE);
-                } else {
-                    txt.setForeground(TEXT_PRI);
-                }
-            }
-        };
-
-        txtOrigen.addFocusListener(validadorFocus);
-        txtDestino.addFocusListener(validadorFocus);
-
-        btnValOri.addActionListener(e -> txtOrigen.transferFocus());
-        btnValDes.addActionListener(e -> txtDestino.transferFocus());
-
         btnConectar.addActionListener(e -> {
             try {
-                String o = txtOrigen.getText();
-                String d = txtDestino.getText();
+                String o = extraerIdAlmacen(cbOrigenRuta);
+                String d = extraerIdAlmacen(cbDestinoRuta);
+                if (o == null || d == null) {
+                    JOptionPane.showMessageDialog(this, "Seleccione origen y destino.",
+                            "Advertencia", JOptionPane.WARNING_MESSAGE);
+                    return;
+                }
                 double dist = Double.parseDouble(txtDistancia.getText());
                 String desc = txtDescripcion.getText();
 
                 logisticaService.conectarAlmacenes(o, d, dist, desc);
-                JOptionPane.showMessageDialog(this, "Ruta conectada.");
+                JOptionPane.showMessageDialog(this, "Ruta conectada: " + o + " ↔ " + d);
                 actualizarTextoRed();
             } catch (AlmacenNoEncontradoException ex) {
                 JOptionPane.showMessageDialog(this, ex.getMessage(),
@@ -236,25 +271,35 @@ public class FrmLogistica extends JDialog {
         });
 
         btnCalcularRuta.addActionListener(e -> {
-            String o = txtRutaOrigen.getText();
-            String d = txtRutaDestino.getText();
+            String o = extraerIdAlmacen(cbRutaOrigen);
+            String d = extraerIdAlmacen(cbRutaDestino);
+            if (o == null || d == null) {
+                JOptionPane.showMessageDialog(this, "Seleccione origen y destino.",
+                        "Advertencia", JOptionPane.WARNING_MESSAGE);
+                return;
+            }
             try {
                 ResultadoDijkstra res = logisticaService.getGrafo().dijkstra(o, d);
-                StringBuilder sb = new StringBuilder();
-                sb.append("═══ RUTA ÓPTIMA (Dijkstra) ═══\n");
-                sb.append("Origen:  ").append(o).append("\n");
-                sb.append("Destino: ").append(d).append("\n");
                 if (res.esAlcanzable) {
-                    sb.append(String.format("Distancia total: %.2f km\n", res.distanciaTotal));
-                    sb.append("Recorrido: ");
+                    StringBuilder ruta = new StringBuilder();
                     for (int i = 0; i < res.camino.size(); i++) {
-                        sb.append("[").append(res.camino.get(i)).append("]");
-                        if (i < res.camino.size() - 1) sb.append(" → ");
+                        ruta.append(res.camino.get(i));
+                        if (i < res.camino.size() - 1) ruta.append(" ➔ ");
                     }
+                    txtResultadoRuta.setBackground(new Color(240, 253, 244));
+                    txtResultadoRuta.setForeground(new Color(21, 128, 61));
+                    txtResultadoRuta.setText(
+                        "Ruta Óptima Encontrada\n" +
+                        "Recorrido: " + ruta.toString() + "\n" +
+                        "Distancia Total: " + String.format("%.2f", res.distanciaTotal) + " km"
+                    );
                 } else {
-                    sb.append("⚠ NO HAY RUTA POSIBLE.");
+                    txtResultadoRuta.setBackground(new Color(254, 242, 242));
+                    txtResultadoRuta.setForeground(new Color(185, 28, 28));
+                    txtResultadoRuta.setText(
+                        "⚠ No existe ruta posible entre " + o + " y " + d + "."
+                    );
                 }
-                txtResultados.setText(sb.toString() + "\n\n" + logisticaService.getGrafo().mostrarRed());
             } catch (AlmacenNoEncontradoException ex) {
                 JOptionPane.showMessageDialog(this, ex.getMessage(),
                         "Error", JOptionPane.ERROR_MESSAGE);
@@ -263,6 +308,34 @@ public class FrmLogistica extends JDialog {
     }
 
     // ── Helpers ──
+
+    /**
+     * Carga los 4 JComboBox de almacenes con los vértices del grafo.
+     * Formato: "ALM-01 — Central Lima"
+     */
+    private void cargarCombosAlmacenes() {
+        cbOrigenRuta.removeAllItems();
+        cbDestinoRuta.removeAllItems();
+        cbRutaOrigen.removeAllItems();
+        cbRutaDestino.removeAllItems();
+
+        ListaEnlazada<VerticeLogistico> vertices = logisticaService.getGrafo().getVertices();
+        for (VerticeLogistico v : vertices) {
+            String item = v.almacen.getId() + " — " + v.almacen.getNombre();
+            cbOrigenRuta.addItem(item);
+            cbDestinoRuta.addItem(item);
+            cbRutaOrigen.addItem(item);
+            cbRutaDestino.addItem(item);
+        }
+    }
+
+    /** Extrae el ID (ej. "ALM-01") del item seleccionado en un combo ("ALM-01 — Nombre"). */
+    private String extraerIdAlmacen(JComboBox<String> combo) {
+        String sel = (String) combo.getSelectedItem();
+        if (sel == null || sel.isEmpty()) return null;
+        return sel.split(" — ")[0].trim();
+    }
+
     private JPanel crearSeccion(String titulo) {
         JPanel panel = new JPanel(new GridBagLayout());
         panel.setBackground(BG_WHITE);
@@ -270,7 +343,7 @@ public class FrmLogistica extends JDialog {
                 BorderFactory.createLineBorder(BORDER, 1),
                 BorderFactory.createEmptyBorder(8, 10, 8, 10)));
         GridBagConstraints gbc = new GridBagConstraints();
-        gbc.gridx = 0; gbc.gridy = 0; gbc.gridwidth = 3;
+        gbc.gridx = 0; gbc.gridy = 0; gbc.gridwidth = 2;
         gbc.fill = GridBagConstraints.HORIZONTAL;
         gbc.insets = new Insets(0, 0, 6, 0);
         JLabel lblTit = new JLabel(titulo);
@@ -301,18 +374,6 @@ public class FrmLogistica extends JDialog {
         btn.setForeground(Color.WHITE);
         btn.setFocusPainted(false);
         btn.setBorder(BorderFactory.createEmptyBorder(7, 16, 7, 16));
-        btn.setCursor(new Cursor(Cursor.HAND_CURSOR));
-        return btn;
-    }
-
-    private JButton crearBotonPequeno(String texto) {
-        JButton btn = new JButton(texto);
-        btn.setFont(new Font("Segoe UI", Font.BOLD, 11));
-        btn.setOpaque(true);
-        btn.setBackground(ACCENT);
-        btn.setForeground(Color.WHITE);
-        btn.setFocusPainted(false);
-        btn.setMargin(new Insets(2, 6, 2, 6));
         btn.setCursor(new Cursor(Cursor.HAND_CURSOR));
         return btn;
     }

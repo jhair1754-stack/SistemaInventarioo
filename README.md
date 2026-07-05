@@ -111,10 +111,10 @@ La interfaz gráfica del sistema está construida con **Java Swing**, utilizando
 
 ### Formularios
 1. **`FrmPrincipal`** — Dashboard con logo UNMSM, título, selector de almacén activo y 4 botones de navegación con iconos y hover interactivo.
-2. **`FrmGestionProductos`** — Formulario CRUD con autogeneración de código, filtro por categorías reales (Electrónico, Alimento, Farmacéutico, etc.) y tabla con selección azul.
+2. **`FrmGestionProductos`** — Formulario CRUD con autogeneración de código, filtro por categorías reales y tabla expandida de 7 columnas: `Código | Nombre | Categoría | Precio (S/) | Stock Actual | Stock Mín. | Fecha Venc.`. Para productos estándar (no perecibles), la columna de fecha de vencimiento muestra `"-"`.
 3. **`FrmControlStock`** — Tabla de stock con filtro por categoría y panel inferior para registrar entradas/salidas con validación inmediata.
-4. **`FrmLogistica`** — Tres secciones: Nuevo Almacén, Conectar Rutas y Ruta Óptima (Dijkstra), con validación en tiempo real de IDs y resultados en texto monoespaciado.
-5. **`FrmReportes`** — Pestañas para Productos Vencidos e Historial de Movimientos (Pila LIFO) con tablas estilizadas.
+4. **`FrmLogistica`** — Tres secciones: Nuevo Almacén, Conectar Rutas y Optimización de Rutas Logísticas. Los campos de origen y destino usan **listas desplegables (`JComboBox`)** que se cargan automáticamente con los almacenes del grafo. El resultado de la ruta óptima se muestra en un **panel inferior dedicado** con formato de flechas (`ALM-01 ➔ ALM-03 ➔ ALM-05 | Distancia Total: 45.00 km`).
+5. **`FrmReportes`** — Tres pestañas: **Inventario Completo** (con polimorfismo: GENERAL muestra Marca, PERECIBLE muestra Fecha Venc.), **Productos Perecibles Vencidos** e **Historial de Movimientos (Pila LIFO)**.
 
 ---
 
@@ -133,14 +133,15 @@ La interfaz gráfica del sistema está construida con **Java Swing**, utilizando
    - Cambiar de almacén activo para los movimientos.
 
 3. **Reportes y Consultas:**
+   - **Inventario Completo** con polimorfismo: diferencia visualmente productos GENERAL (muestra Marca) y PERECIBLE (muestra Fecha de Vencimiento).
    - Visualizar historial de movimientos recorriendo la pila en orden **LIFO** (más reciente primero).
    - Reporte de productos en estado de **Stock Crítico**.
    - Reporte de productos **perecibles vencidos**.
 
 4. **Red Logística (Grafo & Dijkstra):**
    - Visualización de la **Lista de Adyacencia** completa de la red de distribución.
-   - Agregar almacenes (vértices) y conectar almacenes con distancias (aristas).
-   - **Calcular Ruta Óptima (Algoritmo de Dijkstra):** Determina la distancia mínima en kilómetros y el camino secuencial entre dos almacenes de la red.
+   - Agregar almacenes (vértices) y conectar almacenes con distancias (aristas) usando **listas desplegables** auto-pobladas.
+   - **Calcular Ruta Óptima (Algoritmo de Dijkstra):** Determina la distancia mínima en kilómetros y el camino secuencial entre dos almacenes, con resultado visual en panel dedicado.
 
 ---
 
@@ -186,8 +187,12 @@ mvn exec:java
 - [x] **Grafo + Dijkstra:** Implementado desde cero (`Arista` + `GrafoLogistico`).
 - [x] **Lista Enlazada auxiliar:** Implementada desde cero (`ListaEnlazada`) para poblar `JTable` sin depender de `java.util`.
 - [x] **Interfaz Gráfica (GUI):** Formularios Swing (`JFrame`, `JDialog`, `JTable`, `JOptionPane`) con diseño profesional.
+- [x] **Polimorfismo:** Aplicado en reportes y tablas: productos GENERAL muestran Marca y `"-"` en Fecha Venc.; productos PERECIBLE muestran `"N/A"` en Marca y fecha real.
 - [x] **Filtrado por Categoría:** Las categorías del filtro coinciden con las categorías reales de los productos (incluyendo los precargados).
+- [x] **Identificadores estandarizados:** Formato `ALM-XX` (2 dígitos) para todos los almacenes.
+- [x] **Selección por JComboBox:** Los campos de origen/destino en rutas y Dijkstra usan listas desplegables auto-pobladas del grafo.
 - [x] **Comentarios de Rúbrica:** Presentes en el código fuente con el formato `// [REQUISITO RUBRICA: ...]`.
 - [x] **Persistencia en RAM:** Todo el ciclo de vida gestionado dinámicamente en memoria.
 - [x] **Manejo de Excepciones:** `try-catch` estructurados con 5 excepciones personalizadas mostradas en `JOptionPane`.
 - [x] **Proyecto Maven:** Compatible con JDK 17 y limpio de errores de compilación.
+

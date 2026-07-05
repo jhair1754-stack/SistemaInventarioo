@@ -107,7 +107,7 @@ public class FrmPrincipal extends JFrame {
 
         JButton btnProductos = crearBoton("Gestión de Productos", "Administrar catálogo y precios", "📦");
         JButton btnStock     = crearBoton("Control de Stock", "Entradas y salidas de inventario", "📊");
-        JButton btnLogistica = crearBoton("Red Logística", "Almacenes y rutas (Dijkstra)", "🗺️");
+        JButton btnLogistica = crearBoton("Red Logística", "Almacenes y rutas de distribución", "🗺️");
         JButton btnReportes  = crearBoton("Reportes y Auditoría", "Productos vencidos e historial", "📋");
 
         btnProductos.addActionListener(e -> new FrmGestionProductos(this, inventarioService).setVisible(true));

@@ -130,8 +130,8 @@ public class LogisticaService {
                 } catch (NumberFormatException ignored) {}
             }
         }
-        max = Math.max(max, 6); // Asegurar que empiece en ALM-007 (ALM-07)
-        return String.format("ALM-%03d", max + 1);
+        max = Math.max(max, 6); // Asegurar que empiece en ALM-07
+        return String.format("ALM-%02d", max + 1);
     }
 
     // ─────────────────────────────────────────────────────────

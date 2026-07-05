@@ -45,7 +45,7 @@ public class FrmGestionProductos extends JDialog {
         super(parent, "Gestión de Productos", true);
         this.inventarioService = invServ;
 
-        setSize(960, 620);
+        setSize(1100, 640);
         setLocationRelativeTo(parent);
         setLayout(new BorderLayout());
         getContentPane().setBackground(BG_FORM);
@@ -168,7 +168,6 @@ public class FrmGestionProductos extends JDialog {
         lblFiltro.setForeground(TEXT_SEC);
         pnlFiltro.add(lblFiltro);
 
-        // Construimos filtro con "Todas" + las mismas categorías reales
         String[] opcionesFiltro = new String[CATEGORIAS.length + 1];
         opcionesFiltro[0] = "Todas";
         System.arraycopy(CATEGORIAS, 0, opcionesFiltro, 1, CATEGORIAS.length);
@@ -177,9 +176,9 @@ public class FrmGestionProductos extends JDialog {
         pnlFiltro.add(cbFiltroCategoria);
         pnlDerecha.add(pnlFiltro, BorderLayout.NORTH);
 
-        // Tabla
+        // Tabla expandida: Código | Nombre | Categoría | Precio | Stock Actual | Stock Mínimo | Fecha Venc.
         modeloTabla = new DefaultTableModel(
-                new String[]{"Código", "Nombre", "Categoría", "Tipo", "Stock"}, 0) {
+                new String[]{"Código", "Nombre", "Categoría", "Precio (S/)", "Stock Actual", "Stock Mín.", "Fecha Venc."}, 0) {
             @Override
             public boolean isCellEditable(int row, int column) { return false; }
         };
@@ -189,6 +188,7 @@ public class FrmGestionProductos extends JDialog {
         tblProductos.setGridColor(BORDER);
         tblProductos.setSelectionBackground(new Color(219, 234, 254));
         tblProductos.setSelectionForeground(TEXT_PRI);
+        tblProductos.setAutoResizeMode(JTable.AUTO_RESIZE_ALL_COLUMNS);
 
         JTableHeader header = tblProductos.getTableHeader();
         header.setFont(new Font("Segoe UI", Font.BOLD, 12));
@@ -267,6 +267,11 @@ public class FrmGestionProductos extends JDialog {
         tblProductos.clearSelection();
     }
 
+    /**
+     * Actualiza la tabla mostrando todas las columnas solicitadas.
+     * Aplica POLIMORFISMO: para productos GENERAL muestra "-" en Fecha Venc.,
+     * para PERECIBLE muestra la fecha real.
+     */
     private void actualizarTabla() {
         modeloTabla.setRowCount(0);
         String filtro = (String) cbFiltroCategoria.getSelectedItem();
@@ -274,12 +279,18 @@ public class FrmGestionProductos extends JDialog {
 
         for (Producto p : productos) {
             if ("Todas".equals(filtro) || p.getCategoria().equalsIgnoreCase(filtro)) {
+                // Polimorfismo: mostrar fecha de vencimiento solo si es perecible
+                String fechaVenc = "PERECIBLE".equals(p.getTipo()) && p.getFechaVencimiento() != null
+                        ? p.getFechaVencimiento().toString()
+                        : "-";
                 modeloTabla.addRow(new Object[]{
                     p.getCodigo(),
                     p.getNombre(),
                     p.getCategoria(),
-                    p.getTipo(),
-                    p.getCantidadStock()
+                    String.format("S/ %.2f", p.getPrecioUnitario()),
+                    p.getCantidadStock(),
+                    p.getStockMinimo(),
+                    fechaVenc
                 });
             }
         }
@@ -334,7 +345,6 @@ public class FrmGestionProductos extends JDialog {
             return;
         }
 
-        // [REQUISITO RUBRICA]: Validar antes de pedir confirmación
         if (!inventarioService.getArbolProductos().existe(codigo)) {
             JOptionPane.showMessageDialog(this,
                     "Producto no encontrado: " + codigo,
