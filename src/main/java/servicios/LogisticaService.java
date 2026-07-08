@@ -12,8 +12,8 @@ import estructuras.ListaEnlazada;
  * Capa de lógica de negocio que gestiona la red logística
  * delegando al {@link GrafoLogistico}.
  *
- * @author  Equipo Proyecto 4 – Ingeniería de Sistemas UNMSM
- * @version 2.0
+ * @author Equipo 2
+ * @version Beta
  */
 public class LogisticaService {
 
@@ -151,17 +151,17 @@ public class LogisticaService {
     }
 
     /** @return Referencia al grafo logístico. */
-    public GrafoLogistico getGrafo()    { return grafo; }
+    public GrafoLogistico getGrafo() { return grafo; }
 
     /** @return Número de almacenes. */
-    public int getNumeroAlmacenes()     { return grafo.getNumeroVertices(); }
+    public int getNumeroAlmacenes() { return grafo.getNumeroVertices(); }
 
     /** @return Número de rutas. */
-    public int getNumeroRutas()         { return grafo.getNumeroAristas(); }
+    public int getNumeroRutas() { return grafo.getNumeroAristas(); }
 
     /** @return {@code true} si el almacén existe. */
     public boolean existeAlmacen(String id) { return grafo.existeAlmacen(id); }
 
     /** @return El almacén con el ID dado, o {@code null}. */
-    public Almacen getAlmacen(String id)    { return grafo.getAlmacen(id); }
+    public Almacen getAlmacen(String id) { return grafo.getAlmacen(id); }
 }

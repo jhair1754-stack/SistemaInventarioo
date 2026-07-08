@@ -13,8 +13,8 @@ import java.time.format.DateTimeFormatter;
  * (se ordena por {@code codigo}) y como dato en la pila de
  * auditoría a través de {@link Transaccion}.</p>
  *
- * @author  Equipo Proyecto 4 – Ingeniería de Sistemas UNMSM
- * @version 2.0
+ * @author Equipo 2
+ * @version Beta
  */
 public class Producto {
 
@@ -161,50 +161,50 @@ public class Producto {
     //  GETTERS Y SETTERS
 
     /** @return Código único del producto. */
-    public String getCodigo()           { return codigo; }
+    public String getCodigo() { return codigo; }
     /** @param codigo Nuevo código. */
-    public void setCodigo(String c)   { this.codigo = c.toUpperCase().trim(); }
+    public void setCodigo(String c) { this.codigo = c.toUpperCase().trim(); }
 
     /** @return Nombre del producto. */
-    public String getNombre()           { return nombre; }
+    public String getNombre() { return nombre; }
     /** @param nombre Nuevo nombre. */
-    public void setNombre(String n)   { this.nombre = n; }
+    public void setNombre(String n) { this.nombre = n; }
 
     /** @return Categoría del producto. */
-    public String getCategoria()        { return categoria; }
+    public String getCategoria() { return categoria; }
     /** @param categoria Nueva categoría. */
     public void setCategoria(String c){ this.categoria = c; }
 
     /** @return Precio unitario en S/. */
-    public double getPrecioUnitario()          { return precioUnitario; }
+    public double getPrecioUnitario() { return precioUnitario; }
     /** @param precio Nuevo precio unitario. */
-    public void setPrecioUnitario(double p)  { this.precioUnitario = p; }
+    public void setPrecioUnitario(double p) { this.precioUnitario = p; }
 
     /** @return Cantidad actual en stock. */
-    public int getCantidadStock()        { return cantidadStock; }
+    public int getCantidadStock() { return cantidadStock; }
     /** @param stock Nuevo valor directo del stock. */
-    public void setCantidadStock(int s)   { this.cantidadStock = s; }
+    public void setCantidadStock(int s) { this.cantidadStock = s; }
 
     /** @return Umbral mínimo de stock. */
-    public int getStockMinimo()          { return stockMinimo; }
+    public int getStockMinimo() { return stockMinimo; }
     /** @param min Nuevo umbral mínimo. */
-    public void setStockMinimo(int min)   { this.stockMinimo = min; }
+    public void setStockMinimo(int min) { this.stockMinimo = min; }
 
     /** @return Tipo del producto ({@code "GENERAL"} o {@code "PERECIBLE"}). */
-    public String getTipo()              { return tipo; }
+    public String getTipo() { return tipo; }
 
     /** @return Marca comercial (solo General). */
-    public String getMarca()             { return marca; }
+    public String getMarca() { return marca; }
     /** @param marca Nueva marca. */
-    public void setMarca(String m)     { this.marca = m; }
+    public void setMarca(String m) { this.marca = m; }
 
     /** @return Fecha de vencimiento (solo Perecible), o {@code null}. */
-    public LocalDate getFechaVencimiento()         { return fechaVencimiento; }
+    public LocalDate getFechaVencimiento() { return fechaVencimiento; }
     /** @param f Nueva fecha de vencimiento. */
     public void setFechaVencimiento(LocalDate f){ this.fechaVencimiento = f; }
 
     /** @return Fecha y hora de registro en el sistema. */
-    public LocalDateTime getFechaRegistro()        { return fechaRegistro; }
+    public LocalDateTime getFechaRegistro() { return fechaRegistro; }
 
     //  REPRESENTACIÓN EN CADENA
 
@@ -222,22 +222,22 @@ public class Producto {
         String marcaStr = !"N/A".equals(marca)
             ? "  Marca:       " + marca : "";
         return String.format(
-            "┌─────────────────────────────────────────┐%n" +
-            "│  Codigo    : %-27s│%n" +
-            "│  Tipo      : %-27s│%n" +
-            "│  Nombre    : %-27s│%n" +
-            "│  Categoria : %-27s│%n" +
-            "│  Precio    : S/ %-24.2f│%n" +
-            "│  Stock     : %-27d│%n" +
-            "│  StockMin  : %-27d│%n" +
-            "│  Registrado: %-27s│%n" +
+            "%n" +
+            "  Codigo    : %-27s%n" +
+            "  Tipo      : %-27s%n" +
+            "  Nombre    : %-27s%n" +
+            "  Categoria : %-27s%n" +
+            "  Precio    : S/ %-24.2f%n" +
+            "  Stock     : %-27d%n" +
+            "  StockMin  : %-27d%n" +
+            "  Registrado: %-27s%n" +
             "%s%s%s" +
-            "└─────────────────────────────────────────┘",
+            "",
             codigo, tipo, nombre, categoria, precioUnitario,
             cantidadStock, stockMinimo, fmt.format(fechaRegistro),
-            venc.isEmpty()   ? "" : String.format("│  %-40s│%n", venc.trim()),
-            marcaStr.isEmpty()? "" : String.format("│  %-40s│%n", marcaStr.trim()),
-            alerta.isEmpty() ? "" : String.format("│  %-40s│%n", alerta.trim())
+            venc.isEmpty()   ? "" : String.format("  %-40s%n", venc.trim()),
+            marcaStr.isEmpty()? "" : String.format("  %-40s%n", marcaStr.trim()),
+            alerta.isEmpty() ? "" : String.format("  %-40s%n", alerta.trim())
         );
     }
 }

@@ -25,8 +25,8 @@ import java.time.LocalDate;
  *   java -jar target/inventario-sistema.jar
  * </pre>
  *
- * @author  Equipo Proyecto 4 – Ingeniería de Sistemas UNMSM
- * @version 2.0
+ * @author Equipo 2
+ * @version Beta
  */
 public class Main {
 
@@ -37,28 +37,28 @@ public class Main {
      */
     public static void main(String[] args) {
 
-        // ── INICIALIZAR SERVICIOS ──────────────────────────────────────
+        //  INICIALIZAR SERVICIOS 
         LogisticaService logisticaService = new LogisticaService();
         InventarioService inventarioService = new InventarioService(logisticaService, "ALM-01");
 
-        // ── CARGAR RED LOGÍSTICA EN EL GRAFO ──────────────────────────
+        //  CARGAR RED LOGÍSTICA EN EL GRAFO 
         // [REQUISITO RUBRICA: GRAFOS] - Carga de vértices y aristas de demo
         System.out.println("  [INIT] Cargando red logistica...");
         cargarRedLogistica(logisticaService);
 
-        // ── CARGAR PRODUCTOS EN EL BST ─────────────────────────────────
+        //  CARGAR PRODUCTOS EN EL BST 
         // [REQUISITO RUBRICA: ÁRBOL BINARIO DE BÚSQUEDA] - Inserciones de demo
         System.out.println("  [INIT] Cargando productos en el ArbolBinarioBusqueda...");
         cargarProductos(inventarioService);
 
-        // ── SIMULAR MOVIMIENTOS EN LA PILA ────────────────────────────
+        //  SIMULAR MOVIMIENTOS EN LA PILA 
         // [REQUISITO RUBRICA: PILAS] - Los movimientos generan push() automáticos
         System.out.println("  [INIT] Simulando movimientos (push a PilaAuditoria)...");
         simularMovimientos(inventarioService);
 
         System.out.println("  [INIT] Sistema listo.\n");
 
-        // ── LANZAR INTERFAZ GRÁFICA (GUI) ────────────────────────────────
+        //  LANZAR INTERFAZ GRÁFICA (GUI) 
         SwingUtilities.invokeLater(() -> {
             try {
                 // Usamos el L&F Cross-Platform (Metal) para que setBackground()
@@ -133,7 +133,7 @@ public class Main {
      * @param is Servicio de inventario.
      */
     private static void cargarProductos(InventarioService is) {
-        // ── PRODUCTOS GENERALES ────────────────────────────────────────
+        //  PRODUCTOS GENERALES 
         // Constructor: (codigo, nombre, categoria, precio, stock, min, marca)
         is.registrarProducto(new Producto("ELEC-001",
             "Laptop Lenovo IdeaPad", "Electronico",
@@ -155,7 +155,7 @@ public class Main {
             "Taladro Inalambrico Bosch", "Herramienta",
             459.00, 3, 5, "Bosch"));        // Stock crítico: 3 < 5
 
-        // ── PRODUCTOS PERECIBLES ───────────────────────────────────────
+        //  PRODUCTOS PERECIBLES 
         // Constructor: (codigo, nombre, categoria, precio, stock, min, fechaVenc)
         is.registrarProducto(new Producto("ALIM-001",
             "Yogurt Gloria x6", "Alimento",

@@ -14,7 +14,7 @@ import java.time.format.DateTimeFormatter;
 
 public class FrmReportes extends JDialog {
 
-    // ── Paleta profesional clara ──
+    //  Paleta profesional clara 
     private static final Color BG_FORM = new Color(249, 250, 251);
     private static final Color BG_WHITE = Color.WHITE;
     private static final Color ACCENT = new Color(37, 99, 235);
@@ -116,7 +116,7 @@ public class FrmReportes extends JDialog {
         add(tbpReportes, BorderLayout.CENTER);
     }
 
-    // ── Helpers ──
+    //  Helpers 
     private JTable crearTablaEstilizada(DefaultTableModel modelo) {
         JTable tabla = new JTable(modelo);
         tabla.setFont(new Font("Segoe UI", Font.PLAIN, 12));
@@ -146,7 +146,7 @@ public class FrmReportes extends JDialog {
         return btn;
     }
 
-    // ── Datos ──
+    //  Datos 
     private void cargarDatos() {
         cargarInventario();
         cargarVencidos();

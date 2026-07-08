@@ -13,7 +13,7 @@ import java.awt.*;
 
 public class FrmControlStock extends JDialog {
 
-    // ── Paleta profesional clara ──
+    //  Paleta profesional clara 
     private static final Color BG_FORM = new Color(249, 250, 251);
     private static final Color BG_WHITE = Color.WHITE;
     private static final Color ACCENT = new Color(37, 99, 235);
@@ -146,7 +146,7 @@ public class FrmControlStock extends JDialog {
         btnSalida.addActionListener(e -> registrarMovimiento(false));
     }
 
-    // ── Helpers ──
+    //  Helpers 
     private JLabel crearLabel(String texto) {
         JLabel lbl = new JLabel(texto);
         lbl.setFont(new Font("Segoe UI", Font.PLAIN, 12));
@@ -172,7 +172,7 @@ public class FrmControlStock extends JDialog {
         return btn;
     }
 
-    // ── Lógica ──
+    //  Lógica 
     private void actualizarTabla() {
         modeloTabla.setRowCount(0);
         String filtro = (String) cbFiltroCategoria.getSelectedItem();

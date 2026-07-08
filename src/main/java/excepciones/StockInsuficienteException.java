@@ -8,8 +8,8 @@ package excepciones;
  * <p>Extiende {@code Exception} (checked) para forzar al código
  * cliente a manejar explícitamente este caso de error.</p>
  *
- * @author  Equipo Proyecto 4 - Ingeniería de Sistemas UNMSM
- * @version 1.0
+ * @author Equipo 2
+ * @version Beta
  */
 public class StockInsuficienteException extends Exception {
 

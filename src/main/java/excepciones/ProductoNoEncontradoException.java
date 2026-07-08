@@ -8,8 +8,8 @@ package excepciones;
  * <p>Extiende {@code RuntimeException} (unchecked) ya que representa
  * un error de lógica del cliente que provee un código inválido.</p>
  *
- * @author  Equipo Proyecto 4 - Ingeniería de Sistemas UNMSM
- * @version 1.0
+ * @author Equipo 2
+ * @version Beta
  */
 public class ProductoNoEncontradoException extends RuntimeException {
 

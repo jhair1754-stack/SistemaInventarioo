@@ -41,8 +41,8 @@ import modelos.Transaccion;
  *   <li>{@link #toList()}          – O(n): copia toda la pila.</li>
  * </ul>
  *
- * @author  Equipo Proyecto 4 – Ingeniería de Sistemas UNMSM
- * @version 2.0
+ * @author Equipo 2
+ * @version Beta
  */
 public class PilaAuditoria {
 

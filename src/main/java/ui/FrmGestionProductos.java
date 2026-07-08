@@ -16,7 +16,7 @@ import java.time.format.DateTimeParseException;
 
 public class FrmGestionProductos extends JDialog {
 
-    // ── Paleta profesional clara ──
+    //  Paleta profesional clara 
     private static final Color BG_FORM = new Color(249, 250, 251);
     private static final Color BG_WHITE = Color.WHITE;
     private static final Color ACCENT = new Color(37, 99, 235);
@@ -223,7 +223,7 @@ public class FrmGestionProductos extends JDialog {
         autogenerarCodigo();
     }
 
-    // ── Helpers de estilo ──
+    //  Helpers de estilo 
     private JLabel crearLabel(String texto) {
         JLabel lbl = new JLabel(texto);
         lbl.setFont(new Font("Segoe UI", Font.PLAIN, 12));
@@ -249,7 +249,7 @@ public class FrmGestionProductos extends JDialog {
         return btn;
     }
 
-    // ── Lógica de negocio ──
+    //  Lógica de negocio 
     private void autogenerarCodigo() {
         String cat = (String) cbCategoria.getSelectedItem();
         txtCodigo.setText(inventarioService.generarCodigoProducto(cat));

@@ -14,7 +14,7 @@ public class FrmPrincipal extends JFrame {
 
     private JComboBox<String> cbAlmacenActivo;
 
-    // ── Paleta profesional clara ──
+    //  Paleta profesional clara 
     private static final Color BG_MAIN = new Color(245, 247, 250);   // Fondo general gris perla
     private static final Color BG_HEADER = new Color(255, 255, 255);   // Header blanco
     private static final Color ACCENT = new Color(37, 99, 235);     // Azul profesional

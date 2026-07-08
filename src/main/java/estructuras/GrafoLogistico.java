@@ -8,8 +8,8 @@ import modelos.Almacen;
  * Grafo no dirigido con pesos implementado con Lista de Adyacencia
  * adaptado para NO usar colecciones de java.util.*
  *
- * @author Equipo Proyecto 4 – Ingeniería de Sistemas UNMSM
- * @version 3.0
+ * @author Equipo 2
+ * @version Beta
  */
 public class GrafoLogistico {
 
@@ -165,7 +165,7 @@ public class GrafoLogistico {
         if (vertices.isEmpty()) return "  No hay almacenes registrados.\n";
         StringBuilder sb = new StringBuilder();
         sb.append("  ALMACENES EN LA RED LOGISTICA:\n");
-        sb.append("  ─────────────────────────────────────────\n");
+        sb.append("  \n");
         for (VerticeLogistico v : vertices) {
             sb.append("  ").append(v.almacen).append("\n");
         }

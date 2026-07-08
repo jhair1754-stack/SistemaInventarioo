@@ -13,7 +13,7 @@ import java.awt.*;
 
 public class FrmLogistica extends JDialog {
 
-    // ── Paleta profesional clara ──
+    //  Paleta profesional clara 
     private static final Color BG_FORM = new Color(249, 250, 251);
     private static final Color BG_WHITE = Color.WHITE;
     private static final Color ACCENT = new Color(37, 99, 235);
@@ -418,7 +418,7 @@ public class FrmLogistica extends JDialog {
         });
     }
 
-    // ── Helpers ──
+    //  Helpers 
 
     /**
      * Carga los 4 JComboBox de almacenes con los vértices del grafo.

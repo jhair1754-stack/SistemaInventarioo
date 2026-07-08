@@ -36,8 +36,8 @@ import modelos.Producto;
  *   <li>{@link #obtenerAltura()}              – O(n).</li>
  * </ul>
  *
- * @author  Equipo Proyecto 4 – Ingeniería de Sistemas UNMSM
- * @version 2.0
+ * @author Equipo 2
+ * @version Beta
  */
 public class ArbolBinarioBusqueda {
 
@@ -115,13 +115,13 @@ public class ArbolBinarioBusqueda {
      */
     private NodoArbol insertarRec(NodoArbol nodo, Producto producto) {
 
-        // ── CASO BASE ──────────────────────────────────────────────────
+        //  CASO BASE 
         // Llegamos a un puntero nulo → aquí se cuelga el nuevo nodo
         if (nodo == null) {
             return new NodoArbol(producto);  // Crear nodo hoja
         }
 
-        // ── COMPARACIÓN DE CÓDIGOS ─────────────────────────────────────
+        //  COMPARACIÓN DE CÓDIGOS 
         int cmp = producto.getCodigo()
                           .compareToIgnoreCase(nodo.dato.getCodigo());
 
@@ -379,11 +379,11 @@ public class ArbolBinarioBusqueda {
     //  GETTERS DE ESTADO
 
     /** @return Número de productos almacenados. */
-    public int getTamanio()   { return tamanio; }
+    public int getTamanio() { return tamanio; }
 
     /** @return {@code true} si el árbol no contiene ningún producto. */
     public boolean estaVacio(){ return raiz == null; }
 
     /** @return Referencia a la raíz (uso interno del servicio). */
-    NodoArbol getRaiz()       { return raiz; }
+    NodoArbol getRaiz() { return raiz; }
 }

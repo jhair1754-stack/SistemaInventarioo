@@ -17,8 +17,8 @@ import estructuras.ListaEnlazada;
  * Capa de lógica de negocio que orquesta el inventario, ahora
  * interactuando con los inventarios independientes de cada Almacén.
  *
- * @author Equipo Proyecto 4 – Ingeniería de Sistemas UNMSM
- * @version 3.0
+ * @author Equipo 2
+ * @version Beta
  */
 public class InventarioService {
 
@@ -203,21 +203,21 @@ public class InventarioService {
     private void verificarStockCritico(Producto producto) {
         if (producto.estaEnStockCritico()) {
             System.out.println();
-            System.out.println("  ============================================");
-            System.out.println("  |  *** ALERTA: STOCK CRITICO ***           |");
-            System.out.printf ("  |  Producto: %-31s|%n", producto.getCodigo());
-            System.out.printf ("  |  Stock Actual : %-25d|%n", producto.getCantidadStock());
-            System.out.printf ("  |  Stock Minimo : %-25d|%n", producto.getStockMinimo());
-            System.out.printf ("  |  Faltante     : %-25d|%n",
+            System.out.println("  =================================");
+            System.out.println("    ALERTA: STOCK CRITICO");
+            System.out.printf("     Producto: %-31s%n", producto.getCodigo());
+            System.out.printf("     Stock Actual : %-25d%n", producto.getCantidadStock());
+            System.out.printf("     Stock Minimo : %-25d%n", producto.getStockMinimo());
+            System.out.printf("     Faltante     : %-25d%n",
                 producto.getStockMinimo() - producto.getCantidadStock());
-            System.out.println("  ============================================");
+            System.out.println("  =================================");
         }
     }
 
-    public int getNumeroProductos()   { return getArbolProductos().getTamanio(); }
+    public int getNumeroProductos() { return getArbolProductos().getTamanio(); }
     public int getNumeroMovimientos() { return getPilaAuditoria().getTamanio(); }
-    public int getAlturaArbol()       { return getArbolProductos().obtenerAltura(); }
-    public boolean estaVacio()         { return getArbolProductos().estaVacio(); }
+    public int getAlturaArbol() { return getArbolProductos().obtenerAltura(); }
+    public boolean estaVacio() { return getArbolProductos().estaVacio(); }
 
     public String getIdAlmacenActivo() { return idAlmacenActivo; }
     public void setIdAlmacenActivo(String id) { this.idAlmacenActivo = id; }

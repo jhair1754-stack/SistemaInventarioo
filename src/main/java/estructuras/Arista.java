@@ -15,8 +15,8 @@ package estructuras;
  * del {@link GrafoLogistico}. Se almacena en la lista de
  * adyacencia del vértice origen.
  *
- * @author  Equipo Proyecto 4 – Ingeniería de Sistemas UNMSM
- * @version 2.0
+ * @author Equipo 2
+ * @version Beta
  */
 public class Arista {
 
@@ -56,14 +56,14 @@ public class Arista {
     //  ACCESORES
 
     /** @return ID del almacén de destino. */
-    public String getIdDestino()    { return idDestino; }
+    public String getIdDestino() { return idDestino; }
 
     /** @return Distancia en km (peso de la arista). */
-    public double getPeso()         { return peso; }
-    public double getDistanciaKm()  { return peso; }
+    public double getPeso() { return peso; }
+    public double getDistanciaKm() { return peso; }
 
     /** @return Descripción de la ruta. */
-    public String getDescripcion()  { return descripcion; }
+    public String getDescripcion() { return descripcion; }
 
     @Override
     public String toString() {

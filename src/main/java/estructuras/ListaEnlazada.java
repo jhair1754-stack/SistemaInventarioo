@@ -11,7 +11,7 @@ import java.util.NoSuchElementException;
  * y llenar tablas JTable.
  *
  * @param <T> Tipo de elemento a almacenar.
- * @author Equipo Proyecto 4 - Ingeniería de Sistemas UNMSM
+ * @author Equipo 2
  */
 public class ListaEnlazada<T> implements Iterable<T> {
 

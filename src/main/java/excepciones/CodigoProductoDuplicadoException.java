@@ -9,8 +9,8 @@ package excepciones;
  * duplicado es un error de lógica del que se espera que el
  * desarrollador tome medida correctiva inmediata.</p>
  *
- * @author  Equipo Proyecto 4 - Ingeniería de Sistemas UNMSM
- * @version 1.0
+ * @author Equipo 2
+ * @version Beta
  */
 public class CodigoProductoDuplicadoException extends RuntimeException {
 

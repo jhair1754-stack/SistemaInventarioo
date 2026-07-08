@@ -23,8 +23,8 @@ import modelos.Producto;
  * memoria RAM. Cuando valen {@code null}, indican que ese lado
  * del árbol está vacío (nodo hoja).</p>
  *
- * @author  Equipo Proyecto 4 – Ingeniería de Sistemas UNMSM
- * @version 2.0
+ * @author Equipo 2
+ * @version Beta
  */
 public class NodoArbol {
 

@@ -23,8 +23,8 @@ import modelos.Transaccion;
  * Cada nodo almacena una {@link Transaccion} y mantiene una
  * referencia al nodo que estaba en el tope ANTES de él.
  *
- * @author  Equipo Proyecto 4 – Ingeniería de Sistemas UNMSM
- * @version 2.0
+ * @author Equipo 2
+ * @version Beta
  */
 public class NodoPila {
 

@@ -8,8 +8,8 @@ package excepciones;
  * <p>Extiende {@code RuntimeException} (unchecked) ya que representa
  * un error de referencia a un vértice inválido del grafo.</p>
  *
- * @author  Equipo Proyecto 4 - Ingeniería de Sistemas UNMSM
- * @version 1.0
+ * @author Equipo 2
+ * @version Beta
  */
 public class AlmacenNoEncontradoException extends RuntimeException {
 
