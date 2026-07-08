@@ -1,8 +1,6 @@
 package estructuras;
 
-// ====================================================================
 // [REQUISITO RUBRICA: GRAFOS] - Clase Arista
-// ====================================================================
 // Representa una ARISTA (conexión) del grafo logístico.
 // Cada Arista guarda:
 //   • idDestino   → ID del almacén de llegada
@@ -10,12 +8,9 @@ package estructuras;
 //   • descripcion → nombre de la vía o ruta
 //
 // En el grafo NO DIRIGIDO, conectar A→B crea automáticamente B→A.
-// ====================================================================
 
 /**
- * ============================================================
  * ESTRUCTURA – ARISTA DEL GRAFO LOGÍSTICO
- * ============================================================
  * Representa una conexión con peso entre dos almacenes dentro
  * del {@link GrafoLogistico}. Se almacena en la lista de
  * adyacencia del vértice origen.
@@ -25,9 +20,7 @@ package estructuras;
  */
 public class Arista {
 
-    // ─────────────────────────────────────────────────────────
     //  CAMPOS
-    // ─────────────────────────────────────────────────────────
 
     /**
      * ID del almacén DESTINO de esta conexión.
@@ -45,9 +38,7 @@ public class Arista {
      */
     private String descripcion;
 
-    // ─────────────────────────────────────────────────────────
     //  CONSTRUCTOR
-    // ─────────────────────────────────────────────────────────
 
     /**
      * Crea una arista hacia el almacén destino.
@@ -57,14 +48,12 @@ public class Arista {
      * @param descripcion Descripción de la ruta o vía.
      */
     public Arista(String idDestino, double peso, String descripcion) {
-        this.idDestino    = idDestino.toUpperCase().trim();
-        this.peso         = peso;
-        this.descripcion  = descripcion;
+        this.idDestino = idDestino.toUpperCase().trim();
+        this.peso = peso;
+        this.descripcion = descripcion;
     }
 
-    // ─────────────────────────────────────────────────────────
     //  ACCESORES
-    // ─────────────────────────────────────────────────────────
 
     /** @return ID del almacén de destino. */
     public String getIdDestino()    { return idDestino; }

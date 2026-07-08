@@ -13,9 +13,7 @@ import estructuras.PilaAuditoria;
 import estructuras.ListaEnlazada;
 
 /**
- * ============================================================
  * SERVICIO: InventarioService
- * ============================================================
  * Capa de lógica de negocio que orquesta el inventario, ahora
  * interactuando con los inventarios independientes de cada Almacén.
  *

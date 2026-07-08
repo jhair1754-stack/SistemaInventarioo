@@ -14,14 +14,14 @@ import java.awt.*;
 public class FrmControlStock extends JDialog {
 
     // ── Paleta profesional clara ──
-    private static final Color BG_FORM   = new Color(249, 250, 251);
-    private static final Color BG_WHITE  = Color.WHITE;
-    private static final Color ACCENT    = new Color(37, 99, 235);
-    private static final Color TEXT_PRI  = new Color(30, 41, 59);
-    private static final Color TEXT_SEC  = new Color(100, 116, 139);
-    private static final Color BORDER    = new Color(226, 232, 240);
+    private static final Color BG_FORM = new Color(249, 250, 251);
+    private static final Color BG_WHITE = Color.WHITE;
+    private static final Color ACCENT = new Color(37, 99, 235);
+    private static final Color TEXT_PRI = new Color(30, 41, 59);
+    private static final Color TEXT_SEC = new Color(100, 116, 139);
+    private static final Color BORDER = new Color(226, 232, 240);
     private static final Color GREEN_BTN = new Color(22, 163, 74);
-    private static final Color RED_BTN   = new Color(220, 38, 38);
+    private static final Color RED_BTN = new Color(220, 38, 38);
 
     /** Categorías reales (mismas que Main.java y FrmGestionProductos) */
     private static final String[] CATEGORIAS = {
@@ -131,7 +131,7 @@ public class FrmControlStock extends JDialog {
         JPanel pnlBotones = new JPanel(new FlowLayout(FlowLayout.CENTER, 10, 0));
         pnlBotones.setBackground(BG_WHITE);
         btnEntrada = crearBotonAccion("+ Entrada", GREEN_BTN);
-        btnSalida  = crearBotonAccion("- Salida", RED_BTN);
+        btnSalida = crearBotonAccion("- Salida", RED_BTN);
         pnlBotones.add(btnEntrada);
         pnlBotones.add(btnSalida);
 

@@ -1,9 +1,7 @@
 package excepciones;
 
 /**
- * ================================================================
  * EXCEPCIÓN PERSONALIZADA: CodigoProductoDuplicadoException
- * ================================================================
  * Se lanza cuando se intenta insertar en el BST un producto cuyo
  * código ya existe en el árbol (violación de clave única).
  *

@@ -15,13 +15,13 @@ public class FrmPrincipal extends JFrame {
     private JComboBox<String> cbAlmacenActivo;
 
     // ── Paleta profesional clara ──
-    private static final Color BG_MAIN   = new Color(245, 247, 250);   // Fondo general gris perla
+    private static final Color BG_MAIN = new Color(245, 247, 250);   // Fondo general gris perla
     private static final Color BG_HEADER = new Color(255, 255, 255);   // Header blanco
-    private static final Color ACCENT    = new Color(37, 99, 235);     // Azul profesional
+    private static final Color ACCENT = new Color(37, 99, 235);     // Azul profesional
     private static final Color ACCENT_HOVER = new Color(29, 78, 216);
     private static final Color TEXT_PRIMARY = new Color(30, 41, 59);    // Texto oscuro
     private static final Color TEXT_SECONDARY = new Color(100, 116, 139);
-    private static final Color BORDER    = new Color(226, 232, 240);    // Bordes suaves
+    private static final Color BORDER = new Color(226, 232, 240);    // Bordes suaves
 
     public FrmPrincipal(InventarioService invServ, LogisticaService logServ) {
         this.inventarioService = invServ;
@@ -106,9 +106,9 @@ public class FrmPrincipal extends JFrame {
         pnlCentro.setBorder(BorderFactory.createEmptyBorder(40, 60, 40, 60));
 
         JButton btnProductos = crearBoton("Gestión de Productos", "Administrar catálogo y precios", "📦");
-        JButton btnStock     = crearBoton("Control de Stock", "Entradas y salidas de inventario", "📊");
+        JButton btnStock = crearBoton("Control de Stock", "Entradas y salidas de inventario", "📊");
         JButton btnLogistica = crearBoton("Red Logística", "Almacenes y rutas de distribución", "🗺️");
-        JButton btnReportes  = crearBoton("Reportes y Auditoría", "Productos vencidos e historial", "📋");
+        JButton btnReportes = crearBoton("Reportes y Auditoría", "Productos vencidos e historial", "📋");
 
         btnProductos.addActionListener(e -> new FrmGestionProductos(this, inventarioService).setVisible(true));
         btnStock.addActionListener(e -> new FrmControlStock(this, inventarioService).setVisible(true));

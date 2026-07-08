@@ -2,9 +2,7 @@ package estructuras;
 
 import modelos.Transaccion;
 
-// ====================================================================
 // [REQUISITO RUBRICA: PILAS] - Clase NodoPila
-// ====================================================================
 // Eslabón de la cadena enlazada que forma la PilaAuditoria.
 // Cada NodoPila contiene:
 //   • dato      → la Transaccion almacenada
@@ -18,12 +16,9 @@ import modelos.Transaccion;
 //  push(): [Nodo6] se pone DELANTE, apuntando a [Nodo5]
 //  pop() : se extrae [Nodo6] y el TOPE retrocede a [Nodo5]
 //
-// ====================================================================
 
 /**
- * ============================================================
  * ESTRUCTURA – NODO DE LA PILA DE AUDITORÍA
- * ============================================================
  * Nodo individual de la pila enlazada {@link PilaAuditoria}.
  * Cada nodo almacena una {@link Transaccion} y mantiene una
  * referencia al nodo que estaba en el tope ANTES de él.
@@ -33,9 +28,7 @@ import modelos.Transaccion;
  */
 public class NodoPila {
 
-    // ─────────────────────────────────────────────────────────
     //  CAMPOS DEL NODO
-    // ─────────────────────────────────────────────────────────
 
     /**
      * La transacción almacenada en este nodo.
@@ -62,9 +55,7 @@ public class NodoPila {
      */
     NodoPila siguiente;
 
-    // ─────────────────────────────────────────────────────────
     //  CONSTRUCTOR
-    // ─────────────────────────────────────────────────────────
 
     /**
      * Crea un nuevo nodo de pila con la transacción dada.
@@ -74,13 +65,11 @@ public class NodoPila {
      * @param dato La transacción a almacenar en este nodo.
      */
     public NodoPila(Transaccion dato) {
-        this.dato      = dato;    // Carga útil: la transacción de auditoría
+        this.dato = dato;    // Carga útil: la transacción de auditoría
         this.siguiente = null;    // Puntero: null hasta que se asigne en push()
     }
 
-    // ─────────────────────────────────────────────────────────
     //  ACCESORES
-    // ─────────────────────────────────────────────────────────
 
     /**
      * Retorna la transacción almacenada en este nodo.

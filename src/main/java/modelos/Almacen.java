@@ -4,9 +4,7 @@ import estructuras.ArbolBinarioBusqueda;
 import estructuras.PilaAuditoria;
 
 /**
- * ============================================================
  * ENTIDAD: Almacen
- * ============================================================
  * Representa un nodo (vértice) de la red logística de la empresa.
  * Cada almacén puede ser un centro de acopio, un hub de distribución
  * o una tienda de venta al público.
@@ -19,9 +17,7 @@ import estructuras.PilaAuditoria;
  */
 public class Almacen {
 
-    // ─────────────────────────────────────────────────────────
     //  ENUM: TIPO DE NODO EN LA RED LOGÍSTICA
-    // ─────────────────────────────────────────────────────────
 
     /**
      * Clasificación del almacén dentro de la red logística.
@@ -37,24 +33,22 @@ public class Almacen {
         HUB
     }
 
-    // ─────────────────────────────────────────────────────────
     //  CAMPOS (ENCAPSULAMIENTO)
-    // ─────────────────────────────────────────────────────────
 
     /** Identificador único del almacén (clave del vértice en el grafo). */
-    private String      id;
+    private String id;
 
     /** Nombre descriptivo del almacén. */
-    private String      nombre;
+    private String nombre;
 
     /** Dirección o zona geográfica. */
-    private String      ubicacion;
+    private String ubicacion;
 
     /** Tipo de nodo dentro de la red logística. */
     private TipoAlmacen tipo;
 
     /** Capacidad máxima de almacenamiento en unidades. */
-    private int         capacidadMaxima;
+    private int capacidadMaxima;
 
     /** Árbol de productos específico de este almacén. */
     private ArbolBinarioBusqueda arbolProductos;
@@ -62,9 +56,7 @@ public class Almacen {
     /** Pila de auditoría específica de este almacén. */
     private PilaAuditoria pilaAuditoria;
 
-    // ─────────────────────────────────────────────────────────
     //  CONSTRUCTOR
-    // ─────────────────────────────────────────────────────────
 
     /**
      * Constructor completo de Almacen.
@@ -77,41 +69,39 @@ public class Almacen {
      */
     public Almacen(String id, String nombre, String ubicacion,
                    TipoAlmacen tipo, int capacidadMaxima) {
-        this.id              = id.toUpperCase().trim();
-        this.nombre          = nombre;
-        this.ubicacion       = ubicacion;
-        this.tipo            = tipo;
+        this.id = id.toUpperCase().trim();
+        this.nombre = nombre;
+        this.ubicacion = ubicacion;
+        this.tipo = tipo;
         this.capacidadMaxima = capacidadMaxima;
-        this.arbolProductos  = new ArbolBinarioBusqueda();
-        this.pilaAuditoria   = new PilaAuditoria();
+        this.arbolProductos = new ArbolBinarioBusqueda();
+        this.pilaAuditoria = new PilaAuditoria();
     }
 
-    // ─────────────────────────────────────────────────────────
     //  GETTERS Y SETTERS
-    // ─────────────────────────────────────────────────────────
 
     /** @return ID único del almacén. */
-    public String      getId()               { return id; }
+    public String getId()               { return id; }
     /** @param id Nuevo ID. */
-    public void        setId(String id)      { this.id = id.toUpperCase().trim(); }
+    public void setId(String id)      { this.id = id.toUpperCase().trim(); }
 
     /** @return Nombre del almacén. */
-    public String      getNombre()           { return nombre; }
+    public String getNombre()           { return nombre; }
     /** @param n Nuevo nombre. */
-    public void        setNombre(String n)   { this.nombre = n; }
+    public void setNombre(String n)   { this.nombre = n; }
 
     /** @return Ubicación del almacén. */
-    public String      getUbicacion()        { return ubicacion; }
+    public String getUbicacion()        { return ubicacion; }
     /** @param u Nueva ubicación. */
-    public void        setUbicacion(String u){ this.ubicacion = u; }
+    public void setUbicacion(String u){ this.ubicacion = u; }
 
     /** @return Tipo de almacén. */
     public TipoAlmacen getTipo()             { return tipo; }
     /** @param t Nuevo tipo. */
-    public void        setTipo(TipoAlmacen t){ this.tipo = t; }
+    public void setTipo(TipoAlmacen t){ this.tipo = t; }
 
     /** @return Capacidad máxima en unidades. */
-    public int  getCapacidadMaxima()         { return capacidadMaxima; }
+    public int getCapacidadMaxima()         { return capacidadMaxima; }
     /** @param c Nueva capacidad máxima. */
     public void setCapacidadMaxima(int c)    { this.capacidadMaxima = c; }
 
@@ -121,9 +111,7 @@ public class Almacen {
     /** @return La pila de auditoría de este almacén. */
     public PilaAuditoria getPilaAuditoria() { return pilaAuditoria; }
 
-    // ─────────────────────────────────────────────────────────
     //  REPRESENTACIÓN EN CADENA
-    // ─────────────────────────────────────────────────────────
 
     @Override
     public String toString() {

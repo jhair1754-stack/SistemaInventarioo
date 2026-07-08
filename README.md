@@ -48,13 +48,14 @@ Las estructuras de datos cuentan con comentarios explicativos explícitos en for
 ## 📂 Estructura de Paquetes del Proyecto
 
 ```text
-com.distribuidora.inventario/
-├── Main.java                        # Punto de entrada, carga de datos demo y lanzamiento de GUI
-├── models/                          # Entidades de dominio
+src/main/java/
+├── main/
+│   └── Main.java                    # Punto de entrada, carga de datos demo y lanzamiento de GUI
+├── modelos/                         # Entidades de dominio
 │   ├── Producto.java                # Modelo unificado de producto (General y Perecible)
 │   ├── Almacen.java                 # Vértice de la red logística (con BST y Pila propios)
 │   └── Transaccion.java             # Registro inmutable para auditoría LIFO
-├── structures/                      # Estructuras de datos desde cero
+├── estructuras/                     # Estructuras de datos desde cero
 │   ├── NodoArbol.java               # Nodo del BST (punteros izquierdo/derecho)
 │   ├── ArbolBinarioBusqueda.java    # BST completo (insertar, buscar, eliminar, inorden)
 │   ├── NodoPila.java                # Nodo de la Pila (puntero siguiente)
@@ -62,13 +63,13 @@ com.distribuidora.inventario/
 │   ├── ListaEnlazada.java           # Lista enlazada genérica auxiliar
 │   ├── Arista.java                  # Conexión con peso entre almacenes
 │   └── GrafoLogistico.java          # Grafo con lista de adyacencia y Dijkstra
-├── exceptions/                      # Excepciones personalizadas
+├── excepciones/                     # Excepciones personalizadas
 │   ├── StockInsuficienteException.java
 │   ├── ProductoNoEncontradoException.java
 │   ├── AlmacenNoEncontradoException.java
 │   ├── CodigoProductoDuplicadoException.java
 │   └── FechaVencimientoInvalidaException.java
-├── services/                        # Capa de servicios y lógica de negocio
+├── servicios/                       # Capa de servicios y lógica de negocio
 │   ├── InventarioService.java       # Orquestador del BST y PilaAuditoria por almacén
 │   └── LogisticaService.java        # Orquestador del Grafo y rutas Dijkstra
 └── ui/                              # Interfaz gráfica (Java Swing)

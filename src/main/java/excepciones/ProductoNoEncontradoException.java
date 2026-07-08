@@ -1,9 +1,7 @@
 package excepciones;
 
 /**
- * ================================================================
  * EXCEPCIÓN PERSONALIZADA: ProductoNoEncontradoException
- * ================================================================
  * Se lanza cuando se busca un producto por código en el BST
  * y no existe ningún nodo con ese código.
  *

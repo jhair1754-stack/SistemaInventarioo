@@ -2,9 +2,7 @@ package estructuras;
 
 import modelos.Producto;
 
-// ====================================================================
 // [REQUISITO RUBRICA: ÁRBOL BINARIO DE BÚSQUEDA] - Clase NodoArbol
-// ====================================================================
 // Unidad atómica del árbol. Cada NodoArbol guarda un Producto
 // y dos referencias (punteros) a sus hijos izquierdo y derecho.
 //
@@ -13,12 +11,9 @@ import modelos.Producto;
 //   [izquierdo]     [derecho]
 //   (cod < nodo)    (cod > nodo)
 //
-// ====================================================================
 
 /**
- * ============================================================
  * ESTRUCTURA – NODO DEL ÁRBOL BINARIO DE BÚSQUEDA
- * ============================================================
  * Representa un nodo individual dentro del
  * {@link ArbolBinarioBusqueda}. Contiene el {@link Producto}
  * como dato y dos referencias hacia sus sub-árboles hijo.
@@ -33,9 +28,7 @@ import modelos.Producto;
  */
 public class NodoArbol {
 
-    // ─────────────────────────────────────────────────────────
     //  CAMPOS DEL NODO
-    // ─────────────────────────────────────────────────────────
 
     /**
      * El producto almacenado en este nodo.
@@ -60,9 +53,7 @@ public class NodoArbol {
      */
     NodoArbol derecho;
 
-    // ─────────────────────────────────────────────────────────
     //  CONSTRUCTOR
-    // ─────────────────────────────────────────────────────────
 
     /**
      * Crea un nuevo nodo hoja del árbol.
@@ -78,14 +69,12 @@ public class NodoArbol {
      * @param producto El producto a almacenar en este nodo.
      */
     public NodoArbol(Producto producto) {
-        this.dato      = producto;  // Carga útil del nodo
+        this.dato = producto;  // Carga útil del nodo
         this.izquierdo = null;      // Puntero izq.: null → sin hijo izquierdo
-        this.derecho   = null;      // Puntero der.: null → sin hijo derecho
+        this.derecho = null;      // Puntero der.: null → sin hijo derecho
     }
 
-    // ─────────────────────────────────────────────────────────
     //  ACCESOR
-    // ─────────────────────────────────────────────────────────
 
     /**
      * Retorna el producto almacenado en este nodo.

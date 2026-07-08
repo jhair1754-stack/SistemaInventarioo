@@ -1,9 +1,7 @@
 package excepciones;
 
 /**
- * ================================================================
  * EXCEPCIÓN PERSONALIZADA: AlmacenNoEncontradoException
- * ================================================================
  * Se lanza cuando se intenta operar sobre un almacén cuyo ID
  * no existe en el grafo logístico.
  *

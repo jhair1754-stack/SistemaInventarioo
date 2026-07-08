@@ -1,9 +1,7 @@
 package excepciones;
 
 /**
- * ================================================================
  * EXCEPCIÓN PERSONALIZADA: StockInsuficienteException
- * ================================================================
  * Se lanza cuando se intenta registrar una salida de stock mayor
  * a la cantidad disponible en el inventario para un producto.
  *
@@ -42,8 +40,8 @@ public class StockInsuficienteException extends Exception {
             cantidadSolicitada,
             cantidadSolicitada - stockDisponible
         ));
-        this.codigoProducto     = codigoProducto;
-        this.stockDisponible    = stockDisponible;
+        this.codigoProducto = codigoProducto;
+        this.stockDisponible = stockDisponible;
         this.cantidadSolicitada = cantidadSolicitada;
     }
 

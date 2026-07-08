@@ -8,9 +8,7 @@ import estructuras.GrafoLogistico.ResultadoDijkstra;
 import estructuras.ListaEnlazada;
 
 /**
- * ============================================================
  * SERVICIO: LogisticaService
- * ============================================================
  * Capa de lógica de negocio que gestiona la red logística
  * delegando al {@link GrafoLogistico}.
  *
@@ -134,9 +132,7 @@ public class LogisticaService {
         return String.format("ALM-%02d", max + 1);
     }
 
-    // ─────────────────────────────────────────────────────────
     //  GETTERS
-    // ─────────────────────────────────────────────────────────
 
     public boolean eliminarAlmacen(String id) {
         boolean exito = grafo.eliminarAlmacen(id);

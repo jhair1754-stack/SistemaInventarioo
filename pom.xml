@@ -24,7 +24,7 @@
         <maven.compiler.source>17</maven.compiler.source>
         <maven.compiler.target>17</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <exec.mainClass>com.distribuidora.inventario.Main</exec.mainClass>
+        <exec.mainClass>main.Main</exec.mainClass>
     </properties>
 
     <build>
@@ -47,7 +47,7 @@
                 <artifactId>exec-maven-plugin</artifactId>
                 <version>3.1.0</version>
                 <configuration>
-                    <mainClass>com.distribuidora.inventario.Main</mainClass>
+                    <mainClass>main.Main</mainClass>
                 </configuration>
             </plugin>
 

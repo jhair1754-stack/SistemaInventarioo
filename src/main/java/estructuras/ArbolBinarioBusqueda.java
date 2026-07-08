@@ -4,9 +4,7 @@ import excepciones.CodigoProductoDuplicadoException;
 import excepciones.ProductoNoEncontradoException;
 import modelos.Producto;
 
-// ====================================================================
 // [REQUISITO RUBRICA: ÁRBOL BINARIO DE BÚSQUEDA] - ArbolBinarioBusqueda
-// ====================================================================
 // Implementación COMPLETA desde cero de un Árbol Binario de Búsqueda.
 // NO usa java.util.TreeSet, java.util.TreeMap ni ninguna otra
 // colección del JDK.
@@ -20,12 +18,9 @@ import modelos.Producto;
 //   • Búsqueda / Inserción / Eliminación: O(log n) promedio
 //   • Recorrido Inorden (lista ordenada):  O(n)
 //
-// ====================================================================
 
 /**
- * ============================================================
  * ESTRUCTURA: ArbolBinarioBusqueda
- * ============================================================
  * Árbol Binario de Búsqueda (BST) que organiza y recupera
  * {@link Producto}s por su campo {@code codigo} de forma eficiente.
  *
@@ -46,9 +41,7 @@ import modelos.Producto;
  */
 public class ArbolBinarioBusqueda {
 
-    // ─────────────────────────────────────────────────────────
     //  RAÍZ DEL ÁRBOL
-    // ─────────────────────────────────────────────────────────
 
     /**
      * REFERENCIA a la raíz del árbol.
@@ -71,9 +64,7 @@ public class ArbolBinarioBusqueda {
     /** Número de productos almacenados en el árbol. */
     private int tamanio;
 
-    // ─────────────────────────────────────────────────────────
     //  CONSTRUCTOR
-    // ─────────────────────────────────────────────────────────
 
     /**
      * Crea un árbol binario de búsqueda vacío.
@@ -81,13 +72,11 @@ public class ArbolBinarioBusqueda {
      */
     public ArbolBinarioBusqueda() {
         // [REQUISITO RUBRICA: ÁRBOL BINARIO DE BÚSQUEDA] - Inicialización
-        this.raiz    = null;    // Árbol vacío: ningún nodo existe aún
+        this.raiz = null;    // Árbol vacío: ningún nodo existe aún
         this.tamanio = 0;
     }
 
-    // ====================================================================
     // [REQUISITO RUBRICA: ÁRBOL BINARIO DE BÚSQUEDA] - OPERACIÓN: INSERTAR
-    // ====================================================================
 
     /**
      * Inserta un nuevo producto en el árbol, respetando la propiedad BST.
@@ -154,9 +143,7 @@ public class ArbolBinarioBusqueda {
         return nodo;  // Devolver el nodo actual sin cambios (solo su hijo cambió)
     }
 
-    // ====================================================================
     // [REQUISITO RUBRICA: ÁRBOL BINARIO DE BÚSQUEDA] - OPERACIÓN: BUSCAR
-    // ====================================================================
 
     /**
      * Busca y retorna un producto por su código.
@@ -220,9 +207,7 @@ public class ArbolBinarioBusqueda {
         return buscarRec(this.raiz, codigo) != null;
     }
 
-    // ====================================================================
     // [REQUISITO RUBRICA: ÁRBOL BINARIO DE BÚSQUEDA] - OPERACIÓN: ELIMINAR
-    // ====================================================================
 
     /**
      * Elimina un producto del árbol por su código.
@@ -266,7 +251,6 @@ public class ArbolBinarioBusqueda {
             nodo.derecho = eliminarRec(nodo.derecho, codigo);
 
         } else {
-            // ──── NODO ENCONTRADO: APLICAR CASO CORRESPONDIENTE ────
 
             // CASO 1: Nodo hoja (sin hijos) → simplemente eliminarlo
             if (nodo.izquierdo == null && nodo.derecho == null) {
@@ -310,9 +294,7 @@ public class ArbolBinarioBusqueda {
         return nodo;
     }
 
-    // ====================================================================
     // [REQUISITO RUBRICA: ÁRBOL BINARIO DE BÚSQUEDA] - RECORRIDOS
-    // ====================================================================
 
     /**
      * Recorre el árbol en INORDEN (izquierdo → raíz → derecho).
@@ -359,9 +341,7 @@ public class ArbolBinarioBusqueda {
         preordenRec(nodo.derecho, lista);   // 3. Sub-árbol derecho
     }
 
-    // ─────────────────────────────────────────────────────────
     //  UTILIDADES
-    // ─────────────────────────────────────────────────────────
 
     /**
      * Retorna todos los productos cuyo stock actual está por debajo
@@ -370,8 +350,8 @@ public class ArbolBinarioBusqueda {
      * @return Lista de productos en estado crítico de stock.
      */
     public ListaEnlazada<Producto> obtenerProductosCriticos() {
-        ListaEnlazada<Producto> todos     = recorrerInorden();
-        ListaEnlazada<Producto> criticos  = new ListaEnlazada<>();
+        ListaEnlazada<Producto> todos = recorrerInorden();
+        ListaEnlazada<Producto> criticos = new ListaEnlazada<>();
         for (Producto p : todos) {
             if (p.estaEnStockCritico()) criticos.add(p);
         }
@@ -396,9 +376,7 @@ public class ArbolBinarioBusqueda {
         return 1 + Math.max(altIzq, altDer);
     }
 
-    // ─────────────────────────────────────────────────────────
     //  GETTERS DE ESTADO
-    // ─────────────────────────────────────────────────────────
 
     /** @return Número de productos almacenados. */
     public int getTamanio()   { return tamanio; }

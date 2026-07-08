@@ -5,9 +5,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 /**
- * ============================================================
  * ENTIDAD: Producto
- * ============================================================
  * Clase base que representa un producto del inventario de la
  * empresa distribuidora. Aplica encapsulamiento estricto.
  *
@@ -20,47 +18,43 @@ import java.time.format.DateTimeFormatter;
  */
 public class Producto {
 
-    // ─────────────────────────────────────────────────────────
     //  CAMPOS (ENCAPSULAMIENTO - OOP)
-    // ─────────────────────────────────────────────────────────
 
     /** Código alfanumérico único. Es la clave de comparación en el BST. */
-    private String  codigo;
+    private String codigo;
 
     /** Nombre comercial del producto. */
-    private String  nombre;
+    private String nombre;
 
     /** Categoría del producto (ej. "Electrónico", "Alimento"). */
-    private String  categoria;
+    private String categoria;
 
     /** Precio unitario en soles. */
-    private double  precioUnitario;
+    private double precioUnitario;
 
     /** Unidades disponibles en el inventario. */
-    private int     cantidadStock;
+    private int cantidadStock;
 
     /** Umbral mínimo: si {@code cantidadStock} cae debajo, se emite alerta. */
-    private int     stockMinimo;
+    private int stockMinimo;
 
     /**
      * Tipo del producto: {@code "GENERAL"} o {@code "PERECIBLE"}.
      * Permite polimorfismo básico sin subclases separadas para simplificar
      * la integración con el BST genérico.
      */
-    private String  tipo;
+    private String tipo;
 
     /** Fecha de vencimiento (solo relevante si {@code tipo == "PERECIBLE"}). */
     private LocalDate fechaVencimiento;
 
     /** Marca comercial (solo para {@code tipo == "GENERAL"}). */
-    private String  marca;
+    private String marca;
 
     /** Momento exacto del registro en el sistema. */
     private final LocalDateTime fechaRegistro;
 
-    // ─────────────────────────────────────────────────────────
     //  CONSTRUCTORES
-    // ─────────────────────────────────────────────────────────
 
     /**
      * Constructor para producto <b>General</b> (no perecible).
@@ -76,16 +70,16 @@ public class Producto {
     public Producto(String codigo, String nombre, String categoria,
                     double precioUnitario, int cantidadStock,
                     int stockMinimo, String marca) {
-        this.codigo         = codigo.toUpperCase().trim();
-        this.nombre         = nombre;
-        this.categoria      = categoria;
+        this.codigo = codigo.toUpperCase().trim();
+        this.nombre = nombre;
+        this.categoria = categoria;
         this.precioUnitario = precioUnitario;
-        this.cantidadStock  = cantidadStock;
-        this.stockMinimo    = stockMinimo;
-        this.marca          = marca;
-        this.tipo           = "GENERAL";
+        this.cantidadStock = cantidadStock;
+        this.stockMinimo = stockMinimo;
+        this.marca = marca;
+        this.tipo = "GENERAL";
         this.fechaVencimiento = null;
-        this.fechaRegistro  = LocalDateTime.now();
+        this.fechaRegistro = LocalDateTime.now();
     }
 
     /**
@@ -102,21 +96,19 @@ public class Producto {
     public Producto(String codigo, String nombre, String categoria,
                     double precioUnitario, int cantidadStock,
                     int stockMinimo, LocalDate fechaVencimiento) {
-        this.codigo           = codigo.toUpperCase().trim();
-        this.nombre           = nombre;
-        this.categoria        = categoria;
-        this.precioUnitario   = precioUnitario;
-        this.cantidadStock    = cantidadStock;
-        this.stockMinimo      = stockMinimo;
+        this.codigo = codigo.toUpperCase().trim();
+        this.nombre = nombre;
+        this.categoria = categoria;
+        this.precioUnitario = precioUnitario;
+        this.cantidadStock = cantidadStock;
+        this.stockMinimo = stockMinimo;
         this.fechaVencimiento = fechaVencimiento;
-        this.tipo             = "PERECIBLE";
-        this.marca            = "N/A";
-        this.fechaRegistro    = LocalDateTime.now();
+        this.tipo = "PERECIBLE";
+        this.marca = "N/A";
+        this.fechaRegistro = LocalDateTime.now();
     }
 
-    // ─────────────────────────────────────────────────────────
     //  LÓGICA DE NEGOCIO
-    // ─────────────────────────────────────────────────────────
 
     /**
      * Indica si el stock actual está por debajo del umbral mínimo.
@@ -166,37 +158,35 @@ public class Producto {
         this.cantidadStock -= cantidad;
     }
 
-    // ─────────────────────────────────────────────────────────
     //  GETTERS Y SETTERS
-    // ─────────────────────────────────────────────────────────
 
     /** @return Código único del producto. */
     public String getCodigo()           { return codigo; }
     /** @param codigo Nuevo código. */
-    public void   setCodigo(String c)   { this.codigo = c.toUpperCase().trim(); }
+    public void setCodigo(String c)   { this.codigo = c.toUpperCase().trim(); }
 
     /** @return Nombre del producto. */
     public String getNombre()           { return nombre; }
     /** @param nombre Nuevo nombre. */
-    public void   setNombre(String n)   { this.nombre = n; }
+    public void setNombre(String n)   { this.nombre = n; }
 
     /** @return Categoría del producto. */
     public String getCategoria()        { return categoria; }
     /** @param categoria Nueva categoría. */
-    public void   setCategoria(String c){ this.categoria = c; }
+    public void setCategoria(String c){ this.categoria = c; }
 
     /** @return Precio unitario en S/. */
     public double getPrecioUnitario()          { return precioUnitario; }
     /** @param precio Nuevo precio unitario. */
-    public void   setPrecioUnitario(double p)  { this.precioUnitario = p; }
+    public void setPrecioUnitario(double p)  { this.precioUnitario = p; }
 
     /** @return Cantidad actual en stock. */
-    public int  getCantidadStock()        { return cantidadStock; }
+    public int getCantidadStock()        { return cantidadStock; }
     /** @param stock Nuevo valor directo del stock. */
     public void setCantidadStock(int s)   { this.cantidadStock = s; }
 
     /** @return Umbral mínimo de stock. */
-    public int  getStockMinimo()          { return stockMinimo; }
+    public int getStockMinimo()          { return stockMinimo; }
     /** @param min Nuevo umbral mínimo. */
     public void setStockMinimo(int min)   { this.stockMinimo = min; }
 
@@ -206,19 +196,17 @@ public class Producto {
     /** @return Marca comercial (solo General). */
     public String getMarca()             { return marca; }
     /** @param marca Nueva marca. */
-    public void   setMarca(String m)     { this.marca = m; }
+    public void setMarca(String m)     { this.marca = m; }
 
     /** @return Fecha de vencimiento (solo Perecible), o {@code null}. */
     public LocalDate getFechaVencimiento()         { return fechaVencimiento; }
     /** @param f Nueva fecha de vencimiento. */
-    public void      setFechaVencimiento(LocalDate f){ this.fechaVencimiento = f; }
+    public void setFechaVencimiento(LocalDate f){ this.fechaVencimiento = f; }
 
     /** @return Fecha y hora de registro en el sistema. */
     public LocalDateTime getFechaRegistro()        { return fechaRegistro; }
 
-    // ─────────────────────────────────────────────────────────
     //  REPRESENTACIÓN EN CADENA
-    // ─────────────────────────────────────────────────────────
 
     /**
      * Retorna una ficha completa del producto para mostrar en consola.
@@ -229,7 +217,7 @@ public class Producto {
     public String toString() {
         DateTimeFormatter fmt = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
         String alerta = estaEnStockCritico() ? "  *** STOCK CRITICO ***" : "";
-        String venc   = (fechaVencimiento != null)
+        String venc = (fechaVencimiento != null)
             ? "  Vencimiento: " + fechaVencimiento : "";
         String marcaStr = !"N/A".equals(marca)
             ? "  Marca:       " + marca : "";

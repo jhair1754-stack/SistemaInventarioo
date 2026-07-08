@@ -1,3 +1,4 @@
+package main;
 
 import excepciones.StockInsuficienteException;
 import modelos.Almacen;
@@ -13,9 +14,7 @@ import java.awt.Font;
 import java.time.LocalDate;
 
 /**
- * ============================================================
  * PUNTO DE ENTRADA: Main
- * ============================================================
  * Inicializa los servicios, carga datos de demostración en RAM
  * y lanza la interfaz interactiva por consola.
  *
@@ -39,7 +38,7 @@ public class Main {
     public static void main(String[] args) {
 
         // ── INICIALIZAR SERVICIOS ──────────────────────────────────────
-        LogisticaService  logisticaService  = new LogisticaService();
+        LogisticaService logisticaService = new LogisticaService();
         InventarioService inventarioService = new InventarioService(logisticaService, "ALM-01");
 
         // ── CARGAR RED LOGÍSTICA EN EL GRAFO ──────────────────────────
@@ -83,9 +82,7 @@ public class Main {
         });
     }
 
-    // ─────────────────────────────────────────────────────────
     //  CARGA DE RED LOGÍSTICA
-    // ─────────────────────────────────────────────────────────
 
     /**
      * Carga 6 almacenes y 7 rutas en el GrafoLogistica de demostración.
@@ -125,9 +122,7 @@ public class Main {
         ls.conectarAlmacenes("ALM-02", "ALM-06", 10.0, "Av. Arequipa");
     }
 
-    // ─────────────────────────────────────────────────────────
     //  CARGA DE PRODUCTOS
-    // ─────────────────────────────────────────────────────────
 
     /**
      * Inserta 10 productos de demostración en el ArbolBinarioBusqueda.
@@ -188,9 +183,7 @@ public class Main {
             LocalDate.now().plusMonths(12)));
     }
 
-    // ─────────────────────────────────────────────────────────
     //  SIMULACIÓN DE MOVIMIENTOS
-    // ─────────────────────────────────────────────────────────
 
     /**
      * Simula entradas y salidas de stock para pre-cargar la

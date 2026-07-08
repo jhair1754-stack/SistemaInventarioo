@@ -14,14 +14,14 @@ import java.awt.*;
 public class FrmLogistica extends JDialog {
 
     // ── Paleta profesional clara ──
-    private static final Color BG_FORM  = new Color(249, 250, 251);
+    private static final Color BG_FORM = new Color(249, 250, 251);
     private static final Color BG_WHITE = Color.WHITE;
-    private static final Color ACCENT   = new Color(37, 99, 235);
+    private static final Color ACCENT = new Color(37, 99, 235);
     private static final Color TEXT_PRI = new Color(30, 41, 59);
     private static final Color TEXT_SEC = new Color(100, 116, 139);
-    private static final Color BORDER   = new Color(226, 232, 240);
+    private static final Color BORDER = new Color(226, 232, 240);
     private static final Color GREEN_BTN = new Color(22, 163, 74);
-    private static final Color RED_BTN  = new Color(220, 38, 38);
+    private static final Color RED_BTN = new Color(220, 38, 38);
 
     private LogisticaService logisticaService;
 
@@ -49,13 +49,13 @@ public class FrmLogistica extends JDialog {
         super(parent, "Gestión de Red Logística", true);
         this.logisticaService = logServ;
 
-        setSize(1060, 820);
-        setLocationRelativeTo(parent);
         setLayout(new BorderLayout());
         getContentPane().setBackground(BG_FORM);
 
         initComponents();
         actualizarTextoRed();
+        pack();
+        setLocationRelativeTo(parent);
     }
 
     private void initComponents() {
@@ -66,7 +66,6 @@ public class FrmLogistica extends JDialog {
                 BorderFactory.createMatteBorder(0, 0, 0, 1, BORDER),
                 BorderFactory.createEmptyBorder(8, 8, 8, 8)));
 
-        // ─── 1. NUEVO ALMACÉN ───
         JPanel pnlAgregar = crearSeccion("Nuevo Almacén");
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.insets = new Insets(4, 4, 4, 4);
@@ -114,7 +113,6 @@ public class FrmLogistica extends JDialog {
         pnlIzquierdo.add(pnlAgregar);
         pnlIzquierdo.add(Box.createVerticalStrut(8));
 
-        // ─── 2. CONECTAR RUTAS (sin botones "?") ───
         JPanel pnlConectar = crearSeccion("Conectar Rutas");
         gbc = new GridBagConstraints();
         gbc.insets = new Insets(4, 4, 4, 4);
@@ -155,7 +153,6 @@ public class FrmLogistica extends JDialog {
         pnlIzquierdo.add(pnlConectar);
         pnlIzquierdo.add(Box.createVerticalStrut(8));
 
-        // ─── 3. OPTIMIZACIÓN DE RUTAS LOGÍSTICAS ───
         JPanel pnlRuta = crearSeccion("Optimización de Rutas Logísticas");
         gbc = new GridBagConstraints();
         gbc.insets = new Insets(4, 4, 4, 4);
@@ -184,7 +181,6 @@ public class FrmLogistica extends JDialog {
         pnlIzquierdo.add(pnlRuta);
         pnlIzquierdo.add(Box.createVerticalStrut(8));
 
-        // ─── 4. ELIMINAR ALMACÉN O RUTA ───
         JPanel pnlEliminar = crearSeccion("Eliminar Almacén o Ruta");
         gbc = new GridBagConstraints();
         gbc.insets = new Insets(4, 4, 4, 4);
@@ -223,7 +219,7 @@ public class FrmLogistica extends JDialog {
         gbc.gridx = 0; gbc.gridy = fila; gbc.gridwidth = 2;
         pnlEliminar.add(btnEliminarRuta, gbc);
 
-        pnlIzquierdo.add(pnlEliminar);
+        // pnlEliminar se agrega al panel derecho
         
         JScrollPane scrollIzquierdo = new JScrollPane(pnlIzquierdo);
         scrollIzquierdo.setPreferredSize(new Dimension(450, 0));
@@ -231,7 +227,6 @@ public class FrmLogistica extends JDialog {
         scrollIzquierdo.getVerticalScrollBar().setUnitIncrement(16);
         add(scrollIzquierdo, BorderLayout.WEST);
 
-        // ─── PANEL DERECHO: RED + RESULTADO DIJKSTRA ───
         JPanel pnlDerecho = new JPanel(new BorderLayout(0, 8));
         pnlDerecho.setBackground(BG_FORM);
         pnlDerecho.setBorder(BorderFactory.createEmptyBorder(8, 8, 8, 8));
@@ -244,6 +239,7 @@ public class FrmLogistica extends JDialog {
         txtResultados.setForeground(TEXT_PRI);
         txtResultados.setMargin(new Insets(12, 12, 12, 12));
         JScrollPane scrollRed = new JScrollPane(txtResultados);
+        scrollRed.setPreferredSize(new Dimension(600, 250)); // Reducido drásticamente
         scrollRed.setBorder(BorderFactory.createTitledBorder(
                 BorderFactory.createLineBorder(BORDER),
                 "Red Logística Actual",
@@ -267,15 +263,19 @@ public class FrmLogistica extends JDialog {
                 javax.swing.border.TitledBorder.LEFT,
                 javax.swing.border.TitledBorder.TOP,
                 new Font("Segoe UI", Font.BOLD, 12), new Color(21, 128, 61)));
-        scrollRuta.setPreferredSize(new Dimension(0, 120));
-        pnlDerecho.add(scrollRuta, BorderLayout.SOUTH);
+        scrollRuta.setPreferredSize(new Dimension(0, 100));
+        
+        JPanel pnlSurDerecho = new JPanel(new BorderLayout(0, 8));
+        pnlSurDerecho.setBackground(BG_FORM);
+        pnlSurDerecho.add(pnlEliminar, BorderLayout.CENTER);
+        pnlSurDerecho.add(scrollRuta, BorderLayout.SOUTH);
+
+        pnlDerecho.add(pnlSurDerecho, BorderLayout.SOUTH);
 
         add(pnlDerecho, BorderLayout.CENTER);
 
-        // ─── CARGAR COMBOS ───
         cargarCombosAlmacenes();
 
-        // ─── EVENTOS ───
         btnAgregarAlmacen.addActionListener(e -> {
             try {
                 String id = txtIdAlmacen.getText();

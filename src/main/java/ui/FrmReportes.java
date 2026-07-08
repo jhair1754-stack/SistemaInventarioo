@@ -15,12 +15,12 @@ import java.time.format.DateTimeFormatter;
 public class FrmReportes extends JDialog {
 
     // ── Paleta profesional clara ──
-    private static final Color BG_FORM  = new Color(249, 250, 251);
+    private static final Color BG_FORM = new Color(249, 250, 251);
     private static final Color BG_WHITE = Color.WHITE;
-    private static final Color ACCENT   = new Color(37, 99, 235);
+    private static final Color ACCENT = new Color(37, 99, 235);
     private static final Color TEXT_PRI = new Color(30, 41, 59);
     private static final Color TEXT_SEC = new Color(100, 116, 139);
-    private static final Color BORDER   = new Color(226, 232, 240);
+    private static final Color BORDER = new Color(226, 232, 240);
 
     private InventarioService inventarioService;
     private LogisticaService logisticaService;

@@ -41,34 +41,34 @@ public class Transaccion {
 
     // CAMPOS INMUTABLES (final)
     /** Número de secuencia único, asignado automáticamente. */
-    private final long            numero;
+    private final long numero;
 
     /** Tipo del movimiento. */
-    private final TipoMovimiento  tipo;
+    private final TipoMovimiento tipo;
 
     /** Código del producto afectado (snapshot). */
-    private final String          codigoProducto;
+    private final String codigoProducto;
 
     /** Nombre del producto al momento de la transacción (snapshot). */
-    private final String          nombreProducto;
+    private final String nombreProducto;
 
     /** Unidades involucradas en el movimiento. */
-    private final int             cantidad;
+    private final int cantidad;
 
     /** Stock del producto antes del movimiento. */
-    private final int             stockAnterior;
+    private final int stockAnterior;
 
     /** Stock del producto después del movimiento. */
-    private final int             stockPosterior;
+    private final int stockPosterior;
 
     /** ID del almacén donde ocurrió el movimiento. */
-    private final String          idAlmacen;
+    private final String idAlmacen;
 
     /** Observación libre: proveedor, cliente, motivo, etc. */
-    private final String          observacion;
+    private final String observacion;
 
     /** Fecha y hora exacta de la transacción. */
-    private final LocalDateTime   fechaHora;
+    private final LocalDateTime fechaHora;
 
     /** Contador global para asignar números de transacción únicos. */
     private static long contadorSecuencial = 1;
@@ -95,49 +95,49 @@ public class Transaccion {
                        int stockPosterior,
                        String idAlmacen,
                        String observacion) {
-        this.numero          = contadorSecuencial++;
-        this.tipo            = tipo;
-        this.codigoProducto  = codigoProducto;
-        this.nombreProducto  = nombreProducto;
-        this.cantidad        = cantidad;
-        this.stockAnterior   = stockAnterior;
-        this.stockPosterior  = stockPosterior;
-        this.idAlmacen       = idAlmacen;
-        this.observacion     = (observacion == null || observacion.isBlank())
+        this.numero = contadorSecuencial++;
+        this.tipo = tipo;
+        this.codigoProducto = codigoProducto;
+        this.nombreProducto = nombreProducto;
+        this.cantidad = cantidad;
+        this.stockAnterior = stockAnterior;
+        this.stockPosterior = stockPosterior;
+        this.idAlmacen = idAlmacen;
+        this.observacion = (observacion == null || observacion.isBlank())
                                ? "-" : observacion;
-        this.fechaHora       = LocalDateTime.now();
+        this.fechaHora = LocalDateTime.now();
     }
 
     // GETTERS (sin setters: objeto inmutable)
     /** @return Número de secuencia de la transacción. */
-    public long           getNumero()          { return numero; }
+    public long getNumero()          { return numero; }
 
     /** @return Tipo del movimiento. */
     public TipoMovimiento getTipo()            { return tipo; }
 
     /** @return Código del producto afectado. */
-    public String         getCodigoProducto()  { return codigoProducto; }
+    public String getCodigoProducto()  { return codigoProducto; }
 
     /** @return Nombre del producto (snapshot). */
-    public String         getNombreProducto()  { return nombreProducto; }
+    public String getNombreProducto()  { return nombreProducto; }
 
     /** @return Unidades involucradas. */
-    public int            getCantidad()        { return cantidad; }
+    public int getCantidad()        { return cantidad; }
 
     /** @return Stock antes del movimiento. */
-    public int            getStockAnterior()   { return stockAnterior; }
+    public int getStockAnterior()   { return stockAnterior; }
 
     /** @return Stock después del movimiento. */
-    public int            getStockPosterior()  { return stockPosterior; }
+    public int getStockPosterior()  { return stockPosterior; }
 
     /** @return ID del almacén. */
-    public String         getIdAlmacen()       { return idAlmacen; }
+    public String getIdAlmacen()       { return idAlmacen; }
 
     /** @return Observación libre. */
-    public String         getObservacion()     { return observacion; }
+    public String getObservacion()     { return observacion; }
 
     /** @return Fecha y hora de la transacción. */
-    public LocalDateTime  getFechaHora()       { return fechaHora; }
+    public LocalDateTime getFechaHora()       { return fechaHora; }
 
     // REPRESENTACIÓN EN CADENA
     /**
@@ -149,7 +149,7 @@ public class Transaccion {
     public String toString() {
         DateTimeFormatter fmt = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
         String signo = (tipo == TipoMovimiento.SALIDA) ? "-" : "+";
-        String tag   = switch (tipo) {
+        String tag = switch (tipo) {
             case ENTRADA  -> "[ENTRADA ] ";
             case SALIDA   -> "[SALIDA  ] ";
             case REGISTRO -> "[REGISTRO] ";

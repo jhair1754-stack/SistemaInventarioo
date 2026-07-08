@@ -4,9 +4,7 @@ import excepciones.AlmacenNoEncontradoException;
 import modelos.Almacen;
 
 /**
- * ============================================================
  * ESTRUCTURA: GrafoLogistico
- * ============================================================
  * Grafo no dirigido con pesos implementado con Lista de Adyacencia
  * adaptado para NO usar colecciones de java.util.*
  *
@@ -159,7 +157,7 @@ public class GrafoLogistico {
                 }
             }
         }
-        sb.append(String.format("%n  Vertices: %d  |  Aristas: %d%n", vertices.size(), numeroAristas));
+        sb.append(String.format("%n Vertices: %d  |  Aristas: %d%n", vertices.size(), numeroAristas));
         return sb.toString();
     }
 

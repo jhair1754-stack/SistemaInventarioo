@@ -2,9 +2,7 @@ package estructuras;
 
 import modelos.Transaccion;
 
-// ====================================================================
 // [REQUISITO RUBRICA: PILAS] - Clase PilaAuditoria
-// ====================================================================
 // Implementación COMPLETA de una Pila (Stack) LIFO desde cero
 // usando nodos enlazados (NodoPila).
 // NO usa java.util.Stack, java.util.Deque ni ninguna colección JDK.
@@ -25,12 +23,9 @@ import modelos.Transaccion;
 //  pop():  retorna TRX-3, tope → [TRX-2] → [TRX-1] → null
 //  peek(): retorna TRX-2 SIN modificar la pila
 //
-// ====================================================================
 
 /**
- * ============================================================
  * ESTRUCTURA: PilaAuditoria
- * ============================================================
  * Pila LIFO de {@link Transaccion}es implementada desde cero
  * con nodos enlazados ({@link NodoPila}).
  *
@@ -51,9 +46,7 @@ import modelos.Transaccion;
  */
 public class PilaAuditoria {
 
-    // ─────────────────────────────────────────────────────────
     //  TOPE DE LA PILA
-    // ─────────────────────────────────────────────────────────
 
     /**
      * REFERENCIA/PUNTERO al nodo en el TOPE de la pila.
@@ -72,9 +65,7 @@ public class PilaAuditoria {
     /** Número de transacciones actualmente en la pila. */
     private int tamanio;
 
-    // ─────────────────────────────────────────────────────────
     //  CONSTRUCTOR
-    // ─────────────────────────────────────────────────────────
 
     /**
      * Crea una pila de auditoría vacía.
@@ -82,13 +73,11 @@ public class PilaAuditoria {
      */
     public PilaAuditoria() {
         // [REQUISITO RUBRICA: PILAS] - Inicialización de la pila vacía
-        this.tope    = null;  // Pila vacía: ningún nodo existe aún
+        this.tope = null;  // Pila vacía: ningún nodo existe aún
         this.tamanio = 0;
     }
 
-    // ====================================================================
     // [REQUISITO RUBRICA: PILAS] - OPERACIÓN: PUSH (apilar)
-    // ====================================================================
 
     /**
      * Apila una nueva transacción en el tope de la pila.
@@ -110,15 +99,13 @@ public class PilaAuditoria {
      */
     public void push(Transaccion transaccion) {
         // [REQUISITO RUBRICA: PILAS] - Operación PUSH: agrega al tope
-        NodoPila nuevoNodo   = new NodoPila(transaccion); // Paso 1: crear nodo
-        nuevoNodo.siguiente  = this.tope;                 // Paso 2: enlazar con el tope actual
-        this.tope            = nuevoNodo;                 // Paso 3: el nuevo nodo ES el nuevo tope
+        NodoPila nuevoNodo = new NodoPila(transaccion); // Paso 1: crear nodo
+        nuevoNodo.siguiente = this.tope;                 // Paso 2: enlazar con el tope actual
+        this.tope = nuevoNodo;                 // Paso 3: el nuevo nodo ES el nuevo tope
         this.tamanio++;
     }
 
-    // ====================================================================
     // [REQUISITO RUBRICA: PILAS] - OPERACIÓN: POP (desapilar)
-    // ====================================================================
 
     /**
      * Desapila y retorna la transacción en el tope de la pila.
@@ -146,14 +133,12 @@ public class PilaAuditoria {
                 "No se puede desapilar: la pila de auditoria esta vacia.");
         }
         Transaccion dato = this.tope.dato;        // Paso 1: guardar dato del tope
-        this.tope        = this.tope.siguiente;   // Paso 2: mover tope al nodo anterior
+        this.tope = this.tope.siguiente;   // Paso 2: mover tope al nodo anterior
         this.tamanio--;
         return dato;
     }
 
-    // ====================================================================
     // [REQUISITO RUBRICA: PILAS] - OPERACIÓN: PEEK (consultar sin extraer)
-    // ====================================================================
 
     /**
      * Retorna la transacción en el tope <b>sin extraerla</b>.
@@ -172,9 +157,7 @@ public class PilaAuditoria {
         return this.tope.dato;
     }
 
-    // ─────────────────────────────────────────────────────────
     //  OPERACIONES AUXILIARES
-    // ─────────────────────────────────────────────────────────
 
     /**
      * Indica si la pila no contiene ningún elemento.
@@ -208,7 +191,7 @@ public class PilaAuditoria {
     public ListaEnlazada<Transaccion> toList() {
         // [REQUISITO RUBRICA: PILAS] - Recorrido de la pila sin modificarla
         ListaEnlazada<Transaccion> lista = new ListaEnlazada<>();
-        NodoPila          nodoActual = this.tope;   // Comenzar desde el tope
+        NodoPila nodoActual = this.tope;   // Comenzar desde el tope
 
         // Recorrer la cadena: tope → siguiente → siguiente → ... → null
         while (nodoActual != null) {
@@ -224,7 +207,7 @@ public class PilaAuditoria {
      */
     public void vaciar() {
         // Al poner tope en null, ningún nodo es alcanzable → GC los reclamará
-        this.tope    = null;
+        this.tope = null;
         this.tamanio = 0;
     }
 }

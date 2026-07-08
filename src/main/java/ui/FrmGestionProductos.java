@@ -17,14 +17,14 @@ import java.time.format.DateTimeParseException;
 public class FrmGestionProductos extends JDialog {
 
     // ── Paleta profesional clara ──
-    private static final Color BG_FORM    = new Color(249, 250, 251);
-    private static final Color BG_WHITE   = Color.WHITE;
-    private static final Color ACCENT     = new Color(37, 99, 235);
-    private static final Color TEXT_PRI   = new Color(30, 41, 59);
-    private static final Color TEXT_SEC   = new Color(100, 116, 139);
-    private static final Color BORDER     = new Color(226, 232, 240);
-    private static final Color RED_BTN    = new Color(220, 38, 38);
-    private static final Color GREEN_BTN  = new Color(22, 163, 74);
+    private static final Color BG_FORM = new Color(249, 250, 251);
+    private static final Color BG_WHITE = Color.WHITE;
+    private static final Color ACCENT = new Color(37, 99, 235);
+    private static final Color TEXT_PRI = new Color(30, 41, 59);
+    private static final Color TEXT_SEC = new Color(100, 116, 139);
+    private static final Color BORDER = new Color(226, 232, 240);
+    private static final Color RED_BTN = new Color(220, 38, 38);
+    private static final Color GREEN_BTN = new Color(22, 163, 74);
 
     /** Categorías reales que coinciden con los datos demo del Main */
     private static final String[] CATEGORIAS = {
@@ -142,8 +142,8 @@ public class FrmGestionProductos extends JDialog {
         pnlBotones.setBackground(BG_WHITE);
 
         btnRegistrar = crearBotonAccion("Registrar", GREEN_BTN);
-        btnEliminar  = crearBotonAccion("Eliminar", RED_BTN);
-        btnLimpiar   = crearBotonAccion("Limpiar", TEXT_SEC);
+        btnEliminar = crearBotonAccion("Eliminar", RED_BTN);
+        btnLimpiar = crearBotonAccion("Limpiar", TEXT_SEC);
 
         pnlBotones.add(btnRegistrar);
         pnlBotones.add(btnEliminar);
