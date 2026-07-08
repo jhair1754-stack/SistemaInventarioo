@@ -4,7 +4,6 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 /**
- * ENTIDAD: Transaccion
  * Registro inmutable de un movimiento de inventario. Es el
  * elemento que se apila en la {@code PilaAuditoria}.
  *

@@ -8,7 +8,6 @@ import estructuras.GrafoLogistico.ResultadoDijkstra;
 import estructuras.ListaEnlazada;
 
 /**
- * SERVICIO: LogisticaService
  * Capa de lógica de negocio que gestiona la red logística
  * delegando al {@link GrafoLogistico}.
  * 

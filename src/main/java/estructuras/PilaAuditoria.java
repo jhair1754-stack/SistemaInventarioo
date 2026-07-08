@@ -3,7 +3,6 @@ package estructuras;
 import modelos.Transaccion;
 
 /**
- * ESTRUCTURA: PilaAuditoria
  * Pila LIFO de {@link Transaccion}es implementada desde cero
  * con nodos enlazados ({@link NodoPila}).
  *

@@ -5,7 +5,6 @@ import excepciones.ProductoNoEncontradoException;
 import modelos.Producto;
 
 /**
- * ESTRUCTURA: ArbolBinarioBusqueda
  * Árbol Binario de Búsqueda (BST) que organiza y recupera
  * {@link Producto}s por su campo {@code codigo} de forma eficiente.
  *

@@ -5,7 +5,6 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 /**
- * ENTIDAD: Producto
  * Clase base que representa un producto del inventario de la
  * empresa distribuidora. Aplica encapsulamiento estricto.
  *

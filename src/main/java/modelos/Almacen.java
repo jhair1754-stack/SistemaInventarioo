@@ -4,7 +4,6 @@ import estructuras.ArbolBinarioBusqueda;
 import estructuras.PilaAuditoria;
 
 /**
- * ENTIDAD: Almacen
  * Representa un nodo (vértice) de la red logística de la empresa.
  * Cada almacén puede ser un centro de acopio, un hub de distribución
  * o una tienda de venta al público.

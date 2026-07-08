@@ -4,7 +4,6 @@ import java.util.Iterator;
 import java.util.NoSuchElementException;
 
 /**
- * ESTRUCTURA: ListaEnlazada
  * Implementación de una lista simplemente enlazada genérica
  * que reemplaza por completo a java.util.ArrayList y java.util.List.
  * Implementa Iterable para ser usada fácilmente en bucles for-each
