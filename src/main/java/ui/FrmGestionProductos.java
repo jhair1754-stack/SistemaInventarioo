@@ -14,6 +14,7 @@ import java.awt.*;
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 
+/** Interfaz grafica de usuario. */
 public class FrmGestionProductos extends JDialog {
 
     //  Paleta profesional clara 
@@ -40,6 +41,14 @@ public class FrmGestionProductos extends JDialog {
     private JTextField txtCodigo, txtNombre, txtPrecio, txtStock, txtStockMin, txtMarca, txtFechaVenc;
     private JComboBox<String> cbCategoria, cbTipo;
     private JButton btnRegistrar, btnEliminar, btnLimpiar;
+
+    /**
+
+
+     * Constructor principal.
+
+
+     */
 
     public FrmGestionProductos(Frame parent, InventarioService invServ) {
         super(parent, "Gestión de Productos", true);

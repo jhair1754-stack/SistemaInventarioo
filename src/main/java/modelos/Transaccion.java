@@ -108,34 +108,34 @@ public class Transaccion {
     }
 
     // GETTERS (sin setters: objeto inmutable)
-    /** @return Número de secuencia de la transacción. */
+    /** Obtiene el valor. @return Número de secuencia de la transacción. */
     public long getNumero() { return numero; }
 
-    /** @return Tipo del movimiento. */
+    /** Obtiene el valor. @return Tipo del movimiento. */
     public TipoMovimiento getTipo() { return tipo; }
 
-    /** @return Código del producto afectado. */
+    /** Obtiene el valor. @return Código del producto afectado. */
     public String getCodigoProducto() { return codigoProducto; }
 
-    /** @return Nombre del producto (snapshot). */
+    /** Obtiene el valor. @return Nombre del producto (snapshot). */
     public String getNombreProducto() { return nombreProducto; }
 
-    /** @return Unidades involucradas. */
+    /** Obtiene el valor. @return Unidades involucradas. */
     public int getCantidad() { return cantidad; }
 
-    /** @return Stock antes del movimiento. */
+    /** Obtiene el valor. @return Stock antes del movimiento. */
     public int getStockAnterior() { return stockAnterior; }
 
-    /** @return Stock después del movimiento. */
+    /** Obtiene el valor. @return Stock después del movimiento. */
     public int getStockPosterior() { return stockPosterior; }
 
-    /** @return ID del almacén. */
+    /** Obtiene el valor. @return ID del almacén. */
     public String getIdAlmacen() { return idAlmacen; }
 
-    /** @return Observación libre. */
+    /** Obtiene el valor. @return Observación libre. */
     public String getObservacion() { return observacion; }
 
-    /** @return Fecha y hora de la transacción. */
+    /** Obtiene el valor. @return Fecha y hora de la transacción. */
     public LocalDateTime getFechaHora() { return fechaHora; }
 
     // REPRESENTACIÓN EN CADENA

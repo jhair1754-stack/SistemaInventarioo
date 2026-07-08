@@ -11,6 +11,7 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
 import java.awt.*;
 
+/** Interfaz grafica de usuario. */
 public class FrmControlStock extends JDialog {
 
     //  Paleta profesional clara 
@@ -36,6 +37,14 @@ public class FrmControlStock extends JDialog {
 
     private JTextField txtCodigo, txtCantidad, txtObservacion;
     private JButton btnEntrada, btnSalida;
+
+    /**
+
+
+     * Constructor principal.
+
+
+     */
 
     public FrmControlStock(Frame parent, InventarioService invServ) {
         super(parent, "Control de Stock", true);

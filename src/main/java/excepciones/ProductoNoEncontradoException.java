@@ -41,6 +41,6 @@ public class ProductoNoEncontradoException extends RuntimeException {
         this.codigoBuscado = codigoBuscado;
     }
 
-    /** @return Código del producto que no fue encontrado. */
+    /** Obtiene el valor. @return Código del producto que no fue encontrado. */
     public String getCodigoBuscado() { return codigoBuscado; }
 }

@@ -30,6 +30,6 @@ public class AlmacenNoEncontradoException extends RuntimeException {
         this.idAlmacen = idAlmacen;
     }
 
-    /** @return ID del almacén que no fue encontrado. */
+    /** Obtiene el valor. @return ID del almacén que no fue encontrado. */
     public String getIdAlmacen() { return idAlmacen; }
 }

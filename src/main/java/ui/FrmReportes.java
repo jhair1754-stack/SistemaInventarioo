@@ -12,6 +12,7 @@ import javax.swing.table.JTableHeader;
 import java.awt.*;
 import java.time.format.DateTimeFormatter;
 
+/** Interfaz grafica de usuario. */
 public class FrmReportes extends JDialog {
 
     //  Paleta profesional clara 
@@ -27,6 +28,14 @@ public class FrmReportes extends JDialog {
 
     private JTable tblInventario, tblVencidos, tblAuditoria;
     private DefaultTableModel modInventario, modVencidos, modAuditoria;
+
+    /**
+
+
+     * Constructor principal.
+
+
+     */
 
     public FrmReportes(Frame parent, InventarioService invServ, LogisticaService logServ) {
         super(parent, "Reportes y Auditoría", true);

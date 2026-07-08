@@ -45,14 +45,18 @@ public class Arista {
 
     //  ACCESORES
 
-    /** @return ID del almacén de destino. */
+    /** Obtiene el valor. @return ID del almacén de destino. */
     public String getIdDestino() { return idDestino; }
 
-    /** @return Distancia en km (peso de la arista). */
+    /** Obtiene el valor. @return Distancia en km (peso de la arista). */
     public double getPeso() { return peso; }
+    /**
+     * Obtiene la distancia en km.
+     * @return Distancia en km.
+     */
     public double getDistanciaKm() { return peso; }
 
-    /** @return Descripción de la ruta. */
+    /** Obtiene el valor. @return Descripción de la ruta. */
     public String getDescripcion() { return descripcion; }
 
     @Override

@@ -18,6 +18,9 @@ public class ListaEnlazada<T> implements Iterable<T> {
     private NodoLista<T> cabeza;
     private int tamanio;
 
+    /**
+     * Constructor.
+     */
     public ListaEnlazada() {
         this.cabeza = null;
         this.tamanio = 0;
@@ -122,6 +125,11 @@ public class ListaEnlazada<T> implements Iterable<T> {
     /**
      * Verifica si el elemento existe en la lista.
      */
+    /**
+     * Verifica si contiene el elemento.
+     * @param elemento Elemento a buscar.
+     * @return true si lo contiene.
+     */
     public boolean contains(T elemento) {
         NodoLista<T> actual = cabeza;
         while (actual != null) {
@@ -136,12 +144,20 @@ public class ListaEnlazada<T> implements Iterable<T> {
     /**
      * Retorna el número de elementos en la lista.
      */
+    /**
+     * Obtiene el tamano.
+     * @return Numero de elementos.
+     */
     public int size() {
         return tamanio;
     }
 
     /**
      * Verifica si la lista está vacía.
+     */
+    /**
+     * Verifica si esta vacia.
+     * @return true si esta vacia.
      */
     public boolean isEmpty() {
         return tamanio == 0;

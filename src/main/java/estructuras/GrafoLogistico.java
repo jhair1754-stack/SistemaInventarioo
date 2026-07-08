@@ -15,9 +15,15 @@ public class GrafoLogistico {
      * Representa un vertice en el grafo que contiene un almacen y sus conexiones.
      */
     public static class VerticeLogistico {
+        /** Almacen. */
         public Almacen almacen;
+        /** Aristas de conexion. */
         public ListaEnlazada<Arista> aristas;
 
+        /**
+         * Constructor.
+         * @param almacen Almacen.
+         */
         public VerticeLogistico(Almacen almacen) {
             this.almacen = almacen;
             this.aristas = new ListaEnlazada<>();
@@ -204,10 +210,19 @@ public class GrafoLogistico {
      * Clase auxiliar para almacenar el resultado de la busqueda de ruta.
      */
     public static class ResultadoDijkstra {
+        /** Camino de nodos. */
         public final ListaEnlazada<String> camino;
+        /** Distancia total del camino. */
         public final double distanciaTotal;
+        /** Si es alcanzable. */
         public final boolean esAlcanzable;
 
+        /**
+         * Constructor.
+         * @param camino Camino.
+         * @param distanciaTotal Distancia.
+         * @param esAlcanzable Si es alcanzable.
+         */
         public ResultadoDijkstra(ListaEnlazada<String> camino, double distanciaTotal, boolean esAlcanzable) {
             this.camino = camino;
             this.distanciaTotal = distanciaTotal;
@@ -279,13 +294,13 @@ public class GrafoLogistico {
         return false;
     }
 
-    /** @return Numero total de almacenes (vertices). */
+    /** Obtiene el valor. @return Numero total de almacenes (vertices). */
     public int getNumeroVertices() { return vertices.size(); }
 
-    /** @return Numero total de rutas (aristas). */
+    /** Obtiene el valor. @return Numero total de rutas (aristas). */
     public int getNumeroAristas() { return numeroAristas; }
 
-    /** @return Lista de vertices en la red. */
+    /** Obtiene el valor. @return Lista de vertices en la red. */
     public ListaEnlazada<VerticeLogistico> getVertices() { return vertices; }
 
     /**

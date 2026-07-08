@@ -7,6 +7,7 @@ import estructuras.GrafoLogistico.VerticeLogistico;
 import javax.swing.*;
 import java.awt.*;
 
+/** Interfaz grafica de usuario. */
 public class FrmPrincipal extends JFrame {
 
     private InventarioService inventarioService;
@@ -22,6 +23,14 @@ public class FrmPrincipal extends JFrame {
     private static final Color TEXT_PRIMARY = new Color(30, 41, 59);    // Texto oscuro
     private static final Color TEXT_SECONDARY = new Color(100, 116, 139);
     private static final Color BORDER = new Color(226, 232, 240);    // Bordes suaves
+
+    /**
+
+
+     * Constructor principal.
+
+
+     */
 
     public FrmPrincipal(InventarioService invServ, LogisticaService logServ) {
         this.inventarioService = invServ;
@@ -169,6 +178,9 @@ public class FrmPrincipal extends JFrame {
         return btn;
     }
 
+    /**
+     * Actualiza el combo de almacenes.
+     */
     public void actualizarComboAlmacenes() {
         cbAlmacenActivo.removeAllItems();
         if (logisticaService.getGrafo().getVertices().isEmpty()) {

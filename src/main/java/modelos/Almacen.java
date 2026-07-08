@@ -80,35 +80,35 @@ public class Almacen {
 
     //  GETTERS Y SETTERS
 
-    /** @return ID único del almacén. */
+    /** Obtiene el valor. @return ID único del almacén. */
     public String getId() { return id; }
-    /** @param id Nuevo ID. */
+    /** Establece el valor. @param id Nuevo ID. */
     public void setId(String id) { this.id = id.toUpperCase().trim(); }
 
-    /** @return Nombre del almacén. */
+    /** Obtiene el valor. @return Nombre del almacén. */
     public String getNombre() { return nombre; }
-    /** @param n Nuevo nombre. */
+    /** Establece el valor. @param n Nuevo nombre. */
     public void setNombre(String n) { this.nombre = n; }
 
-    /** @return Ubicación del almacén. */
+    /** Obtiene el valor. @return Ubicación del almacén. */
     public String getUbicacion() { return ubicacion; }
-    /** @param u Nueva ubicación. */
+    /** Establece el valor. @param u Nueva ubicación. */
     public void setUbicacion(String u){ this.ubicacion = u; }
 
-    /** @return Tipo de almacén. */
+    /** Obtiene el valor. @return Tipo de almacén. */
     public TipoAlmacen getTipo() { return tipo; }
-    /** @param t Nuevo tipo. */
+    /** Establece el valor. @param t Nuevo tipo. */
     public void setTipo(TipoAlmacen t){ this.tipo = t; }
 
-    /** @return Capacidad máxima en unidades. */
+    /** Obtiene el valor. @return Capacidad máxima en unidades. */
     public int getCapacidadMaxima() { return capacidadMaxima; }
-    /** @param c Nueva capacidad máxima. */
+    /** Establece el valor. @param c Nueva capacidad máxima. */
     public void setCapacidadMaxima(int c) { this.capacidadMaxima = c; }
 
-    /** @return El árbol de productos de este almacén. */
+    /** Obtiene el valor. @return El árbol de productos de este almacén. */
     public ArbolBinarioBusqueda getArbolProductos() { return arbolProductos; }
 
-    /** @return La pila de auditoría de este almacén. */
+    /** Obtiene el valor. @return La pila de auditoría de este almacén. */
     public PilaAuditoria getPilaAuditoria() { return pilaAuditoria; }
 
     //  REPRESENTACIÓN EN CADENA

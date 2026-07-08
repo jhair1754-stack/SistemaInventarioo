@@ -299,19 +299,19 @@ public class InventarioService {
         }
     }
 
-    /** @return El numero total de productos en el almacen activo. */
+    /** Obtiene el valor. @return El numero total de productos en el almacen activo. */
     public int getNumeroProductos() { return getArbolProductos().getTamanio(); }
 
-    /** @return El numero total de transacciones registradas. */
+    /** Obtiene el valor. @return El numero total de transacciones registradas. */
     public int getNumeroMovimientos() { return getPilaAuditoria().getTamanio(); }
 
-    /** @return La altura del arbol binario de busqueda. */
+    /** Obtiene el valor. @return La altura del arbol binario de busqueda. */
     public int getAlturaArbol() { return getArbolProductos().obtenerAltura(); }
 
-    /** @return true si no hay productos registrados, false en caso contrario. */
+    /** Obtiene el valor. @return true si no hay productos registrados, false en caso contrario. */
     public boolean estaVacio() { return getArbolProductos().estaVacio(); }
 
-    /** @return ID del almacen activo. */
+    /** Obtiene el valor. @return ID del almacen activo. */
     public String getIdAlmacenActivo() { return idAlmacenActivo; }
 
     /**

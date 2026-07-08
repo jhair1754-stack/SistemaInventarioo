@@ -160,50 +160,50 @@ public class Producto {
 
     //  GETTERS Y SETTERS
 
-    /** @return Código único del producto. */
+    /** Obtiene el valor. @return Código único del producto. */
     public String getCodigo() { return codigo; }
-    /** @param codigo Nuevo código. */
+    /** Establece el valor. @param c Nuevo código. */
     public void setCodigo(String c) { this.codigo = c.toUpperCase().trim(); }
 
-    /** @return Nombre del producto. */
+    /** Obtiene el valor. @return Nombre del producto. */
     public String getNombre() { return nombre; }
-    /** @param nombre Nuevo nombre. */
+    /** Establece el valor. @param n Nuevo nombre. */
     public void setNombre(String n) { this.nombre = n; }
 
-    /** @return Categoría del producto. */
+    /** Obtiene el valor. @return Categoría del producto. */
     public String getCategoria() { return categoria; }
-    /** @param categoria Nueva categoría. */
+    /** Establece el valor. @param c Nueva categoría. */
     public void setCategoria(String c){ this.categoria = c; }
 
-    /** @return Precio unitario en S/. */
+    /** Obtiene el valor. @return Precio unitario en S/. */
     public double getPrecioUnitario() { return precioUnitario; }
-    /** @param precio Nuevo precio unitario. */
+    /** Establece el valor. @param p Nuevo precio unitario. */
     public void setPrecioUnitario(double p) { this.precioUnitario = p; }
 
-    /** @return Cantidad actual en stock. */
+    /** Obtiene el valor. @return Cantidad actual en stock. */
     public int getCantidadStock() { return cantidadStock; }
-    /** @param stock Nuevo valor directo del stock. */
+    /** Establece el valor. @param s Nuevo valor directo del stock. */
     public void setCantidadStock(int s) { this.cantidadStock = s; }
 
-    /** @return Umbral mínimo de stock. */
+    /** Obtiene el valor. @return Umbral mínimo de stock. */
     public int getStockMinimo() { return stockMinimo; }
-    /** @param min Nuevo umbral mínimo. */
+    /** Establece el valor. @param min Nuevo umbral mínimo. */
     public void setStockMinimo(int min) { this.stockMinimo = min; }
 
-    /** @return Tipo del producto ({@code "GENERAL"} o {@code "PERECIBLE"}). */
+    /** Obtiene el valor. @return Tipo del producto ({@code "GENERAL"} o {@code "PERECIBLE"}). */
     public String getTipo() { return tipo; }
 
-    /** @return Marca comercial (solo General). */
+    /** Obtiene el valor. @return Marca comercial (solo General). */
     public String getMarca() { return marca; }
-    /** @param marca Nueva marca. */
+    /** Establece el valor. @param m Nueva marca. */
     public void setMarca(String m) { this.marca = m; }
 
-    /** @return Fecha de vencimiento (solo Perecible), o {@code null}. */
+    /** Obtiene el valor. @return Fecha de vencimiento (solo Perecible), o {@code null}. */
     public LocalDate getFechaVencimiento() { return fechaVencimiento; }
-    /** @param f Nueva fecha de vencimiento. */
+    /** Establece el valor. @param f Nueva fecha de vencimiento. */
     public void setFechaVencimiento(LocalDate f){ this.fechaVencimiento = f; }
 
-    /** @return Fecha y hora de registro en el sistema. */
+    /** Obtiene el valor. @return Fecha y hora de registro en el sistema. */
     public LocalDateTime getFechaRegistro() { return fechaRegistro; }
 
     //  REPRESENTACIÓN EN CADENA

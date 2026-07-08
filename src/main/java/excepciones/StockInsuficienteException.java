@@ -45,15 +45,15 @@ public class StockInsuficienteException extends Exception {
         this.cantidadSolicitada = cantidadSolicitada;
     }
 
-    /** @return Código del producto con stock insuficiente. */
+    /** Obtiene el valor. @return Código del producto con stock insuficiente. */
     public String getCodigoProducto() { return codigoProducto; }
 
-    /** @return Stock disponible al momento del error. */
+    /** Obtiene el valor. @return Stock disponible al momento del error. */
     public int getStockDisponible() { return stockDisponible; }
 
-    /** @return Cantidad solicitada que causó el error. */
+    /** Obtiene el valor. @return Cantidad solicitada que causó el error. */
     public int getCantidadSolicitada() { return cantidadSolicitada; }
 
-    /** @return Número de unidades faltantes para satisfacer la solicitud. */
+    /** Obtiene el valor. @return Número de unidades faltantes para satisfacer la solicitud. */
     public int getFaltante() { return cantidadSolicitada - stockDisponible; }
 }

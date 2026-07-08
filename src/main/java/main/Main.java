@@ -23,6 +23,7 @@ import java.time.LocalDate;
  * @author Equipo 2
  * @version Beta
  */
+/** Clase principal del sistema. */
 public class Main {
 
     /**

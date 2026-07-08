@@ -112,6 +112,10 @@ public class LogisticaService {
     /**
      * Genera el siguiente ID de almacén con el formato ALM-XXX
      */
+    /**
+     * Genera un codigo de almacen.
+     * @return Codigo generado.
+     */
     public String generarCodigoAlmacen() {
         int max = 0;
         ListaEnlazada<GrafoLogistico.VerticeLogistico> vertices = grafo.getVertices();
@@ -130,6 +134,11 @@ public class LogisticaService {
 
     //  GETTERS
 
+    /**
+     * Elimina un almacen.
+     * @param id ID del almacen.
+     * @return true si se elimino.
+     */
     public boolean eliminarAlmacen(String id) {
         boolean exito = grafo.eliminarAlmacen(id);
         if (exito) {
@@ -138,6 +147,12 @@ public class LogisticaService {
         return exito;
     }
 
+    /**
+     * Elimina una ruta.
+     * @param idOrigen ID origen.
+     * @param idDestino ID destino.
+     * @return true si se elimino.
+     */
     public boolean eliminarRuta(String idOrigen, String idDestino) {
         boolean exito = grafo.eliminarRuta(idOrigen, idDestino);
         if (exito) {
@@ -146,18 +161,22 @@ public class LogisticaService {
         return exito;
     }
 
-    /** @return Referencia al grafo logístico. */
+    /** Obtiene el valor. @return Referencia al grafo logístico. */
     public GrafoLogistico getGrafo() { return grafo; }
 
-    /** @return Número de almacenes. */
+    /** Obtiene el valor. @return Número de almacenes. */
     public int getNumeroAlmacenes() { return grafo.getNumeroVertices(); }
 
-    /** @return Número de rutas. */
+    /** Obtiene el valor. @return Número de rutas. */
     public int getNumeroRutas() { return grafo.getNumeroAristas(); }
 
-    /** @return {@code true} si el almacén existe. */
+    /** Verifica existencia.
+     * @param id ID del almacen.
+     * @return {@code true} si existe. */
     public boolean existeAlmacen(String id) { return grafo.existeAlmacen(id); }
 
-    /** @return El almacén con el ID dado, o {@code null}. */
+    /** Obtiene el almacen.
+     * @param id ID del almacen.
+     * @return El almacen. */
     public Almacen getAlmacen(String id) { return grafo.getAlmacen(id); }
 }

@@ -315,12 +315,12 @@ Vale {@code null} cuando el árbol está completamente vacío.
 
     //  GETTERS DE ESTADO
 
-    /** @return Número de productos almacenados. */
+    /** Obtiene el valor. @return Número de productos almacenados. */
     public int getTamanio() { return tamanio; }
 
-    /** @return {@code true} si el árbol no contiene ningún producto. */
+    /** Obtiene el valor. @return {@code true} si el árbol no contiene ningún producto. */
     public boolean estaVacio(){ return raiz == null; }
 
-    /** @return Referencia a la raíz (uso interno del servicio). */
+    /** Obtiene el valor. @return Referencia a la raíz (uso interno del servicio). */
     NodoArbol getRaiz() { return raiz; }
 }

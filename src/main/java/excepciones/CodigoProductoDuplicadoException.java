@@ -32,6 +32,6 @@ public class CodigoProductoDuplicadoException extends RuntimeException {
         this.codigoDuplicado = codigoDuplicado;
     }
 
-    /** @return Código duplicado que causó el error. */
+    /** Obtiene el valor. @return Código duplicado que causó el error. */
     public String getCodigoDuplicado() { return codigoDuplicado; }
 }

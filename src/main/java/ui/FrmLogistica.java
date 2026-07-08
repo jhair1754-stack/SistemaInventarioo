@@ -11,6 +11,7 @@ import estructuras.ListaEnlazada;
 import javax.swing.*;
 import java.awt.*;
 
+/** Interfaz grafica de usuario. */
 public class FrmLogistica extends JDialog {
 
     //  Paleta profesional clara 
@@ -44,6 +45,14 @@ public class FrmLogistica extends JDialog {
 
     private JTextArea txtResultados;
     private JTextArea txtResultadoRuta; // Panel inferior para resultado Dijkstra
+
+    /**
+
+
+     * Constructor principal.
+
+
+     */
 
     public FrmLogistica(Frame parent, LogisticaService logServ) {
         super(parent, "Gestión de Red Logística", true);
