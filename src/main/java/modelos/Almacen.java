@@ -9,9 +9,9 @@ import estructuras.PilaAuditoria;
  * Cada almacén puede ser un centro de acopio, un hub de distribución
  * o una tienda de venta al público.
  *
- * <p>Es el tipo de dato que {@code GrafoLogistica} almacena
- * en cada vértice de su lista de adyacencia.</p>
- *
+ * Es el tipo de dato que {@code GrafoLogistica} almacena
+ * en cada vértice de su lista de adyacencia.
+ * 
  * @author Equipo 2
  * @version Beta
  */
@@ -60,8 +60,8 @@ public class Almacen {
 
     /**
      * Constructor completo de Almacen.
-     *
-     * @param id              Identificador único (ej. {@code "ALM-01"}).
+ * 
+ * @param id              Identificador único (ej. {@code "ALM-01"}).
      * @param nombre          Nombre descriptivo.
      * @param ubicacion       Dirección o zona geográfica.
      * @param tipo            Tipo de nodo ({@link TipoAlmacen}).

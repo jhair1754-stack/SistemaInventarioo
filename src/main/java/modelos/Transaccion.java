@@ -6,20 +6,19 @@ import java.time.format.DateTimeFormatter;
 /**
  * ENTIDAD: Transaccion
  * Registro inmutable de un movimiento de inventario. Es el
- * <b>elemento que se apila</b> en la {@code PilaAuditoria}.
+ * elemento que se apila en la {@code PilaAuditoria}.
  *
- * <p>Una vez construida, ningún campo puede cambiar, garantizando
- * la integridad del historial de auditoría.</p>
+ * Una vez construida, ningún campo puede cambiar, garantizando
+ * la integridad del historial de auditoría.
  *
  * <h2>Tipos de movimiento</h2>
- * <ul>
- *   <li>{@code ENTRADA}  – Ingreso de mercancía.</li>
- *   <li>{@code SALIDA}   – Despacho de mercancía.</li>
- *   <li>{@code REGISTRO} – Alta de un producto nuevo.</li>
- *   <li>{@code AJUSTE}   – Corrección manual de stock.</li>
- * </ul>
- *
- * @author Equipo 2
+ * 
+ *   {@code ENTRADA}  – Ingreso de mercancía.
+ *   {@code SALIDA}   – Despacho de mercancía.
+ *   {@code REGISTRO} – Alta de un producto nuevo.
+ *   {@code AJUSTE}   – Corrección manual de stock.
+ * 
+@author Equipo 2
  * @version Beta
  */
 public class Transaccion {
@@ -77,8 +76,8 @@ public class Transaccion {
     /**
      * Crea un registro de transacción. El número de secuencia
      * se asigna automáticamente y de forma incremental.
-     *
-     * @param tipo           Tipo de movimiento.
+ * 
+ * @param tipo           Tipo de movimiento.
      * @param codigoProducto Código del producto afectado.
      * @param nombreProducto Nombre del producto (snapshot).
      * @param cantidad       Unidades involucradas.
@@ -142,8 +141,8 @@ public class Transaccion {
     // REPRESENTACIÓN EN CADENA
     /**
      * Formato compacto para mostrar en el historial de la pila.
-     *
-     * @return Cadena con los datos más relevantes de la transacción.
+ * 
+ * @return Cadena con los datos más relevantes de la transacción.
      */
     @Override
     public String toString() {

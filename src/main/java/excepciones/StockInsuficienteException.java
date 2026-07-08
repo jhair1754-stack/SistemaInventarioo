@@ -5,9 +5,9 @@ package excepciones;
  * Se lanza cuando se intenta registrar una salida de stock mayor
  * a la cantidad disponible en el inventario para un producto.
  *
- * <p>Extiende {@code Exception} (checked) para forzar al código
- * cliente a manejar explícitamente este caso de error.</p>
- *
+ * Extiende {@code Exception} (checked) para forzar al código
+ * cliente a manejar explícitamente este caso de error.
+ * 
  * @author Equipo 2
  * @version Beta
  */
@@ -24,8 +24,8 @@ public class StockInsuficienteException extends Exception {
 
     /**
      * Constructor principal.
-     *
-     * @param codigoProducto    Código del producto afectado.
+ * 
+ * @param codigoProducto    Código del producto afectado.
      * @param stockDisponible   Stock actual disponible.
      * @param cantidadSolicitada Cantidad que se intentó retirar.
      */

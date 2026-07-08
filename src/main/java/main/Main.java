@@ -19,12 +19,7 @@ import java.time.LocalDate;
  * y lanza la interfaz interactiva por consola.
  *
  * <h2>Para compilar y ejecutar con Maven</h2>
- * <pre>
- *   mvn clean compile
- *   mvn package
- *   java -jar target/inventario-sistema.jar
- * </pre>
- *
+ * 
  * @author Equipo 2
  * @version Beta
  */
@@ -32,8 +27,8 @@ public class Main {
 
     /**
      * Método principal.
-     *
-     * @param args Argumentos de línea de comandos (no usados).
+ * 
+ * @param args Argumentos de línea de comandos (no usados).
      */
     public static void main(String[] args) {
 
@@ -41,18 +36,15 @@ public class Main {
         LogisticaService logisticaService = new LogisticaService();
         InventarioService inventarioService = new InventarioService(logisticaService, "ALM-01");
 
-        //  CARGAR RED LOGÍSTICA EN EL GRAFO 
-        // [REQUISITO RUBRICA: GRAFOS] - Carga de vértices y aristas de demo
+        //  CARGAR RED LOGÍSTICA EN EL GRAFO
         System.out.println("  [INIT] Cargando red logistica...");
         cargarRedLogistica(logisticaService);
 
-        //  CARGAR PRODUCTOS EN EL BST 
-        // [REQUISITO RUBRICA: ÁRBOL BINARIO DE BÚSQUEDA] - Inserciones de demo
+        //  CARGAR PRODUCTOS EN EL BST
         System.out.println("  [INIT] Cargando productos en el ArbolBinarioBusqueda...");
         cargarProductos(inventarioService);
 
-        //  SIMULAR MOVIMIENTOS EN LA PILA 
-        // [REQUISITO RUBRICA: PILAS] - Los movimientos generan push() automáticos
+        //  SIMULAR MOVIMIENTOS EN LA PILA
         System.out.println("  [INIT] Simulando movimientos (push a PilaAuditoria)...");
         simularMovimientos(inventarioService);
 
@@ -87,15 +79,9 @@ public class Main {
     /**
      * Carga 6 almacenes y 7 rutas en el GrafoLogistica de demostración.
      *
-     * <p>Topología:</p>
-     * <pre>
-     *   ALM-01(Central) --(12.5 km)-- ALM-02(Callao) --(10 km)-- ALM-06(Miraflores)
-     *   ALM-01 --(25 km)-- ALM-03(SJL) --(30 km)-- ALM-04(Surco)
-     *   ALM-02 --(18 km)-- ALM-04
-     *   ALM-04 --(55 km)-- ALM-05(Ica) --(80 km)-- ALM-06
-     * </pre>
-     *
-     * @param ls Servicio de logística.
+     * Topología:
+ * 
+ * @param ls Servicio de logística.
      */
     private static void cargarRedLogistica(LogisticaService ls) {
         // VÉRTICES
@@ -129,8 +115,8 @@ public class Main {
      * Incluye tanto productos Generales como Perecibles.
      * Tres de ellos tienen stock intencional mente bajo para
      * demostrar las alertas de stock crítico.
-     *
-     * @param is Servicio de inventario.
+ * 
+ * @param is Servicio de inventario.
      */
     private static void cargarProductos(InventarioService is) {
         //  PRODUCTOS GENERALES 
@@ -188,17 +174,17 @@ public class Main {
     /**
      * Simula entradas y salidas de stock para pre-cargar la
      * PilaAuditoria con datos de demostración.
-     *
-     * @param is Servicio de inventario.
+ * 
+ * @param is Servicio de inventario.
      */
     private static void simularMovimientos(InventarioService is) {
         try {
-            // Entradas de stock → push(ENTRADA) a la pila
+            // Entradas de stock
             is.registrarEntrada("ELEC-001", 20, "Compra a proveedor TechPeru SAC");
             is.registrarEntrada("ALIM-001", 50, "Lote 2024-A de Gloria SA");
             is.registrarEntrada("FARM-001", 200, "Farmacia Nacional - pedido mensual");
 
-            // Salidas de stock → push(SALIDA) a la pila
+            // Salidas de stock
             is.registrarSalida("ROPE-001", 15, "Pedido cliente #1045 – SJL");
             is.registrarSalida("ALIM-002", 30, "Despacho Plaza Vea");
             is.registrarSalida("ELEC-002",  5, "Venta corporativa empresa ABC");

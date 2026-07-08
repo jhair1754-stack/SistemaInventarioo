@@ -16,7 +16,7 @@ import estructuras.ListaEnlazada;
  * SERVICIO: InventarioService
  * Capa de lógica de negocio que orquesta el inventario, ahora
  * interactuando con los inventarios independientes de cada Almacén.
- *
+ * 
  * @author Equipo 2
  * @version Beta
  */

@@ -11,7 +11,7 @@ import estructuras.ListaEnlazada;
  * SERVICIO: LogisticaService
  * Capa de lógica de negocio que gestiona la red logística
  * delegando al {@link GrafoLogistico}.
- *
+ * 
  * @author Equipo 2
  * @version Beta
  */
@@ -20,24 +20,22 @@ public class LogisticaService {
     /**
      * GRAFO LOGÍSTICO que modela la red de almacenes y rutas.
      *
-     * [REQUISITO RUBRICA: GRAFOS] - Instancia del grafo en el
+     * Instancia del grafo en el
      * servicio de logística.
      */
     private final GrafoLogistico grafo;
 
     /** Crea el servicio de logística con el grafo vacío. */
     public LogisticaService() {
-        // [REQUISITO RUBRICA: GRAFOS] - Inicialización del grafo logístico
         this.grafo = new GrafoLogistico();
     }
 
     /**
      * Agrega un almacén (vértice) a la red logística.
-     *
-     * @param almacen El almacén a agregar.
+ * 
+ * @param almacen El almacén a agregar.
      */
     public void agregarAlmacen(Almacen almacen) {
-        // [REQUISITO RUBRICA: GRAFOS] - Agregar vértice al grafo
         grafo.agregarAlmacen(almacen);
         System.out.printf("  [OK] Almacen '%s' (%s) agregado a la red.%n",
             almacen.getId(), almacen.getNombre());
@@ -45,8 +43,8 @@ public class LogisticaService {
 
     /**
      * Conecta dos almacenes con una ruta bidireccional.
-     *
-     * @param idOrigen    ID del almacén de origen.
+ * 
+ * @param idOrigen    ID del almacén de origen.
      * @param idDestino   ID del almacén de destino.
      * @param distanciaKm Distancia en kilómetros.
      * @param descripcion Descripción de la vía.
@@ -54,7 +52,6 @@ public class LogisticaService {
      */
     public void conectarAlmacenes(String idOrigen, String idDestino,
                                    double distanciaKm, String descripcion) {
-        // [REQUISITO RUBRICA: GRAFOS] - Agregar arista ponderada al grafo
         grafo.conectar(idOrigen, idDestino, distanciaKm, descripcion);
         System.out.printf("  [OK] Ruta: [%s] <--(%.1f km)--> [%s] via %s%n",
             idOrigen, distanciaKm, idDestino, descripcion);
@@ -62,13 +59,12 @@ public class LogisticaService {
 
     /**
      * Calcula y muestra la ruta óptima entre dos almacenes (Dijkstra).
-     *
-     * @param idOrigen  ID de inicio.
+ * 
+ * @param idOrigen  ID de inicio.
      * @param idDestino ID de destino.
      * @throws AlmacenNoEncontradoException si algún ID no existe.
      */
     public void calcularRutaOptima(String idOrigen, String idDestino) {
-        // [REQUISITO RUBRICA: GRAFOS] - Algoritmo de Dijkstra
         ResultadoDijkstra res = grafo.dijkstra(idOrigen, idDestino);
 
         System.out.println();
@@ -85,7 +81,7 @@ public class LogisticaService {
             System.out.println("  ╠══════════════════════════════════════════════╣");
             System.out.println("  ║  Recorrido:                                  ║");
 
-            // Mostrar el camino como: [ALM-01] → [ALM-02] → [ALM-06]
+            // Mostrar el camino
             StringBuilder ruta = new StringBuilder("  ║    ");
             ListaEnlazada<String> camino = res.camino;
             for (int i = 0; i < camino.size(); i++) {

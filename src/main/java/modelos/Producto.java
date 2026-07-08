@@ -9,10 +9,10 @@ import java.time.format.DateTimeFormatter;
  * Clase base que representa un producto del inventario de la
  * empresa distribuidora. Aplica encapsulamiento estricto.
  *
- * <p>Sirve como tipo unificado para el Árbol Binario de Búsqueda
+ * Sirve como tipo unificado para el Árbol Binario de Búsqueda
  * (se ordena por {@code codigo}) y como dato en la pila de
- * auditoría a través de {@link Transaccion}.</p>
- *
+ * auditoría a través de {@link Transaccion}.
+ * 
  * @author Equipo 2
  * @version Beta
  */
@@ -57,9 +57,9 @@ public class Producto {
     //  CONSTRUCTORES
 
     /**
-     * Constructor para producto <b>General</b> (no perecible).
-     *
-     * @param codigo         Código único (clave BST).
+     * Constructor para producto General (no perecible).
+ * 
+ * @param codigo         Código único (clave BST).
      * @param nombre         Nombre del producto.
      * @param categoria      Categoría comercial.
      * @param precioUnitario Precio unitario (S/).
@@ -83,9 +83,9 @@ public class Producto {
     }
 
     /**
-     * Constructor para producto <b>Perecible</b>.
-     *
-     * @param codigo           Código único (clave BST).
+     * Constructor para producto Perecible.
+ * 
+ * @param codigo           Código único (clave BST).
      * @param nombre           Nombre del producto.
      * @param categoria        Categoría comercial.
      * @param precioUnitario   Precio unitario (S/).
@@ -112,8 +112,8 @@ public class Producto {
 
     /**
      * Indica si el stock actual está por debajo del umbral mínimo.
-     *
-     * @return {@code true} si {@code cantidadStock < stockMinimo}.
+ * 
+ * @return {@code true} si {@code cantidadStock < stockMinimo}.
      */
     public boolean estaEnStockCritico() {
         return this.cantidadStock < this.stockMinimo;
@@ -121,8 +121,8 @@ public class Producto {
 
     /**
      * Indica si un producto perecible ya superó su fecha de vencimiento.
-     *
-     * @return {@code true} si la fecha de hoy es posterior a {@code fechaVencimiento}.
+ * 
+ * @return {@code true} si la fecha de hoy es posterior a {@code fechaVencimiento}.
      *         Para productos no perecibles retorna siempre {@code false}.
      */
     public boolean estaVencido() {
@@ -132,8 +132,8 @@ public class Producto {
 
     /**
      * Aumenta el stock del producto.
-     *
-     * @param cantidad Unidades a añadir (debe ser &gt; 0).
+ * 
+ * @param cantidad Unidades a añadir (debe ser &gt; 0).
      * @throws IllegalArgumentException si {@code cantidad} ≤ 0.
      */
     public void aumentarStock(int cantidad) {
@@ -145,10 +145,10 @@ public class Producto {
 
     /**
      * Disminuye el stock del producto.
-     * <b>No valida</b> si hay suficiente stock; esa responsabilidad
+     * No valida si hay suficiente stock; esa responsabilidad
      * pertenece al servicio que llama a este método.
-     *
-     * @param cantidad Unidades a retirar (debe ser &gt; 0).
+ * 
+ * @param cantidad Unidades a retirar (debe ser &gt; 0).
      * @throws IllegalArgumentException si {@code cantidad} ≤ 0.
      */
     public void disminuirStock(int cantidad) {
@@ -210,8 +210,8 @@ public class Producto {
 
     /**
      * Retorna una ficha completa del producto para mostrar en consola.
-     *
-     * @return Cadena formateada con todos los campos del producto.
+ * 
+ * @return Cadena formateada con todos los campos del producto.
      */
     @Override
     public String toString() {

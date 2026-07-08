@@ -7,7 +7,7 @@ import modelos.Almacen;
  * ESTRUCTURA: GrafoLogistico
  * Grafo no dirigido con pesos implementado con Lista de Adyacencia
  * adaptado para NO usar colecciones de java.util.*
- *
+ * 
  * @author Equipo 2
  * @version Beta
  */

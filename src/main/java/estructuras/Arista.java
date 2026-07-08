@@ -1,20 +1,10 @@
 package estructuras;
 
-// [REQUISITO RUBRICA: GRAFOS] - Clase Arista
-// Representa una ARISTA (conexión) del grafo logístico.
-// Cada Arista guarda:
-//   • idDestino   → ID del almacén de llegada
-//   • peso        → PESO de la arista (distancia en km o costo)
-//   • descripcion → nombre de la vía o ruta
-//
-// En el grafo NO DIRIGIDO, conectar A→B crea automáticamente B→A.
-
 /**
- * ESTRUCTURA – ARISTA DEL GRAFO LOGÍSTICO
- * Representa una conexión con peso entre dos almacenes dentro
+ *  * Representa una conexión con peso entre dos almacenes dentro
  * del {@link GrafoLogistico}. Se almacena en la lista de
  * adyacencia del vértice origen.
- *
+ * 
  * @author Equipo 2
  * @version Beta
  */
@@ -42,8 +32,8 @@ public class Arista {
 
     /**
      * Crea una arista hacia el almacén destino.
-     *
-     * @param idDestino   ID del almacén de destino.
+ * 
+ * @param idDestino   ID del almacén de destino.
      * @param peso        Peso (distancia en km o costo).
      * @param descripcion Descripción de la ruta o vía.
      */

@@ -2,27 +2,11 @@ package estructuras;
 
 import modelos.Transaccion;
 
-// [REQUISITO RUBRICA: PILAS] - Clase NodoPila
-// Eslabón de la cadena enlazada que forma la PilaAuditoria.
-// Cada NodoPila contiene:
-//   • dato      → la Transaccion almacenada
-//   • siguiente → referencia/puntero al nodo que estaba encima ANTES
-//
-// Estructura de la cadena (LIFO):
-//
-//  TOPE → [Nodo5] → [Nodo4] → [Nodo3] → [Nodo2] → [Nodo1] → null
-//          (último)                                  (primero)
-//
-//  push(): [Nodo6] se pone DELANTE, apuntando a [Nodo5]
-//  pop() : se extrae [Nodo6] y el TOPE retrocede a [Nodo5]
-//
-
 /**
- * ESTRUCTURA – NODO DE LA PILA DE AUDITORÍA
- * Nodo individual de la pila enlazada {@link PilaAuditoria}.
+ *  * Nodo individual de la pila enlazada {@link PilaAuditoria}.
  * Cada nodo almacena una {@link Transaccion} y mantiene una
  * referencia al nodo que estaba en el tope ANTES de él.
- *
+ * 
  * @author Equipo 2
  * @version Beta
  */
@@ -39,18 +23,8 @@ public class NodoPila {
     /**
      * REFERENCIA/PUNTERO al nodo anterior (el que estaba en el tope
      * antes de que este nodo fuera apilado con {@code push}).
-     *
-     * <pre>
-     *  Justo antes del push(nuevoNodo):
-     *    tope → [NodoActual] → [NodoAnterior] → ... → null
-     *
-     *  Después del push(nuevoNodo):
-     *    tope → [nuevoNodo] → [NodoActual] → [NodoAnterior] → ... → null
-     *              ↑
-     *        nuevoNodo.siguiente = NodoActual
-     * </pre>
-     *
-     * Vale {@code null} cuando es el primer (y único) nodo de la pila,
+ * 
+Vale {@code null} cuando es el primer (y único) nodo de la pila,
      * o el fondo de la misma.
      */
     NodoPila siguiente;
@@ -61,8 +35,8 @@ public class NodoPila {
      * Crea un nuevo nodo de pila con la transacción dada.
      * El puntero {@code siguiente} se inicializa en {@code null}
      * (no tiene sucesor hasta que se apile).
-     *
-     * @param dato La transacción a almacenar en este nodo.
+ * 
+ * @param dato La transacción a almacenar en este nodo.
      */
     public NodoPila(Transaccion dato) {
         this.dato = dato;    // Carga útil: la transacción de auditoría
@@ -73,8 +47,8 @@ public class NodoPila {
 
     /**
      * Retorna la transacción almacenada en este nodo.
-     *
-     * @return La {@link Transaccion} almacenada.
+ * 
+ * @return La {@link Transaccion} almacenada.
      */
     public Transaccion getDato() { return dato; }
 }

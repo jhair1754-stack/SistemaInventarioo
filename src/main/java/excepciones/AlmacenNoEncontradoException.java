@@ -5,9 +5,9 @@ package excepciones;
  * Se lanza cuando se intenta operar sobre un almacén cuyo ID
  * no existe en el grafo logístico.
  *
- * <p>Extiende {@code RuntimeException} (unchecked) ya que representa
- * un error de referencia a un vértice inválido del grafo.</p>
- *
+ * Extiende {@code RuntimeException} (unchecked) ya que representa
+ * un error de referencia a un vértice inválido del grafo.
+ * 
  * @author Equipo 2
  * @version Beta
  */
@@ -18,8 +18,8 @@ public class AlmacenNoEncontradoException extends RuntimeException {
 
     /**
      * Constructor principal.
-     *
-     * @param idAlmacen ID del almacén no encontrado en el grafo.
+ * 
+ * @param idAlmacen ID del almacén no encontrado en el grafo.
      */
     public AlmacenNoEncontradoException(String idAlmacen) {
         super(String.format(

@@ -9,7 +9,7 @@ import java.util.NoSuchElementException;
  * que reemplaza por completo a java.util.ArrayList y java.util.List.
  * Implementa Iterable para ser usada fácilmente en bucles for-each
  * y llenar tablas JTable.
- *
+ * 
  * @param <T> Tipo de elemento a almacenar.
  * @author Equipo 2
  */

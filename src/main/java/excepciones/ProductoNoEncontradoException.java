@@ -5,9 +5,9 @@ package excepciones;
  * Se lanza cuando se busca un producto por código en el BST
  * y no existe ningún nodo con ese código.
  *
- * <p>Extiende {@code RuntimeException} (unchecked) ya que representa
- * un error de lógica del cliente que provee un código inválido.</p>
- *
+ * Extiende {@code RuntimeException} (unchecked) ya que representa
+ * un error de lógica del cliente que provee un código inválido.
+ * 
  * @author Equipo 2
  * @version Beta
  */
@@ -18,8 +18,8 @@ public class ProductoNoEncontradoException extends RuntimeException {
 
     /**
      * Constructor principal.
-     *
-     * @param codigoBuscado Código del producto que no fue encontrado.
+ * 
+ * @param codigoBuscado Código del producto que no fue encontrado.
      */
     public ProductoNoEncontradoException(String codigoBuscado) {
         super(String.format(
@@ -32,8 +32,8 @@ public class ProductoNoEncontradoException extends RuntimeException {
 
     /**
      * Constructor con mensaje personalizado.
-     *
-     * @param codigoBuscado Código del producto que no fue encontrado.
+ * 
+ * @param codigoBuscado Código del producto que no fue encontrado.
      * @param mensaje       Mensaje descriptivo adicional.
      */
     public ProductoNoEncontradoException(String codigoBuscado, String mensaje) {
