@@ -48,8 +48,8 @@ public class NodoArbol {
      * Crea un nuevo nodo hoja del árbol.
      * Ambas referencias hijo se inicializan en {@code null}:
      * el nodo nace sin hijos (es una hoja).
- * 
-@param producto El producto a almacenar en este nodo.
+     * 
+     * @param producto El producto a almacenar en este nodo.
      */
     public NodoArbol(Producto producto) {
         this.dato = producto;  // Carga útil del nodo
@@ -61,16 +61,16 @@ public class NodoArbol {
 
     /**
      * Retorna el producto almacenado en este nodo.
- * 
- * @return El {@link Producto} almacenado.
+     * 
+     * @return El {@link Producto} almacenado.
      */
     public Producto getDato() { return dato; }
 
     /**
      * Reemplaza el producto almacenado en este nodo.
      * Usado durante la operación de eliminación (sucesor inorden).
- * 
- * @param dato Nuevo producto.
+     * 
+     * @param dato Nuevo producto.
      */
     public void setDato(Producto dato) { this.dato = dato; }
 }

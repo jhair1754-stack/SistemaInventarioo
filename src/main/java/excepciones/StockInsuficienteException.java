@@ -24,8 +24,8 @@ public class StockInsuficienteException extends Exception {
 
     /**
      * Constructor principal.
- * 
- * @param codigoProducto    Código del producto afectado.
+     * 
+     * @param codigoProducto    Código del producto afectado.
      * @param stockDisponible   Stock actual disponible.
      * @param cantidadSolicitada Cantidad que se intentó retirar.
      */

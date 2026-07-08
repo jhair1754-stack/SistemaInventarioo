@@ -19,8 +19,8 @@ public class CodigoProductoDuplicadoException extends RuntimeException {
 
     /**
      * Constructor principal.
- * 
- * @param codigoDuplicado Código del producto que ya existe en el BST.
+     * 
+     * @param codigoDuplicado Código del producto que ya existe en el BST.
      */
     public CodigoProductoDuplicadoException(String codigoDuplicado) {
         super(String.format(

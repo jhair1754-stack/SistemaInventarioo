@@ -18,8 +18,8 @@ public class AlmacenNoEncontradoException extends RuntimeException {
 
     /**
      * Constructor principal.
- * 
- * @param idAlmacen ID del almacén no encontrado en el grafo.
+     * 
+     * @param idAlmacen ID del almacén no encontrado en el grafo.
      */
     public AlmacenNoEncontradoException(String idAlmacen) {
         super(String.format(

@@ -23,8 +23,8 @@ public class NodoPila {
     /**
      * REFERENCIA/PUNTERO al nodo anterior (el que estaba en el tope
      * antes de que este nodo fuera apilado con {@code push}).
- * 
-Vale {@code null} cuando es el primer (y único) nodo de la pila,
+     * 
+     * Vale {@code null} cuando es el primer (y único) nodo de la pila,
      * o el fondo de la misma.
      */
     NodoPila siguiente;
@@ -35,8 +35,8 @@ Vale {@code null} cuando es el primer (y único) nodo de la pila,
      * Crea un nuevo nodo de pila con la transacción dada.
      * El puntero {@code siguiente} se inicializa en {@code null}
      * (no tiene sucesor hasta que se apile).
- * 
- * @param dato La transacción a almacenar en este nodo.
+     * 
+     * @param dato La transacción a almacenar en este nodo.
      */
     public NodoPila(Transaccion dato) {
         this.dato = dato;    // Carga útil: la transacción de auditoría
@@ -47,8 +47,8 @@ Vale {@code null} cuando es el primer (y único) nodo de la pila,
 
     /**
      * Retorna la transacción almacenada en este nodo.
- * 
- * @return La {@link Transaccion} almacenada.
+     * 
+     * @return La {@link Transaccion} almacenada.
      */
     public Transaccion getDato() { return dato; }
 }

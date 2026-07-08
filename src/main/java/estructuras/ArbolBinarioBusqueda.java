@@ -52,17 +52,14 @@ Vale {@code null} cuando el árbol está completamente vacío.
 
     /**
      * Inserta un nuevo producto en el árbol, respetando la propiedad BST.
- * 
-Si la raíz es null, el nuevo nodo será la raíz.
+     * Si la raíz es null, el nuevo nodo será la raíz.
      *   Comparar el código del nuevo producto con el nodo actual:
      *     
      *       Código menor va a la izquierda.
      *       Código mayor va a la derecha.
      *       Código igual lanza excepción.
- * 
-Al llegar a un puntero {@code null}, insertar aquí el nuevo nodo.
- * 
-@param producto Producto a insertar (código único requerido).
+     * Al llegar a un puntero {@code null}, insertar aquí el nuevo nodo.
+     * @param producto Producto a insertar (código único requerido).
      * @throws CodigoProductoDuplicadoException si el código ya existe.
      */
     public void insertar(Producto producto) {
@@ -112,8 +109,8 @@ Al llegar a un puntero {@code null}, insertar aquí el nuevo nodo.
 
     /**
      * Busca y retorna un producto por su código.
- * 
- * @param codigo Código del producto a buscar.
+     * 
+     * @param codigo Código del producto a buscar.
      * @return El {@link Producto} encontrado.
      * @throws ProductoNoEncontradoException si el código no existe en el árbol.
      */
@@ -127,8 +124,8 @@ Al llegar a un puntero {@code null}, insertar aquí el nuevo nodo.
 
     /**
      * Auxiliar recursivo para {@link #buscar(String)}.
- * 
- * @param nodo   Nodo evaluado en esta llamada.
+     * 
+     * @param nodo   Nodo evaluado en esta llamada.
      * @param codigo Código a buscar.
      * @return El nodo que contiene el producto, o {@code null} si no existe.
      */
@@ -155,8 +152,8 @@ Al llegar a un puntero {@code null}, insertar aquí el nuevo nodo.
 
     /**
      * Verifica si existe un producto con el código dado, sin lanzar excepción.
- * 
- * @param codigo Código a verificar.
+     * 
+     * @param codigo Código a verificar.
      * @return {@code true} si el producto existe.
      */
     public boolean existe(String codigo) {
@@ -165,13 +162,11 @@ Al llegar a un puntero {@code null}, insertar aquí el nuevo nodo.
 
     /**
      * Elimina un producto del árbol por su código.
- * 
-Nodo hoja: se pone {@code null} en el puntero del padre.
+     * Nodo hoja: se pone {@code null} en el puntero del padre.
      *   Un hijo: el padre apunta directamente al único hijo.
      *   Dos hijos: se reemplaza con el sucesor inorden
      *       (mínimo del sub-árbol derecho) y luego se elimina ese sucesor.
- * 
-@param codigo Código del producto a eliminar.
+     * @param codigo Código del producto a eliminar.
      * @throws ProductoNoEncontradoException si el código no existe.
      */
     public void eliminar(String codigo) {
@@ -182,8 +177,8 @@ Nodo hoja: se pone {@code null} en el puntero del padre.
 
     /**
      * Auxiliar recursivo para {@link #eliminar(String)}.
- * 
- * @param nodo   Nodo evaluado en esta llamada.
+     * 
+     * @param nodo   Nodo evaluado en esta llamada.
      * @param codigo Código del producto a eliminar.
      * @return La raíz del sub-árbol tras la eliminación.
      */
@@ -232,8 +227,8 @@ Nodo hoja: se pone {@code null} en el puntero del padre.
     /**
      * Encuentra el nodo con el valor mínimo dentro de un sub-árbol
      * (el nodo más a la izquierda). Se usa para hallar el sucesor inorden.
- * 
- * @param nodo Raíz del sub-árbol en que buscar el mínimo.
+     * 
+     * @param nodo Raíz del sub-árbol en que buscar el mínimo.
      * @return El nodo con el código lexicográficamente menor.
      */
     private NodoArbol minimoNodo(NodoArbol nodo) {
@@ -246,8 +241,8 @@ Nodo hoja: se pone {@code null} en el puntero del padre.
 
     /**
      * Recorre el árbol en inorden.
- * 
- * @return Lista de productos ordenados alfabéticamente por código.
+     * 
+     * @return Lista de productos ordenados alfabéticamente por código.
      */
     public ListaEnlazada<Producto> recorrerInorden() {
         ListaEnlazada<Producto> lista = new ListaEnlazada<>();
@@ -266,8 +261,8 @@ Nodo hoja: se pone {@code null} en el puntero del padre.
     /**
      * Recorre el árbol en preorden.
      * Útil para duplicar/serializar la estructura del árbol.
- * 
- * @return Lista de productos en preorden.
+     * 
+     * @return Lista de productos en preorden.
      */
     public ListaEnlazada<Producto> recorrerPreorden() {
         ListaEnlazada<Producto> lista = new ListaEnlazada<>();
@@ -288,8 +283,8 @@ Nodo hoja: se pone {@code null} en el puntero del padre.
     /**
      * Retorna todos los productos cuyo stock actual está por debajo
      * del stock mínimo configurado.
- * 
- * @return Lista de productos en estado crítico de stock.
+     * 
+     * @return Lista de productos en estado crítico de stock.
      */
     public ListaEnlazada<Producto> obtenerProductosCriticos() {
         ListaEnlazada<Producto> todos = recorrerInorden();
@@ -303,8 +298,8 @@ Nodo hoja: se pone {@code null} en el puntero del padre.
     /**
      * Calcula la altura del árbol (número de aristas en el camino
      * más largo desde la raíz hasta una hoja).
- * 
- * @return Altura del árbol. Retorna {@code -1} si el árbol está vacío.
+     * 
+     * @return Altura del árbol. Retorna {@code -1} si el árbol está vacío.
      */
     public int obtenerAltura() {
         return alturaRec(this.raiz);

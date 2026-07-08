@@ -18,7 +18,7 @@ import modelos.Transaccion;
  *   {@link #peek()}            – O(1): consulta el tope.
  *   {@link #toList()}          – O(n): copia toda la pila.
  * 
-@author Equipo 2
+ * @author Equipo 2
  * @version Beta
  */
 public class PilaAuditoria {
@@ -30,8 +30,8 @@ public class PilaAuditoria {
      *
      * Es el único punto de acceso a toda la pila. Siempre
      * apunta al elemento apilado más recientemente.
- * 
-Vale {@code null} cuando la pila está completamente vacía.
+     * 
+     * Vale {@code null} cuando la pila está completamente vacía.
      */
     private NodoPila tope;
 
@@ -51,8 +51,8 @@ Vale {@code null} cuando la pila está completamente vacía.
 
     /**
      * Apila una nueva transacción en el tope de la pila.
- * 
- * @param transaccion La transacción de inventario a apilar.
+     * 
+     * @param transaccion La transacción de inventario a apilar.
      */
     public void push(Transaccion transaccion) {
         NodoPila nuevoNodo = new NodoPila(transaccion); // Crear nodo
@@ -63,8 +63,8 @@ Vale {@code null} cuando la pila está completamente vacía.
 
     /**
      * Desapila y retorna la transacción en el tope de la pila.
- * 
- * @return La {@link Transaccion} que estaba en el tope.
+     * 
+     * @return La {@link Transaccion} que estaba en el tope.
      * @throws IllegalStateException si la pila está vacía.
      */
     public Transaccion pop() {
@@ -80,8 +80,8 @@ Vale {@code null} cuando la pila está completamente vacía.
 
     /**
      * Retorna la transacción en el tope sin extraerla.
- * 
-@return La {@link Transaccion} en el tope de la pila.
+     * 
+     * @return La {@link Transaccion} en el tope de la pila.
      * @throws IllegalStateException si la pila está vacía.
      */
     public Transaccion peek() {
@@ -96,8 +96,8 @@ Vale {@code null} cuando la pila está completamente vacía.
 
     /**
      * Indica si la pila no contiene ningún elemento.
- * 
- * @return {@code true} si la pila está vacía.
+     * 
+     * @return {@code true} si la pila está vacía.
      */
     public boolean estaVacia() {
         return this.tope == null;
@@ -105,8 +105,8 @@ Vale {@code null} cuando la pila está completamente vacía.
 
     /**
      * Retorna el número de transacciones en la pila.
- * 
- * @return Cantidad de elementos apilados.
+     * 
+     * @return Cantidad de elementos apilados.
      */
     public int getTamanio() {
         return tamanio;
@@ -118,8 +118,8 @@ Vale {@code null} cuando la pila está completamente vacía.
      *
      * Recorre la cadena enlazada desde el {@code tope} hasta {@code null},
      * añadiendo cada transacción a la lista.
- * 
-@return Lista de transacciones; el elemento 0 es el más reciente.
+     * 
+     * @return Lista de transacciones; el elemento 0 es el más reciente.
      */
     public ListaEnlazada<Transaccion> toList() {
         ListaEnlazada<Transaccion> lista = new ListaEnlazada<>();

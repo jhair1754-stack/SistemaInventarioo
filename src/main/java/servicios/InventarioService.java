@@ -13,9 +13,8 @@ import estructuras.PilaAuditoria;
 import estructuras.ListaEnlazada;
 
 /**
- * SERVICIO: InventarioService
- * Capa de lógica de negocio que orquesta el inventario, ahora
- * interactuando con los inventarios independientes de cada Almacén.
+ * Capa de logica de negocio que orquesta el inventario,
+ * interactuando con los inventarios independientes de cada Almacen.
  * 
  * @author Equipo 2
  * @version Beta
@@ -25,30 +24,53 @@ public class InventarioService {
     private final LogisticaService logisticaService;
     private String idAlmacenActivo;
 
+    /**
+     * Constructor principal del servicio de inventario.
+     * 
+     * @param logisticaService Servicio logistico asociado.
+     * @param idAlmacenActivo  ID del almacen inicialmente activo.
+     */
     public InventarioService(LogisticaService logisticaService, String idAlmacenActivo) {
         this.logisticaService = logisticaService;
         this.idAlmacenActivo = idAlmacenActivo;
     }
 
+    /**
+     * Obtiene el almacen actualmente activo.
+     * 
+     * @return El almacen activo.
+     * @throws IllegalStateException si no hay almacen activo o no existe.
+     */
     private Almacen getAlmacenActual() {
         if (idAlmacenActivo == null || idAlmacenActivo.isEmpty()) {
-            throw new IllegalStateException("No hay un almacén activo seleccionado.");
+            throw new IllegalStateException("No hay un almacen activo seleccionado.");
         }
         Almacen almacen = logisticaService.getAlmacen(idAlmacenActivo);
         if (almacen == null) {
-            throw new IllegalStateException("El almacén activo '" + idAlmacenActivo + "' no existe en la red logística.");
+            throw new IllegalStateException("El almacen activo '" + idAlmacenActivo + "' no existe en la red logistica.");
         }
         return almacen;
     }
 
+    /**
+     * @return El arbol binario de busqueda de productos del almacen activo.
+     */
     public ArbolBinarioBusqueda getArbolProductos() {
         return getAlmacenActual().getArbolProductos();
     }
 
+    /**
+     * @return La pila de auditoria del almacen activo.
+     */
     public PilaAuditoria getPilaAuditoria() {
         return getAlmacenActual().getPilaAuditoria();
     }
 
+    /**
+     * Registra un nuevo producto en el inventario.
+     * 
+     * @param producto Producto a registrar.
+     */
     public void registrarProducto(Producto producto) {
         try {
             getArbolProductos().insertar(producto);
@@ -68,6 +90,13 @@ public class InventarioService {
         }
     }
 
+    /**
+     * Registra una entrada de stock para un producto existente.
+     * 
+     * @param codigoProducto Codigo del producto.
+     * @param cantidad       Cantidad a incrementar.
+     * @param observacion    Detalle de la transaccion.
+     */
     public void registrarEntrada(String codigoProducto, int cantidad, String observacion) {
         try {
             Producto producto = getArbolProductos().buscar(codigoProducto);
@@ -91,6 +120,14 @@ public class InventarioService {
         }
     }
 
+    /**
+     * Registra una salida de stock para un producto existente.
+     * 
+     * @param codigoProducto Codigo del producto.
+     * @param cantidad       Cantidad a disminuir.
+     * @param observacion    Detalle de la transaccion.
+     * @throws StockInsuficienteException si no hay stock suficiente.
+     */
     public void registrarSalida(String codigoProducto, int cantidad, String observacion)
             throws StockInsuficienteException {
         try {
@@ -120,10 +157,21 @@ public class InventarioService {
         }
     }
 
+    /**
+     * Busca un producto por su codigo.
+     * 
+     * @param codigoProducto Codigo del producto a buscar.
+     * @return El producto encontrado.
+     */
     public Producto buscarProducto(String codigoProducto) {
         return getArbolProductos().buscar(codigoProducto);
     }
 
+    /**
+     * Elimina un producto del inventario.
+     * 
+     * @param codigoProducto Codigo del producto a eliminar.
+     */
     public void eliminarProducto(String codigoProducto) {
         Producto producto = getArbolProductos().buscar(codigoProducto);
         getArbolProductos().eliminar(codigoProducto);
@@ -137,6 +185,12 @@ public class InventarioService {
         ));
     }
 
+    /**
+     * Obtiene el historial de transacciones realizadas en el almacen activo.
+     * 
+     * @param limite Numero maximo de transacciones a retornar (0 para todas).
+     * @return Lista con el historial de transacciones.
+     */
     public ListaEnlazada<Transaccion> obtenerHistorial(int limite) {
         ListaEnlazada<Transaccion> hist = getPilaAuditoria().toList();
         if (limite > 0 && hist.size() > limite) {
@@ -149,10 +203,20 @@ public class InventarioService {
         return hist;
     }
 
+    /**
+     * Extrae la ultima transaccion registrada en la pila de auditoria.
+     * 
+     * @return La transaccion extraida.
+     */
     public Transaccion desapilarUltimo() {
         return getPilaAuditoria().pop();
     }
 
+    /**
+     * Obtiene una lista con todos los productos del inventario ordenados.
+     * 
+     * @return Lista de todos los productos.
+     */
     public ListaEnlazada<Producto> listarTodosLosProductos() {
         try {
             return getArbolProductos().recorrerInorden();
@@ -161,10 +225,20 @@ public class InventarioService {
         }
     }
 
+    /**
+     * Obtiene la lista de productos que estan en stock critico.
+     * 
+     * @return Lista de productos en estado critico.
+     */
     public ListaEnlazada<Producto> obtenerProductosCriticos() {
         return getArbolProductos().obtenerProductosCriticos();
     }
 
+    /**
+     * Obtiene la lista de productos cuya fecha de vencimiento ya paso.
+     * 
+     * @return Lista de productos vencidos.
+     */
     public ListaEnlazada<Producto> obtenerProductosVencidos() {
         ListaEnlazada<Producto> todos = getArbolProductos().recorrerInorden();
         ListaEnlazada<Producto> vencidos = new ListaEnlazada<>();
@@ -176,6 +250,12 @@ public class InventarioService {
         return vencidos;
     }
 
+    /**
+     * Genera un codigo correlativo para un nuevo producto basado en su categoria.
+     * 
+     * @param categoria Categoria del producto.
+     * @return Codigo autogenerado (ej. GEN-001).
+     */
     public String generarCodigoProducto(String categoria) {
         if (categoria == null || categoria.trim().isEmpty()) {
             categoria = "GEN";
@@ -194,12 +274,17 @@ public class InventarioService {
                 }
             }
         } catch (Exception ignored) {
-            // Si falla al obtener productos (ej. no hay almacén activo)
+            // Si falla al obtener productos (ej. no hay almacen activo)
         }
         
         return String.format("%s-%03d", prefijo, max + 1);
     }
 
+    /**
+     * Muestra por consola una alerta si el producto tiene stock menor o igual al minimo.
+     * 
+     * @param producto Producto a verificar.
+     */
     private void verificarStockCritico(Producto producto) {
         if (producto.estaEnStockCritico()) {
             System.out.println();
@@ -214,11 +299,25 @@ public class InventarioService {
         }
     }
 
+    /** @return El numero total de productos en el almacen activo. */
     public int getNumeroProductos() { return getArbolProductos().getTamanio(); }
+
+    /** @return El numero total de transacciones registradas. */
     public int getNumeroMovimientos() { return getPilaAuditoria().getTamanio(); }
+
+    /** @return La altura del arbol binario de busqueda. */
     public int getAlturaArbol() { return getArbolProductos().obtenerAltura(); }
+
+    /** @return true si no hay productos registrados, false en caso contrario. */
     public boolean estaVacio() { return getArbolProductos().estaVacio(); }
 
+    /** @return ID del almacen activo. */
     public String getIdAlmacenActivo() { return idAlmacenActivo; }
+
+    /**
+     * Establece el almacen activo.
+     * 
+     * @param id ID del almacen.
+     */
     public void setIdAlmacenActivo(String id) { this.idAlmacenActivo = id; }
 }

@@ -4,15 +4,16 @@ import excepciones.AlmacenNoEncontradoException;
 import modelos.Almacen;
 
 /**
- * ESTRUCTURA: GrafoLogistico
- * Grafo no dirigido con pesos implementado con Lista de Adyacencia
- * adaptado para NO usar colecciones de java.util.*
+ * Gestiona los almacenes y sus conexiones en la red logistica.
  * 
  * @author Equipo 2
  * @version Beta
  */
 public class GrafoLogistico {
 
+    /**
+     * Representa un vertice en el grafo que contiene un almacen y sus conexiones.
+     */
     public static class VerticeLogistico {
         public Almacen almacen;
         public ListaEnlazada<Arista> aristas;
@@ -26,17 +27,33 @@ public class GrafoLogistico {
     private final ListaEnlazada<VerticeLogistico> vertices;
     private int numeroAristas;
 
+    /**
+     * Constructor principal.
+     */
     public GrafoLogistico() {
         this.vertices = new ListaEnlazada<>();
         this.numeroAristas = 0;
     }
 
+    /**
+     * Agrega un almacen a la red logistica.
+     * 
+     * @param almacen Almacen a agregar.
+     */
     public void agregarAlmacen(Almacen almacen) {
         if (!existeAlmacen(almacen.getId())) {
             vertices.add(new VerticeLogistico(almacen));
         }
     }
 
+    /**
+     * Crea una conexion directa entre dos almacenes.
+     * 
+     * @param idOrigen      ID del almacen de origen.
+     * @param idDestino     ID del almacen de destino.
+     * @param distanciaKm   Distancia en kilometros.
+     * @param descripcion   Descripcion de la ruta.
+     */
     public void conectar(String idOrigen, String idDestino, double distanciaKm, String descripcion) {
         VerticeLogistico vOrigen = obtenerVertice(idOrigen);
         VerticeLogistico vDestino = obtenerVertice(idDestino);
@@ -51,8 +68,11 @@ public class GrafoLogistico {
     }
 
     /**
-     * Calcula la ruta logística óptima usando Dijkstra (O(V^2)) usando
-     * estructuras personalizadas en lugar de PriorityQueue.
+     * Calcula la ruta mas corta entre dos almacenes.
+     * 
+     * @param idOrigen  ID del almacen de inicio.
+     * @param idDestino ID del almacen de destino.
+     * @return ResultadoDijkstra con el camino y distancia total.
      */
     public ResultadoDijkstra dijkstra(String idOrigen, String idDestino) {
         if (!existeAlmacen(idOrigen)) throw new AlmacenNoEncontradoException(idOrigen);
@@ -81,7 +101,6 @@ public class GrafoLogistico {
         distancias[indiceOrigen] = 0.0;
 
         for (int count = 0; count < numV; count++) {
-            // Encontrar el vértice con menor distancia no visitado
             double minDist = Double.MAX_VALUE;
             int u = -1;
             for (int i = 0; i < numV; i++) {
@@ -91,7 +110,7 @@ public class GrafoLogistico {
                 }
             }
 
-            if (u == -1 || ids[u].equalsIgnoreCase(idDestino)) break; // No hay más alcanzables o llegamos
+            if (u == -1 || ids[u].equalsIgnoreCase(idDestino)) break;
 
             visitados[u] = true;
             VerticeLogistico vActual = vertices.get(u);
@@ -118,7 +137,6 @@ public class GrafoLogistico {
             paso = (idx != -1) ? predecesores[idx] : null;
         }
 
-        // Invertir el camino usando arreglo temporal
         ListaEnlazada<String> caminoInvertido = new ListaEnlazada<>();
         for (int i = camino.size() - 1; i >= 0; i--) {
             caminoInvertido.add(camino.get(i));
@@ -137,6 +155,11 @@ public class GrafoLogistico {
         return -1;
     }
 
+    /**
+     * Muestra una representacion en texto de la red logistica.
+     * 
+     * @return Cadena con el formato de la red.
+     */
     public String mostrarRed() {
         if (vertices.isEmpty()) return "  La red logistica esta vacia.";
 
@@ -161,6 +184,11 @@ public class GrafoLogistico {
         return sb.toString();
     }
 
+    /**
+     * Devuelve una lista en texto de los almacenes registrados.
+     * 
+     * @return Cadena con los almacenes.
+     */
     public String listarAlmacenes() {
         if (vertices.isEmpty()) return "  No hay almacenes registrados.\n";
         StringBuilder sb = new StringBuilder();
@@ -172,6 +200,9 @@ public class GrafoLogistico {
         return sb.toString();
     }
 
+    /**
+     * Clase auxiliar para almacenar el resultado de la busqueda de ruta.
+     */
     public static class ResultadoDijkstra {
         public final ListaEnlazada<String> camino;
         public final double distanciaTotal;
@@ -184,15 +215,19 @@ public class GrafoLogistico {
         }
     }
 
+    /**
+     * Elimina un almacen y todas sus conexiones.
+     * 
+     * @param id ID del almacen a eliminar.
+     * @return true si se elimino correctamente, false si no existe.
+     */
     public boolean eliminarAlmacen(String id) {
         VerticeLogistico v = obtenerVertice(id);
         if (v == null) return false;
 
-        // Eliminar todas las aristas de este almacén en los otros almacenes
         for (Arista a : v.aristas) {
             VerticeLogistico vecino = obtenerVertice(a.getIdDestino());
             if (vecino != null) {
-                // Eliminar la arista de vuelta
                 for (int i = 0; i < vecino.aristas.size(); i++) {
                     if (vecino.aristas.get(i).getIdDestino().equalsIgnoreCase(id)) {
                         vecino.aristas.remove(i);
@@ -203,10 +238,16 @@ public class GrafoLogistico {
             this.numeroAristas--;
         }
 
-        // Eliminar el vértice de la lista
         return vertices.remove(v);
     }
 
+    /**
+     * Elimina la conexion directa entre dos almacenes.
+     * 
+     * @param idOrigen  ID del almacen de origen.
+     * @param idDestino ID del almacen de destino.
+     * @return true si se elimino correctamente, false en caso contrario.
+     */
     public boolean eliminarRuta(String idOrigen, String idDestino) {
         VerticeLogistico vOrigen = obtenerVertice(idOrigen);
         VerticeLogistico vDestino = obtenerVertice(idDestino);
@@ -238,11 +279,21 @@ public class GrafoLogistico {
         return false;
     }
 
+    /** @return Numero total de almacenes (vertices). */
     public int getNumeroVertices() { return vertices.size(); }
+
+    /** @return Numero total de rutas (aristas). */
     public int getNumeroAristas() { return numeroAristas; }
 
+    /** @return Lista de vertices en la red. */
     public ListaEnlazada<VerticeLogistico> getVertices() { return vertices; }
 
+    /**
+     * Obtiene el vertice correspondiente a un ID de almacen.
+     * 
+     * @param id ID del almacen.
+     * @return El vertice logistico, o null si no se encuentra.
+     */
     public VerticeLogistico obtenerVertice(String id) {
         for (VerticeLogistico v : vertices) {
             if (v.almacen.getId().equalsIgnoreCase(id.trim())) {
@@ -252,11 +303,23 @@ public class GrafoLogistico {
         return null;
     }
 
+    /**
+     * Obtiene un almacen por su ID.
+     * 
+     * @param id ID del almacen.
+     * @return El objeto Almacen, o null si no se encuentra.
+     */
     public Almacen getAlmacen(String id) {
         VerticeLogistico v = obtenerVertice(id);
         return v != null ? v.almacen : null;
     }
 
+    /**
+     * Verifica si existe un almacen en la red.
+     * 
+     * @param id ID del almacen.
+     * @return true si existe, false en caso contrario.
+     */
     public boolean existeAlmacen(String id) {
         return obtenerVertice(id) != null;
     }

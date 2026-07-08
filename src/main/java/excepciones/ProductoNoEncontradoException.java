@@ -18,8 +18,8 @@ public class ProductoNoEncontradoException extends RuntimeException {
 
     /**
      * Constructor principal.
- * 
- * @param codigoBuscado Código del producto que no fue encontrado.
+     * 
+     * @param codigoBuscado Código del producto que no fue encontrado.
      */
     public ProductoNoEncontradoException(String codigoBuscado) {
         super(String.format(
@@ -32,8 +32,8 @@ public class ProductoNoEncontradoException extends RuntimeException {
 
     /**
      * Constructor con mensaje personalizado.
- * 
- * @param codigoBuscado Código del producto que no fue encontrado.
+     * 
+     * @param codigoBuscado Código del producto que no fue encontrado.
      * @param mensaje       Mensaje descriptivo adicional.
      */
     public ProductoNoEncontradoException(String codigoBuscado, String mensaje) {
