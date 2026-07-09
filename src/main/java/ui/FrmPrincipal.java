@@ -36,7 +36,7 @@ public class FrmPrincipal extends JFrame {
         this.inventarioService = invServ;
         this.logisticaService = logServ;
 
-        setTitle("Sistema de Control de Inventario y Red Logística — UNMSM");
+        setTitle("Sistema de Control de Inventario");
         setSize(950, 650);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
@@ -72,12 +72,12 @@ public class FrmPrincipal extends JFrame {
         pnlTitulos.setLayout(new BoxLayout(pnlTitulos, BoxLayout.Y_AXIS));
         pnlTitulos.setBackground(BG_HEADER);
 
-        JLabel lblTitulo = new JLabel("Sistema de Inventario y Red Logística");
+        JLabel lblTitulo = new JLabel("Sistema de Control de Inventario");
         lblTitulo.setFont(new Font("Segoe UI", Font.BOLD, 17));
         lblTitulo.setForeground(TEXT_PRIMARY);
         pnlTitulos.add(lblTitulo);
 
-        JLabel lblSubtitulo = new JLabel("Universidad Nacional Mayor de San Marcos — FISI");
+        JLabel lblSubtitulo = new JLabel("Grupo 2");
         lblSubtitulo.setFont(new Font("Segoe UI", Font.PLAIN, 12));
         lblSubtitulo.setForeground(TEXT_SECONDARY);
         pnlTitulos.add(lblSubtitulo);
@@ -138,7 +138,7 @@ public class FrmPrincipal extends JFrame {
         JPanel pnlFooter = new JPanel(new FlowLayout(FlowLayout.CENTER));
         pnlFooter.setBackground(BG_MAIN);
         pnlFooter.setBorder(BorderFactory.createMatteBorder(1, 0, 0, 0, BORDER));
-        JLabel lblFooter = new JLabel("Estructura de Datos — Proyecto 4 — Equipo de 9 integrantes — 2026-I");
+        JLabel lblFooter = new JLabel(" ");
         lblFooter.setFont(new Font("Segoe UI", Font.ITALIC, 11));
         lblFooter.setForeground(TEXT_SECONDARY);
         pnlFooter.add(lblFooter);
